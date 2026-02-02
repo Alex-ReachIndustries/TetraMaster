@@ -1,17 +1,20 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { selectMoveEasy, selectMoveHard, selectMoveMedium } from '../../ai'
 import { countScores, createGame, applyMove } from '../../engine/rules'
 import { validateDeck } from '../../engine/validate'
-import type { GameState, Move, PlayerId } from '../../engine/types'
+import type { BattleResult, GameState, Move, PlayerId, Position } from '../../engine/types'
 import { useDeckStore, useGameStore, useSettingsStore } from '../../state'
+import { BattleAnimation, type BattlePresentation } from '../components/BattleAnimation'
 import { BoardView } from '../components/BoardView'
 import { CardView } from '../components/CardView'
 import { DevPanel } from '../components/DevPanel'
+import { CAPTURE_FLASH_MS, PLACE_FLASH_MS, getAiDelayMs } from '../animationConfig'
 
 type PlayerType = 'human' | 'ai'
 type AiLevel = 'easy' | 'medium' | 'hard'
 
 const aiLevels: AiLevel[] = ['easy', 'medium', 'hard']
+const positionKey = (position: Position) => `${position.x},${position.y}`
 
 export const PlayPage = () => {
   const settings = useSettingsStore()
@@ -23,6 +26,14 @@ export const PlayPage = () => {
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null)
   const [error, setError] = useState('')
   const [matchSeed, setMatchSeed] = useState(settings.rngSeed)
+  const [flashByPosition, setFlashByPosition] = useState<Record<string, 'place' | 'capture'>>({})
+  const [battleQueue, setBattleQueue] = useState<BattlePresentation[]>([])
+  const [activeBattle, setActiveBattle] = useState<BattlePresentation | null>(null)
+  const [pendingCaptureFlashes, setPendingCaptureFlashes] = useState<Position[]>([])
+  const flashTimersRef = useRef<Record<string, number>>({})
+  const flashRafRef = useRef<Record<string, number>>({})
+  const aiTimerRef = useRef<number | null>(null)
+  const latestGameRef = useRef<GameState | null>(null)
   const resolvedDeckIds = useMemo<[string, string]>(() => {
     if (decks.length === 0) return ['', '']
     const first = deckIds[0] || decks[0].id
@@ -31,6 +42,88 @@ export const PlayPage = () => {
   }, [deckIds, decks])
 
   const scores = useMemo(() => (game ? countScores(game) : { 0: 0, 1: 0 }), [game])
+  const isBattleAnimating = Boolean(activeBattle) || battleQueue.length > 0
+
+  useEffect(() => {
+    latestGameRef.current = game
+  }, [game])
+
+  useEffect(
+    () => () => {
+      Object.values(flashTimersRef.current).forEach((timer) => window.clearTimeout(timer))
+      Object.values(flashRafRef.current).forEach((raf) => window.cancelAnimationFrame(raf))
+      if (aiTimerRef.current !== null) {
+        window.clearTimeout(aiTimerRef.current)
+      }
+    },
+    [],
+  )
+
+  const clearFlashAt = useCallback((key: string) => {
+    if (flashTimersRef.current[key]) {
+      window.clearTimeout(flashTimersRef.current[key])
+      delete flashTimersRef.current[key]
+    }
+    if (flashRafRef.current[key]) {
+      window.cancelAnimationFrame(flashRafRef.current[key])
+      delete flashRafRef.current[key]
+    }
+    setFlashByPosition((prev) => {
+      if (!prev[key]) return prev
+      const next = { ...prev }
+      delete next[key]
+      return next
+    })
+  }, [])
+
+  const resetTransientState = useCallback(() => {
+    Object.values(flashTimersRef.current).forEach((timer) => window.clearTimeout(timer))
+    Object.values(flashRafRef.current).forEach((raf) => window.cancelAnimationFrame(raf))
+    flashTimersRef.current = {}
+    flashRafRef.current = {}
+    if (aiTimerRef.current !== null) {
+      window.clearTimeout(aiTimerRef.current)
+      aiTimerRef.current = null
+    }
+    setFlashByPosition({})
+    setBattleQueue([])
+    setActiveBattle(null)
+    setPendingCaptureFlashes([])
+  }, [])
+
+  const triggerFlash = useCallback(
+    (position: Position, type: 'place' | 'capture', durationMs: number) => {
+      const key = positionKey(position)
+      clearFlashAt(key)
+      flashRafRef.current[key] = window.requestAnimationFrame(() => {
+        setFlashByPosition((prev) => ({ ...prev, [key]: type }))
+        delete flashRafRef.current[key]
+      })
+      flashTimersRef.current[key] = window.setTimeout(() => {
+        clearFlashAt(key)
+      }, durationMs)
+    },
+    [clearFlashAt],
+  )
+
+  const buildBattlePresentation = useCallback(
+    (result: BattleResult, state: GameState): BattlePresentation | null => {
+      const attackerCell = state.board[result.attackerPos.y]?.[result.attackerPos.x]
+      const defenderCell = state.board[result.defenderPos.y]?.[result.defenderPos.x]
+      if (attackerCell?.type !== 'card' || defenderCell?.type !== 'card') {
+        return null
+      }
+      return {
+        attacker: attackerCell.card,
+        defender: defenderCell.card,
+        attackerPlayer: result.attackerPlayer,
+        defenderPlayer: result.defenderPlayer,
+        roll: result.roll,
+        winner: result.winner,
+      }
+    },
+    [],
+  )
 
   const startGame = () => {
     const deck1 = decks.find((deck) => deck.id === resolvedDeckIds[0])
@@ -54,16 +147,18 @@ export const PlayPage = () => {
     })
     setError('')
     setSelectedCardId(null)
+    resetTransientState()
     setGame(nextGame)
   }
 
   const resetGame = () => {
+    resetTransientState()
     setGame(null)
     setSelectedCardId(null)
   }
 
   const handleCellClick = (x: number, y: number) => {
-    if (!game || game.status !== 'in_progress') return
+    if (!game || game.status !== 'in_progress' || isBattleAnimating) return
     if (playerTypes[game.activePlayer] !== 'human') return
     if (!selectedCardId) return
     const move: Move = {
@@ -71,9 +166,7 @@ export const PlayPage = () => {
       cardInstanceId: selectedCardId,
       position: { x, y },
     }
-    const nextState = applyMove(game, move)
-    if (nextState !== game) {
-      updateGame(nextState)
+    if (processMove(game, move)) {
       setSelectedCardId(null)
     }
   }
@@ -93,18 +186,133 @@ export const PlayPage = () => {
     [aiDifficulty, settings.aiThinkTimeMs, settings.aiRandomness],
   )
 
+  const processMove = useCallback(
+    (state: GameState, move: Move) => {
+      const nextState = applyMove(state, move)
+      if (nextState === state) return false
+      const newEvents = nextState.events.slice(state.events.length)
+      const placePositions: Position[] = []
+      const capturePositions: Position[] = []
+      const captureSources: Position[] = []
+      const battles: BattlePresentation[] = []
+      let lastPlace: Position | null = null
+      let lastBattle: BattleResult | null = null
+
+      newEvents.forEach((event) => {
+        if (event.type === 'place') {
+          placePositions.push(event.position)
+          lastPlace = event.position
+          return
+        }
+        if (event.type === 'battle') {
+          lastBattle = event.result
+          const presentation = buildBattlePresentation(event.result, nextState)
+          if (presentation) battles.push(presentation)
+          return
+        }
+        if (event.type === 'capture') {
+          capturePositions.push(event.position)
+          if (event.reason === 'arrow' && lastPlace) {
+            captureSources.push(lastPlace)
+          }
+          if (event.reason === 'battle' && lastBattle) {
+            captureSources.push(
+              lastBattle.winner === 'attacker' ? lastBattle.attackerPos : lastBattle.defenderPos,
+            )
+          }
+        }
+      })
+
+      const uniquePositions = (positions: Position[]) => {
+        const map = new Map<string, Position>()
+        positions.forEach((pos) => {
+          map.set(positionKey(pos), pos)
+        })
+        return Array.from(map.values())
+      }
+
+      updateGame(nextState)
+
+      uniquePositions(placePositions).forEach((pos) => {
+        triggerFlash(pos, 'place', PLACE_FLASH_MS)
+      })
+
+      const captureFlashes = uniquePositions([...capturePositions, ...captureSources])
+      if (battles.length > 0) {
+        setPendingCaptureFlashes((prev) => [...prev, ...captureFlashes])
+        if (!activeBattle) {
+          setActiveBattle(battles[0])
+          if (battles.length > 1) {
+            setBattleQueue((prev) => [...prev, ...battles.slice(1)])
+          }
+        } else {
+          setBattleQueue((prev) => [...prev, ...battles])
+        }
+      } else {
+        captureFlashes.forEach((pos) => triggerFlash(pos, 'capture', CAPTURE_FLASH_MS))
+      }
+
+      return true
+    },
+    [activeBattle, buildBattlePresentation, triggerFlash, updateGame],
+  )
+
   useEffect(() => {
+    if (aiTimerRef.current !== null) {
+      window.clearTimeout(aiTimerRef.current)
+      aiTimerRef.current = null
+    }
     if (!game || game.status !== 'in_progress') return
+    if (isBattleAnimating) return
     const activeType = playerTypes[game.activePlayer]
     if (activeType !== 'ai') return
-    const timer = window.setTimeout(() => {
-      const move = runAiMove(game, game.activePlayer)
-      if (move) {
-        updateGame(applyMove(game, move))
+
+    const snapshot = {
+      seed: game.seed,
+      turn: game.turn,
+      activePlayer: game.activePlayer,
+    }
+    const delay = getAiDelayMs(game.seed, game.turn, game.activePlayer, settings.reducedMotion)
+    aiTimerRef.current = window.setTimeout(() => {
+      const latest = latestGameRef.current
+      if (!latest || latest.status !== 'in_progress') return
+      if (
+        latest.seed !== snapshot.seed ||
+        latest.turn !== snapshot.turn ||
+        latest.activePlayer !== snapshot.activePlayer
+      ) {
+        return
       }
-    }, settings.reducedMotion ? 0 : 400)
-    return () => window.clearTimeout(timer)
-  }, [game, playerTypes, runAiMove, settings.reducedMotion, updateGame])
+      if (playerTypes[latest.activePlayer] !== 'ai') return
+      const move = runAiMove(latest, latest.activePlayer)
+      if (move) {
+        processMove(latest, move)
+      }
+    }, delay)
+    return () => {
+      if (aiTimerRef.current !== null) {
+        window.clearTimeout(aiTimerRef.current)
+        aiTimerRef.current = null
+      }
+    }
+  }, [game, isBattleAnimating, playerTypes, processMove, runAiMove, settings.reducedMotion])
+
+  useEffect(() => {
+    if (activeBattle || battleQueue.length === 0) return
+    setActiveBattle(battleQueue[0])
+    setBattleQueue((prev) => prev.slice(1))
+  }, [activeBattle, battleQueue])
+
+  const handleBattleComplete = useCallback(() => {
+    setActiveBattle(null)
+  }, [])
+
+  useEffect(() => {
+    if (activeBattle || battleQueue.length > 0) return
+    if (pendingCaptureFlashes.length === 0) return
+    pendingCaptureFlashes.forEach((pos) => triggerFlash(pos, 'capture', CAPTURE_FLASH_MS))
+    setPendingCaptureFlashes([])
+  }, [activeBattle, battleQueue.length, pendingCaptureFlashes, triggerFlash])
 
   return (
     <section className="page">
@@ -226,7 +434,12 @@ export const PlayPage = () => {
           </div>
 
           <div className="game__board">
-            <BoardView game={game} onCellClick={handleCellClick} />
+            <BoardView
+              game={game}
+              onCellClick={handleCellClick}
+              flashByPosition={flashByPosition}
+              interactionDisabled={isBattleAnimating}
+            />
           </div>
 
           <div className="game__hands">
@@ -250,6 +463,7 @@ export const PlayPage = () => {
                         faceDown={faceDown}
                         selected={selectedCardId === card.instanceId}
                         onClick={() => {
+                          if (isBattleAnimating) return
                           if (playerTypes[game.activePlayer] !== 'human') return
                           if (game.activePlayer !== playerId) return
                           setSelectedCardId((prev) =>
@@ -265,6 +479,13 @@ export const PlayPage = () => {
           </div>
 
           {settings.showDevPanel ? <DevPanel game={game} /> : null}
+          {activeBattle ? (
+            <BattleAnimation
+              battle={activeBattle}
+              reducedMotion={settings.reducedMotion}
+              onComplete={handleBattleComplete}
+            />
+          ) : null}
         </div>
       ) : (
         <div className="panel">
