@@ -66,14 +66,20 @@ export const DeckBuilderPage = () => {
       `${settings.rngSeed}-${definition.id}-${counterRef.current}-${deckId}`,
     )
     counterRef.current += 1
-    const { card } = createCardInstance(definition, rng, { density: settings.arrowDensity })
+    const { card } = createCardInstance(definition, rng, {
+      mode: settings.arrowMode,
+      density: settings.arrowDensity,
+    })
     addCard(deckId, card)
   }
 
   const handleReroll = (deckId: string, card: CardInstance) => {
     const rng = createRng(`${settings.rngSeed}-${card.instanceId}-${counterRef.current}`)
     counterRef.current += 1
-    const result = rerollArrows(card, rng, { density: settings.arrowDensity })
+    const result = rerollArrows(card, rng, {
+      mode: settings.arrowMode,
+      density: settings.arrowDensity,
+    })
     updateCard(deckId, card.instanceId, result.card)
   }
 

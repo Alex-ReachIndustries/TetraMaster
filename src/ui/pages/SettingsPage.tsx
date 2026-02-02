@@ -7,6 +7,7 @@ export const SettingsPage = () => {
     reducedMotion,
     aiRandomness,
     aiThinkTimeMs,
+    arrowMode,
     arrowDensity,
     blockMode,
     blockCount,
@@ -18,6 +19,7 @@ export const SettingsPage = () => {
     setReducedMotion,
     setAiRandomness,
     setAiThinkTime,
+    setArrowMode,
     setArrowDensity,
     setBlockMode,
     setBlockCount,
@@ -57,6 +59,16 @@ export const SettingsPage = () => {
           <input value={rngSeed} onChange={(event) => setRngSeed(event.target.value)} />
         </label>
         <label className="field">
+          <span>Arrow generation</span>
+          <select
+            value={arrowMode}
+            onChange={(event) => setArrowMode(event.target.value as never)}
+          >
+            <option value="original">Original distribution</option>
+            <option value="density">Density slider</option>
+          </select>
+        </label>
+        <label className="field">
           <span>Arrow density</span>
           <input
             type="range"
@@ -65,6 +77,7 @@ export const SettingsPage = () => {
             step={0.05}
             value={arrowDensity}
             onChange={(event) => setArrowDensity(Number(event.target.value))}
+            disabled={arrowMode !== 'density'}
           />
           <span className="field__hint">{Math.round(arrowDensity * 100)}%</span>
         </label>

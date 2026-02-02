@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { ArtMode } from '../services/artProvider'
+import type { ArrowGenerationMode } from '../engine/cards'
 
 export type ThemeMode = 'classic' | 'modern'
 export type BlockMode = 'random' | 'fixed'
@@ -14,6 +15,7 @@ export interface SettingsState {
     medium: number
     hard: number
   }
+  arrowMode: ArrowGenerationMode
   arrowDensity: number
   blockMode: BlockMode
   blockCount: number
@@ -28,6 +30,7 @@ export interface SettingsActions {
   setReducedMotion: (value: boolean) => void
   setAiRandomness: (value: boolean) => void
   setAiThinkTime: (key: keyof SettingsState['aiThinkTimeMs'], value: number) => void
+  setArrowMode: (value: ArrowGenerationMode) => void
   setArrowDensity: (value: number) => void
   setBlockMode: (value: BlockMode) => void
   setBlockCount: (value: number) => void
@@ -48,6 +51,7 @@ export const useSettingsStore = create<SettingsState & SettingsActions>()(
         medium: 500,
         hard: 1000,
       },
+      arrowMode: 'original',
       arrowDensity: 0.5,
       blockMode: 'random',
       blockCount: 0,
@@ -65,6 +69,7 @@ export const useSettingsStore = create<SettingsState & SettingsActions>()(
             [key]: value,
           },
         })),
+      setArrowMode: (value) => set({ arrowMode: value }),
       setArrowDensity: (value) => set({ arrowDensity: value }),
       setBlockMode: (value) => set({ blockMode: value }),
       setBlockCount: (value) => set({ blockCount: value }),

@@ -78,6 +78,15 @@ The card list sources do not include fixed arrow layouts. This implementation ge
 patterns per card instance (matching the in-game variation) and lets you reroll arrows in the deck
 builder. Arrow density is adjustable in Settings.
 
+Original arrow generation (optional) follows the game's distribution for arrow counts. The
+Memoria open-source project documents the same algorithm used in FFIX:
+
+- Arrow count distribution (0-8 arrows): 1, 8, 25, 31, 18, 9, 5, 2, 1 out of 100.
+- After choosing the count, arrow directions are selected randomly from the eight directions.
+
+Source:
+https://github.com/Albeoris/Memoria/blob/main/Assembly-CSharp/Global/Card/CardPool.cs
+
 ### Deck rules
 
 - Deck size: 5 cards.
