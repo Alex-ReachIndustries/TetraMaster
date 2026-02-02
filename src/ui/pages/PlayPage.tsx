@@ -240,14 +240,21 @@ export const PlayPage = () => {
       const captureFlashes = uniquePositions([...capturePositions, ...captureSources])
       if (battles.length > 0) {
         setPendingCaptureFlashes((prev) => [...prev, ...captureFlashes])
-        setBattleQueue((prev) => [...prev, ...battles])
+        if (!activeBattle) {
+          setActiveBattle(battles[0])
+          if (battles.length > 1) {
+            setBattleQueue((prev) => [...prev, ...battles.slice(1)])
+          }
+        } else {
+          setBattleQueue((prev) => [...prev, ...battles])
+        }
       } else {
         captureFlashes.forEach((pos) => triggerFlash(pos, 'capture', CAPTURE_FLASH_MS))
       }
 
       return true
     },
-    [buildBattlePresentation, triggerFlash, updateGame],
+    [activeBattle, buildBattlePresentation, triggerFlash, updateGame],
   )
 
   useEffect(() => {
