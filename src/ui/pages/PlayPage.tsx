@@ -121,7 +121,7 @@ export const PlayPage = () => {
       }
     }, settings.reducedMotion ? 0 : 400)
     return () => window.clearTimeout(timer)
-  }, [game, playerTypes, runAiMove, settings.reducedMotion, updateGame])
+  }, [activeBattle, game, playerTypes, runAiMove, settings.reducedMotion, updateGame])
 
   return (
     <section className="page">

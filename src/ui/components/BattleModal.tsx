@@ -26,7 +26,7 @@ export const BattleModal = ({
     setDefenderHp(roll.defenderValue)
     setPhase('intro')
     let frame = 0
-    let timeout = window.setTimeout(() => {
+    const timeout = window.setTimeout(() => {
       setPhase('animating')
       const start = performance.now()
       const duration = 700
