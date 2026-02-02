@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "001",
+    "name": "Goblin",
+    "stats": {
+      "power": "0",
+      "class": "P",
+      "physical": "0",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "002",
+    "name": "Fang",
+    "stats": {
+      "power": "0",
+      "class": "P",
+      "physical": "0",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "003",
+    "name": "Skeleton",
+    "stats": {
+      "power": "0",
+      "class": "P",
+      "physical": "0",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "004",
+    "name": "Flan",
+    "stats": {
+      "power": "0",
+      "class": "M",
+      "physical": "0",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "005",
+    "name": "Zaghnol",
+    "stats": {
+      "power": "0",
+      "class": "P",
+      "physical": "0",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "006",
+    "name": "Lizard Man",
+    "stats": {
+      "power": "0",
+      "class": "P",
+      "physical": "0",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "007",
+    "name": "Zombie",
+    "stats": {
+      "power": "1",
+      "class": "M",
+      "physical": "1",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "008",
+    "name": "Bomb",
+    "stats": {
+      "power": "1",
+      "class": "M",
+      "physical": "0",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "009",
+    "name": "Ironite",
+    "stats": {
+      "power": "1",
+      "class": "P",
+      "physical": "1",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "010",
+    "name": "Sahagin",
+    "stats": {
+      "power": "1",
+      "class": "P",
+      "physical": "1",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "011",
+    "name": "Yeti",
+    "stats": {
+      "power": "1",
+      "class": "M",
+      "physical": "0",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "012",
+    "name": "Mimic",
+    "stats": {
+      "power": "1",
+      "class": "M",
+      "physical": "1",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "013",
+    "name": "Wyerd",
+    "stats": {
+      "power": "1",
+      "class": "M",
+      "physical": "0",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "014",
+    "name": "Mandragora",
+    "stats": {
+      "power": "1",
+      "class": "M",
+      "physical": "0",
+      "magical": "2"
+    }
+  },
+  {
+    "id": "015",
+    "name": "Crawler",
+    "stats": {
+      "power": "2",
+      "class": "P",
+      "physical": "2",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "016",
+    "name": "Sand Scorpion",
+    "stats": {
+      "power": "2",
+      "class": "P",
+      "physical": "2",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "017",
+    "name": "Nymph",
+    "stats": {
+      "power": "2",
+      "class": "M",
+      "physical": "0",
+      "magical": "2"
+    }
+  },
+  {
+    "id": "018",
+    "name": "Sand Golem",
+    "stats": {
+      "power": "2",
+      "class": "P",
+      "physical": "2",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "019",
+    "name": "Zuu",
+    "stats": {
+      "power": "2",
+      "class": "P",
+      "physical": "0",
+      "magical": "2"
+    }
+  },
+  {
+    "id": "020",
+    "name": "Dragonfly",
+    "stats": {
+      "power": "2",
+      "class": "P",
+      "physical": "2",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "021",
+    "name": "Carrion Worm",
+    "stats": {
+      "power": "2",
+      "class": "M",
+      "physical": "1",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "022",
+    "name": "Cerberus",
+    "stats": {
+      "power": "2",
+      "class": "P",
+      "physical": "2",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "023",
+    "name": "Antlion",
+    "stats": {
+      "power": "3",
+      "class": "P",
+      "physical": "2",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "024",
+    "name": "Cactuar",
+    "stats": {
+      "power": "3",
+      "class": "P",
+      "physical": "C",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "025",
+    "name": "Gimme Cat",
+    "stats": {
+      "power": "3",
+      "class": "M",
+      "physical": "1",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "026",
+    "name": "Ragtimer",
+    "stats": {
+      "power": "3",
+      "class": "M",
+      "physical": "2",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "027",
+    "name": "Hedgehog Pie",
+    "stats": {
+      "power": "3",
+      "class": "M",
+      "physical": "1",
+      "magical": "2"
+    }
+  },
+  {
+    "id": "028",
+    "name": "Ralvuimago",
+    "stats": {
+      "power": "3",
+      "class": "P",
+      "physical": "4",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "029",
+    "name": "Ochu",
+    "stats": {
+      "power": "3",
+      "class": "P",
+      "physical": "2",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "030",
+    "name": "Troll",
+    "stats": {
+      "power": "3",
+      "class": "P",
+      "physical": "3",
+      "magical": "2"
+    }
+  },
+  {
+    "id": "031",
+    "name": "Blazer Beetle",
+    "stats": {
+      "power": "4",
+      "class": "P",
+      "physical": "5",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "032",
+    "name": "Abomination",
+    "stats": {
+      "power": "4",
+      "class": "P",
+      "physical": "3",
+      "magical": "3"
+    }
+  },
+  {
+    "id": "033",
+    "name": "Zemzelett",
+    "stats": {
+      "power": "4",
+      "class": "M",
+      "physical": "1",
+      "magical": "5"
+    }
+  },
+  {
+    "id": "034",
+    "name": "Stroper",
+    "stats": {
+      "power": "4",
+      "class": "P",
+      "physical": "3",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "035",
+    "name": "Tantarian",
+    "stats": {
+      "power": "4",
+      "class": "M",
+      "physical": "2",
+      "magical": "2"
+    }
+  },
+  {
+    "id": "036",
+    "name": "Grand Dragon",
+    "stats": {
+      "power": "4",
+      "class": "P",
+      "physical": "4",
+      "magical": "4"
+    }
+  },
+  {
+    "id": "037",
+    "name": "Feather Circle",
+    "stats": {
+      "power": "4",
+      "class": "M",
+      "physical": "2",
+      "magical": "2"
+    }
+  },
+  {
+    "id": "038",
+    "name": "Hecteyes",
+    "stats": {
+      "power": "4",
+      "class": "M",
+      "physical": "0",
+      "magical": "4"
+    }
+  },
+  {
+    "id": "039",
+    "name": "Ogre",
+    "stats": {
+      "power": "5",
+      "class": "P",
+      "physical": "4",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "040",
+    "name": "Armstrong",
+    "stats": {
+      "power": "5",
+      "class": "M",
+      "physical": "2",
+      "magical": "4"
+    }
+  },
+  {
+    "id": "041",
+    "name": "Ash",
+    "stats": {
+      "power": "5",
+      "class": "M",
+      "physical": "3",
+      "magical": "3"
+    }
+  },
+  {
+    "id": "042",
+    "name": "Wraith",
+    "stats": {
+      "power": "5",
+      "class": "M",
+      "physical": "4",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "043",
+    "name": "Gargoyle",
+    "stats": {
+      "power": "5",
+      "class": "M",
+      "physical": "3",
+      "magical": "2"
+    }
+  },
+  {
+    "id": "044",
+    "name": "Vepal",
+    "stats": {
+      "power": "5",
+      "class": "M",
+      "physical": "3",
+      "magical": "3"
+    }
+  },
+  {
+    "id": "045",
+    "name": "Grimlock",
+    "stats": {
+      "power": "5",
+      "class": "M",
+      "physical": "2",
+      "magical": "3"
+    }
+  },
+  {
+    "id": "046",
+    "name": "Tonberry",
+    "stats": {
+      "power": "2",
+      "class": "P",
+      "physical": "3",
+      "magical": "3"
+    }
+  },
+  {
+    "id": "047",
+    "name": "Veteran",
+    "stats": {
+      "power": "5",
+      "class": "M",
+      "physical": "1",
+      "magical": "9"
+    }
+  },
+  {
+    "id": "048",
+    "name": "Garuda",
+    "stats": {
+      "power": "6",
+      "class": "M",
+      "physical": "4",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "049",
+    "name": "Malboro",
+    "stats": {
+      "power": "5",
+      "class": "M",
+      "physical": "3",
+      "magical": "6"
+    }
+  },
+  {
+    "id": "050",
+    "name": "Mover",
+    "stats": {
+      "power": "6",
+      "class": "M",
+      "physical": "F",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "051",
+    "name": "Abadon",
+    "stats": {
+      "power": "7",
+      "class": "M",
+      "physical": "6",
+      "magical": "2"
+    }
+  },
+  {
+    "id": "052",
+    "name": "Behemoth",
+    "stats": {
+      "power": "B",
+      "class": "P",
+      "physical": "4",
+      "magical": "6"
+    }
+  },
+  {
+    "id": "053",
+    "name": "Iron Man",
+    "stats": {
+      "power": "C",
+      "class": "P",
+      "physical": "6",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "054",
+    "name": "Nova Dragon",
+    "stats": {
+      "power": "E",
+      "class": "P",
+      "physical": "7",
+      "magical": "C"
+    }
+  },
+  {
+    "id": "055",
+    "name": "Ozma",
+    "stats": {
+      "power": "D",
+      "class": "M",
+      "physical": "0",
+      "magical": "C"
+    }
+  },
+  {
+    "id": "056",
+    "name": "Hades",
+    "stats": {
+      "power": "F",
+      "class": "M",
+      "physical": "C",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "057",
+    "name": "Holy",
+    "stats": {
+      "power": "8",
+      "class": "M",
+      "physical": "2",
+      "magical": "3"
+    }
+  },
+  {
+    "id": "058",
+    "name": "Meteor",
+    "stats": {
+      "power": "B",
+      "class": "M",
+      "physical": "A",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "059",
+    "name": "Flare",
+    "stats": {
+      "power": "C",
+      "class": "M",
+      "physical": "0",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "060",
+    "name": "Shiva",
+    "stats": {
+      "power": "5",
+      "class": "M",
+      "physical": "0",
+      "magical": "5"
+    }
+  },
+  {
+    "id": "061",
+    "name": "Ifrit",
+    "stats": {
+      "power": "6",
+      "class": "M",
+      "physical": "9",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "062",
+    "name": "Ramuh",
+    "stats": {
+      "power": "4",
+      "class": "M",
+      "physical": "1",
+      "magical": "6"
+    }
+  },
+  {
+    "id": "063",
+    "name": "Atomos",
+    "stats": {
+      "power": "4",
+      "class": "M",
+      "physical": "6",
+      "magical": "6"
+    }
+  },
+  {
+    "id": "064",
+    "name": "Odin",
+    "stats": {
+      "power": "C",
+      "class": "M",
+      "physical": "8",
+      "magical": "4"
+    }
+  },
+  {
+    "id": "065",
+    "name": "Leviathan",
+    "stats": {
+      "power": "B",
+      "class": "M",
+      "physical": "6",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "066",
+    "name": "Bahamut",
+    "stats": {
+      "power": "C",
+      "class": "M",
+      "physical": "8",
+      "magical": "5"
+    }
+  },
+  {
+    "id": "067",
+    "name": "Ark",
+    "stats": {
+      "power": "E",
+      "class": "M",
+      "physical": "5",
+      "magical": "5"
+    }
+  },
+  {
+    "id": "068",
+    "name": "Fenrir",
+    "stats": {
+      "power": "8",
+      "class": "M",
+      "physical": "2",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "069",
+    "name": "Madeen",
+    "stats": {
+      "power": "A",
+      "class": "M",
+      "physical": "1",
+      "magical": "6"
+    }
+  },
+  {
+    "id": "070",
+    "name": "Alexander",
+    "stats": {
+      "power": "D",
+      "class": "M",
+      "physical": "B",
+      "magical": "5"
+    }
+  },
+  {
+    "id": "071",
+    "name": "Excalibur II",
+    "stats": {
+      "power": "F",
+      "class": "P",
+      "physical": "B",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "072",
+    "name": "Ultima Weapon",
+    "stats": {
+      "power": "F",
+      "class": "P",
+      "physical": "1",
+      "magical": "6"
+    }
+  },
+  {
+    "id": "073",
+    "name": "Masamune",
+    "stats": {
+      "power": "C",
+      "class": "P",
+      "physical": "B",
+      "magical": "3"
+    }
+  },
+  {
+    "id": "074",
+    "name": "Elixir",
+    "stats": {
+      "power": "6",
+      "class": "M",
+      "physical": "6",
+      "magical": "6"
+    }
+  },
+  {
+    "id": "075",
+    "name": "Dark Matter",
+    "stats": {
+      "power": "C",
+      "class": "M",
+      "physical": "3",
+      "magical": "C"
+    }
+  },
+  {
+    "id": "076",
+    "name": "Ribbon",
+    "stats": {
+      "power": "0",
+      "class": "M",
+      "physical": "C",
+      "magical": "F"
+    }
+  },
+  {
+    "id": "077",
+    "name": "Tiger Racket",
+    "stats": {
+      "power": "0",
+      "class": "P",
+      "physical": "0",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "078",
+    "name": "Save the Queen",
+    "stats": {
+      "power": "6",
+      "class": "P",
+      "physical": "3",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "079",
+    "name": "Genji",
+    "stats": {
+      "power": "0",
+      "class": "P",
+      "physical": "6",
+      "magical": "A"
+    }
+  },
+  {
+    "id": "080",
+    "name": "Mythril Sword",
+    "stats": {
+      "power": "1",
+      "class": "P",
+      "physical": "0",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "081",
+    "name": "Blue Narciss",
+    "stats": {
+      "power": "8",
+      "class": "P",
+      "physical": "8",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "082",
+    "name": "Hilda Garde 3",
+    "stats": {
+      "power": "6",
+      "class": "P",
+      "physical": "3",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "083",
+    "name": "Invincible",
+    "stats": {
+      "power": "B",
+      "class": "P",
+      "physical": "8",
+      "magical": "C"
+    }
+  },
+  {
+    "id": "084",
+    "name": "Cargo Ship",
+    "stats": {
+      "power": "2",
+      "class": "P",
+      "physical": "6",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "085",
+    "name": "Hilda Garde 1",
+    "stats": {
+      "power": "6",
+      "class": "P",
+      "physical": "4",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "086",
+    "name": "Red Rose",
+    "stats": {
+      "power": "8",
+      "class": "P",
+      "physical": "1",
+      "magical": "8"
+    }
+  },
+  {
+    "id": "087",
+    "name": "Theater Ship",
+    "stats": {
+      "power": "1",
+      "class": "P",
+      "physical": "6",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "088",
+    "name": "Viltgance",
+    "stats": {
+      "power": "E",
+      "class": "P",
+      "physical": "8",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "089",
+    "name": "Chocobo",
+    "stats": {
+      "power": "0",
+      "class": "P",
+      "physical": "0",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "090",
+    "name": "Fat Chocobo",
+    "stats": {
+      "power": "1",
+      "class": "P",
+      "physical": "1",
+      "magical": "1"
+    }
+  },
+  {
+    "id": "091",
+    "name": "Mog",
+    "stats": {
+      "power": "1",
+      "class": "M",
+      "physical": "0",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "092",
+    "name": "Frog",
+    "stats": {
+      "power": "0",
+      "class": "P",
+      "physical": "0",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "093",
+    "name": "Oglop",
+    "stats": {
+      "power": "2",
+      "class": "P",
+      "physical": "1",
+      "magical": "0"
+    }
+  },
+  {
+    "id": "094",
+    "name": "Alexandria",
+    "stats": {
+      "power": "0",
+      "class": "P",
+      "physical": "B",
+      "magical": "6"
+    }
+  },
+  {
+    "id": "095",
+    "name": "Lindblum",
+    "stats": {
+      "power": "0",
+      "class": "P",
+      "physical": "6",
+      "magical": "B"
+    }
+  },
+  {
+    "id": "096",
+    "name": "Two Moons",
+    "stats": {
+      "power": "6",
+      "class": "M",
+      "physical": "5",
+      "magical": "5"
+    }
+  },
+  {
+    "id": "097",
+    "name": "Gargant",
+    "stats": {
+      "power": "2",
+      "class": "P",
+      "physical": "0",
+      "magical": "3"
+    }
+  },
+  {
+    "id": "098",
+    "name": "Namingway",
+    "stats": {
+      "power": "7",
+      "class": "M",
+      "physical": "7",
+      "magical": "7"
+    }
+  },
+  {
+    "id": "099",
+    "name": "Boco",
+    "stats": {
+      "power": "7",
+      "class": "P",
+      "physical": "7",
+      "magical": "7"
+    }
+  },
+  {
+    "id": "100",
+    "name": "Airship",
+    "stats": {
+      "power": "7",
+      "class": "P",
+      "physical": "7",
+      "magical": "7"
+    }
+  }
+]
