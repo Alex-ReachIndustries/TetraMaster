@@ -25,6 +25,8 @@ export const CardView = ({
   size = 'medium',
   interactive = true,
   flash,
+  showPower = false,
+  overridePower,
 }: {
   card: CardInstance
   owner?: PlayerId
@@ -34,6 +36,10 @@ export const CardView = ({
   size?: 'small' | 'medium' | 'large'
   interactive?: boolean
   flash?: 'place' | 'capture'
+  /** Show the big number in the centre (e.g. countdown HP during battle) */
+  showPower?: boolean
+  /** When showPower, use this value instead of card.stats.power (e.g. battle countdown HP) */
+  overridePower?: number
 }) => {
   const theme = useSettingsStore((state) => state.theme)
   const artModeOverride = useSettingsStore((state) => state.artModeOverride)
@@ -53,6 +59,11 @@ export const CardView = ({
           artModeOverride={artModeOverride}
           seed={`${seed}-${card.definitionId}`}
         />
+        {showPower && (
+          <div className="card__power" aria-hidden="true">
+            {overridePower !== undefined ? overridePower : card.stats.power}
+          </div>
+        )}
       </div>
       <div className="card__stats">
         <span className="stat stat--power">{card.stats.power}</span>
@@ -77,7 +88,7 @@ export const CardView = ({
     selected && 'card--selected',
     flash && `card--flash-${flash}`,
   )
-  const styleVars: CSSProperties = {
+  const styleVars: CSSProperties & Record<string, string> = {
     '--flash-place-ms': `${PLACE_FLASH_MS}ms`,
     '--flash-capture-ms': `${CAPTURE_FLASH_MS}ms`,
   }

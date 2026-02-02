@@ -426,7 +426,7 @@ export const PlayPage = () => {
             </div>
             {game.status === 'finished' ? (
               <div className="winner">
-                {game.winner === 'draw'
+                {game.winner == null || game.winner === 'draw'
                   ? 'Draw!'
                   : `Player ${game.winner + 1} wins the match.`}
               </div>

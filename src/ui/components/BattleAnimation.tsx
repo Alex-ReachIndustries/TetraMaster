@@ -136,7 +136,7 @@ export const BattleAnimation = ({
     phase === 'result' && winnerSide === 'left' && 'battle-card--loser',
   )
 
-  const styleVars: CSSProperties = {
+  const styleVars: CSSProperties & Record<string, string> = {
     '--battle-popin-ms': `${BATTLE_POPIN_MS}ms`,
     '--battle-bump-ms': `${BATTLE_BUMP_MS}ms`,
     '--battle-winner-ms': `${BATTLE_WINNER_MS}ms`,
@@ -161,17 +161,24 @@ export const BattleAnimation = ({
         <div className="battle-modal__title">Battle!</div>
         <div className="battle-modal__arena">
           <div className={leftClassName} data-owner={battle.attackerPlayer}>
-            <div className="battle-card__health">{leftHealth}</div>
-            <CardView card={battle.attacker} owner={battle.attackerPlayer} size="large" interactive={false} />
+            <CardView
+              card={battle.attacker}
+              owner={battle.attackerPlayer}
+              size="large"
+              interactive={false}
+              showPower
+              overridePower={leftHealth}
+            />
             <div className="battle-card__label">Attacker</div>
           </div>
           <div className={rightClassName} data-owner={battle.defenderPlayer}>
-            <div className="battle-card__health">{rightHealth}</div>
             <CardView
               card={battle.defender}
               owner={battle.defenderPlayer}
               size="large"
               interactive={false}
+              showPower
+              overridePower={rightHealth}
             />
             <div className="battle-card__label">Defender</div>
           </div>
