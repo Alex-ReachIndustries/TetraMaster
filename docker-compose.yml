@@ -1,0 +1,8 @@
+services:
+  app:
+    build: .
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_ART_PROVIDER: ${VITE_ART_PROVIDER:-procedural}
+      VITE_LOCAL_ART_ENDPOINT: ${VITE_LOCAL_ART_ENDPOINT:-http://host.docker.internal:8081/card}
