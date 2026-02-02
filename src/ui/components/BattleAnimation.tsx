@@ -136,7 +136,7 @@ export const BattleAnimation = ({
     phase === 'result' && winnerSide === 'left' && 'battle-card--loser',
   )
 
-  const styleVars: CSSProperties = {
+  const styleVars: CSSProperties & Record<string, string> = {
     '--battle-popin-ms': `${BATTLE_POPIN_MS}ms`,
     '--battle-bump-ms': `${BATTLE_BUMP_MS}ms`,
     '--battle-winner-ms': `${BATTLE_WINNER_MS}ms`,

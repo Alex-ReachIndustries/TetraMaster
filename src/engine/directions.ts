@@ -35,7 +35,7 @@ export const maskToArrows = (mask: string): Direction[] => {
   const trimmed = mask.trim()
   const values =
     trimmed.length >= directionOrder.length ? trimmed.slice(0, directionOrder.length) : trimmed
-  return directionOrder.filter((dir, index) => values[index] === '1')
+  return directionOrder.filter((_, index) => values[index] === '1')
 }
 
 export const addPosition = (pos: Position, delta: Position): Position => ({

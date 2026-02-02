@@ -1,4 +1,3 @@
-import React from 'react'
 import { hashSeed } from '../engine/rng'
 
 const makeRng = (seed: number) => {

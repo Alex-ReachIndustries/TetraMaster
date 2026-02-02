@@ -77,7 +77,7 @@ export const CardView = ({
     selected && 'card--selected',
     flash && `card--flash-${flash}`,
   )
-  const styleVars: CSSProperties = {
+  const styleVars: CSSProperties & Record<string, string> = {
     '--flash-place-ms': `${PLACE_FLASH_MS}ms`,
     '--flash-capture-ms': `${CAPTURE_FLASH_MS}ms`,
   }
