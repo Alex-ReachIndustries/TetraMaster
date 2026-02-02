@@ -73,6 +73,8 @@ export interface BattleResult {
   defenderPos: Position
   attackerPlayer: PlayerId
   defenderPlayer: PlayerId
+  attackerCard: CardInstance
+  defenderCard: CardInstance
 }
 
 export type CaptureReason = 'arrow' | 'battle' | 'combo'

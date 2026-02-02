@@ -4,6 +4,7 @@ import { countScores, createGame, applyMove } from '../../engine/rules'
 import { validateDeck } from '../../engine/validate'
 import type { GameState, Move, PlayerId } from '../../engine/types'
 import { useDeckStore, useGameStore, useSettingsStore } from '../../state'
+import { BattleModal } from '../components/BattleModal'
 import { BoardView } from '../components/BoardView'
 import { CardView } from '../components/CardView'
 import { DevPanel } from '../components/DevPanel'
@@ -23,6 +24,7 @@ export const PlayPage = () => {
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null)
   const [error, setError] = useState('')
   const [matchSeed, setMatchSeed] = useState(settings.rngSeed)
+  const [battleIndex, setBattleIndex] = useState(0)
   const resolvedDeckIds = useMemo<[string, string]>(() => {
     if (decks.length === 0) return ['', '']
     const first = deckIds[0] || decks[0].id
@@ -31,6 +33,17 @@ export const PlayPage = () => {
   }, [deckIds, decks])
 
   const scores = useMemo(() => (game ? countScores(game) : { 0: 0, 1: 0 }), [game])
+  const battleEvents = useMemo(
+    () =>
+      game
+        ? game.events
+            .filter((event) => event.type === 'battle')
+            .map((event) => (event.type === 'battle' ? event.result : null))
+            .filter((result): result is NonNullable<typeof result> => Boolean(result))
+        : [],
+    [game],
+  )
+  const activeBattle = battleIndex < battleEvents.length ? battleEvents[battleIndex] : null
 
   const startGame = () => {
     const deck1 = decks.find((deck) => deck.id === resolvedDeckIds[0])
@@ -54,16 +67,19 @@ export const PlayPage = () => {
     })
     setError('')
     setSelectedCardId(null)
+    setBattleIndex(0)
     setGame(nextGame)
   }
 
   const resetGame = () => {
     setGame(null)
     setSelectedCardId(null)
+    setBattleIndex(0)
   }
 
   const handleCellClick = (x: number, y: number) => {
     if (!game || game.status !== 'in_progress') return
+    if (activeBattle) return
     if (playerTypes[game.activePlayer] !== 'human') return
     if (!selectedCardId) return
     const move: Move = {
@@ -95,6 +111,7 @@ export const PlayPage = () => {
 
   useEffect(() => {
     if (!game || game.status !== 'in_progress') return
+    if (activeBattle) return
     const activeType = playerTypes[game.activePlayer]
     if (activeType !== 'ai') return
     const timer = window.setTimeout(() => {
@@ -265,6 +282,9 @@ export const PlayPage = () => {
           </div>
 
           {settings.showDevPanel ? <DevPanel game={game} /> : null}
+          {activeBattle ? (
+            <BattleModal battle={activeBattle} onComplete={() => setBattleIndex((prev) => prev + 1)} />
+          ) : null}
         </div>
       ) : (
         <div className="panel">

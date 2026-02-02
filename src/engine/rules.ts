@@ -292,6 +292,8 @@ const resolvePlacement = (
       defenderPos: battle.pos,
       attackerPlayer: attackerCell.owner,
       defenderPlayer: defenderCell.owner,
+      attackerCard: cloneCard(attackerCell.card),
+      defenderCard: cloneCard(defenderCell.card),
     }
     events.push({ type: 'battle', result: battleResult })
     if (result === 'attacker') {
