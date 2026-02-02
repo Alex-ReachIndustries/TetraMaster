@@ -1,6 +1,8 @@
 import clsx from 'clsx'
+import type { CSSProperties } from 'react'
 import type { CardInstance, Direction, PlayerId } from '../../engine/types'
 import { useSettingsStore } from '../../state'
+import { CAPTURE_FLASH_MS, PLACE_FLASH_MS } from '../animationConfig'
 import { CardArt } from './CardArt'
 
 const arrowClass: Record<Direction, string> = {
@@ -22,6 +24,7 @@ export const CardView = ({
   onClick,
   size = 'medium',
   interactive = true,
+  flash,
 }: {
   card: CardInstance
   owner?: PlayerId
@@ -30,6 +33,7 @@ export const CardView = ({
   onClick?: () => void
   size?: 'small' | 'medium' | 'large'
   interactive?: boolean
+  flash?: 'place' | 'capture'
 }) => {
   const theme = useSettingsStore((state) => state.theme)
   const artModeOverride = useSettingsStore((state) => state.artModeOverride)
@@ -71,14 +75,30 @@ export const CardView = ({
     owner !== undefined && `card--owner-${owner}`,
     faceDown && 'card--facedown',
     selected && 'card--selected',
+    flash && `card--flash-${flash}`,
   )
+  const styleVars: CSSProperties = {
+    '--flash-place-ms': `${PLACE_FLASH_MS}ms`,
+    '--flash-capture-ms': `${CAPTURE_FLASH_MS}ms`,
+  }
 
   if (!interactive) {
-    return <div className={className}>{content}</div>
+    return (
+      <div className={className} data-owner={owner} style={styleVars}>
+        {content}
+      </div>
+    )
   }
 
   return (
-    <button type="button" className={className} onClick={onClick} aria-pressed={selected}>
+    <button
+      type="button"
+      className={className}
+      onClick={onClick}
+      aria-pressed={selected}
+      data-owner={owner}
+      style={styleVars}
+    >
       {content}
     </button>
   )
