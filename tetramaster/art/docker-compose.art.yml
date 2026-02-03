@@ -1,9 +1,11 @@
-# TetraMaster card art generation
-# Run from repository root:
+# TetraMaster card art generation – local image generation (no API key).
+# Based on Story_Teller/cardset-studio: Stable Diffusion WebUI in Docker, A1111 API, no auth.
+#
+# One-command generation from repo root:
 #   docker compose -f tetramaster/art/docker-compose.art.yml run --rm generator
-# Set SD_URL if SD runs elsewhere (e.g. host): SD_URL=http://host.docker.internal:7860 docker compose -f tetramaster/art/docker-compose.art.yml run --rm generator
-# Optional: start stable-diffusion in same compose first, then run generator (SD_URL defaults to http://stable-diffusion:7860).
-# Volume ../.. mounts repo root so scripts can read src/data/cards.json and write tetramaster/art/output.
+# This starts stable-diffusion (if needed), waits for it to be healthy, then runs prompts + images.
+# Volume ../.. mounts repo root so scripts read src/data/cards.json and write tetramaster/art/output.
+# To use an existing SD on the host: SD_URL=http://host.docker.internal:7860 docker compose ... run --rm generator
 
 services:
   generator:
@@ -17,14 +19,23 @@ services:
       - sh
       - -c
       - "node tetramaster/art/scripts/generate-prompts.mjs && node tetramaster/art/scripts/generate-images.mjs"
+    depends_on:
+      stable-diffusion:
+        condition: service_healthy
+    networks:
+      - art-network
 
-  # Optional: Stable Diffusion WebUI (A1111 API). Requires NVIDIA GPU; see your SD setup for model download.
+  # Local Stable Diffusion WebUI (A1111 API). No API key; runs entirely in Docker.
+  # Requires NVIDIA GPU. See MODELS.md for model setup (optional volume mount or built-in defaults).
   stable-diffusion:
     image: ghcr.io/ai-dock/stable-diffusion-webui:latest
     ports:
       - "7860:7860"
+    volumes:
+      - sd_models:/opt/stable-diffusion-webui/models/Stable-diffusion
+      - sd_outputs:/opt/stable-diffusion-webui/outputs
     environment:
-      - COMMANDLINE_ARGS=--api --xformers --listen --no-half-vae
+      - COMMANDLINE_ARGS=--api --xformers --listen --no-half-vae --enable-insecure-extension-access
       - WEB_ENABLE_AUTH=false
       - WEBUI_PORT=7860
     healthcheck:
@@ -33,3 +44,13 @@ services:
       timeout: 10s
       retries: 10
       start_period: 300s
+    networks:
+      - art-network
+
+networks:
+  art-network:
+    driver: bridge
+
+volumes:
+  sd_models:
+  sd_outputs:
