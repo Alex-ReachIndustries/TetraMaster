@@ -1,0 +1,35 @@
+# TetraMaster card art generation
+# Run from repository root:
+#   docker compose -f tetramaster/art/docker-compose.art.yml run --rm generator
+# Set SD_URL if SD runs elsewhere (e.g. host): SD_URL=http://host.docker.internal:7860 docker compose -f tetramaster/art/docker-compose.art.yml run --rm generator
+# Optional: start stable-diffusion in same compose first, then run generator (SD_URL defaults to http://stable-diffusion:7860).
+# Volume ../.. mounts repo root so scripts can read src/data/cards.json and write tetramaster/art/output.
+
+services:
+  generator:
+    image: node:20-slim
+    working_dir: /app
+    volumes:
+      - ../..:/app
+    environment:
+      - SD_URL=${SD_URL:-http://stable-diffusion:7860}
+    command:
+      - sh
+      - -c
+      - "node tetramaster/art/scripts/generate-prompts.mjs && node tetramaster/art/scripts/generate-images.mjs"
+
+  # Optional: Stable Diffusion WebUI (A1111 API). Requires NVIDIA GPU; see your SD setup for model download.
+  stable-diffusion:
+    image: ghcr.io/ai-dock/stable-diffusion-webui:latest
+    ports:
+      - "7860:7860"
+    environment:
+      - COMMANDLINE_ARGS=--api --xformers --listen --no-half-vae
+      - WEB_ENABLE_AUTH=false
+      - WEBUI_PORT=7860
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7860/sdapi/v1/sd-models"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 300s

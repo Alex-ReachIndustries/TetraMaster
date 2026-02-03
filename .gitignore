@@ -13,6 +13,7 @@ dist-ssr
 *.local
 public/generated
 coverage
+tetramaster/art/output
 
 # Editor directories and files
 .vscode/*

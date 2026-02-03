@@ -1,0 +1,702 @@
+[
+  {
+    "id": "001",
+    "name": "Goblin",
+    "prompt": "Fantasy card art, Goblin, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47665
+  },
+  {
+    "id": "002",
+    "name": "Fang",
+    "prompt": "Fantasy card art, Fang, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47666
+  },
+  {
+    "id": "003",
+    "name": "Skeleton",
+    "prompt": "Fantasy card art, Skeleton, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47667
+  },
+  {
+    "id": "004",
+    "name": "Flan",
+    "prompt": "Fantasy card art, Flan, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47668
+  },
+  {
+    "id": "005",
+    "name": "Zaghnol",
+    "prompt": "Fantasy card art, Zaghnol, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47669
+  },
+  {
+    "id": "006",
+    "name": "Lizard Man",
+    "prompt": "Fantasy card art, Lizard Man, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47670
+  },
+  {
+    "id": "007",
+    "name": "Zombie",
+    "prompt": "Fantasy card art, Zombie, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47671
+  },
+  {
+    "id": "008",
+    "name": "Bomb",
+    "prompt": "Fantasy card art, Bomb, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47672
+  },
+  {
+    "id": "009",
+    "name": "Ironite",
+    "prompt": "Fantasy card art, Ironite, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47673
+  },
+  {
+    "id": "010",
+    "name": "Sahagin",
+    "prompt": "Fantasy card art, Sahagin, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47695
+  },
+  {
+    "id": "011",
+    "name": "Yeti",
+    "prompt": "Fantasy card art, Yeti, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47696
+  },
+  {
+    "id": "012",
+    "name": "Mimic",
+    "prompt": "Fantasy card art, Mimic, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47697
+  },
+  {
+    "id": "013",
+    "name": "Wyerd",
+    "prompt": "Fantasy card art, Wyerd, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47698
+  },
+  {
+    "id": "014",
+    "name": "Mandragora",
+    "prompt": "Fantasy card art, Mandragora, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47699
+  },
+  {
+    "id": "015",
+    "name": "Crawler",
+    "prompt": "Fantasy card art, Crawler, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47700
+  },
+  {
+    "id": "016",
+    "name": "Sand Scorpion",
+    "prompt": "Fantasy card art, Sand Scorpion, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47701
+  },
+  {
+    "id": "017",
+    "name": "Nymph",
+    "prompt": "Fantasy card art, Nymph, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47702
+  },
+  {
+    "id": "018",
+    "name": "Sand Golem",
+    "prompt": "Fantasy card art, Sand Golem, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47703
+  },
+  {
+    "id": "019",
+    "name": "Zuu",
+    "prompt": "Fantasy card art, Zuu, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47704
+  },
+  {
+    "id": "020",
+    "name": "Dragonfly",
+    "prompt": "Fantasy card art, Dragonfly, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47726
+  },
+  {
+    "id": "021",
+    "name": "Carrion Worm",
+    "prompt": "Fantasy card art, Carrion Worm, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47727
+  },
+  {
+    "id": "022",
+    "name": "Cerberus",
+    "prompt": "Fantasy card art, Cerberus, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47728
+  },
+  {
+    "id": "023",
+    "name": "Antlion",
+    "prompt": "Fantasy card art, Antlion, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47729
+  },
+  {
+    "id": "024",
+    "name": "Cactuar",
+    "prompt": "Fantasy card art, Cactuar, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47730
+  },
+  {
+    "id": "025",
+    "name": "Gimme Cat",
+    "prompt": "Fantasy card art, Gimme Cat, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47731
+  },
+  {
+    "id": "026",
+    "name": "Ragtimer",
+    "prompt": "Fantasy card art, Ragtimer, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47732
+  },
+  {
+    "id": "027",
+    "name": "Hedgehog Pie",
+    "prompt": "Fantasy card art, Hedgehog Pie, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47733
+  },
+  {
+    "id": "028",
+    "name": "Ralvuimago",
+    "prompt": "Fantasy card art, Ralvuimago, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47734
+  },
+  {
+    "id": "029",
+    "name": "Ochu",
+    "prompt": "Fantasy card art, Ochu, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47735
+  },
+  {
+    "id": "030",
+    "name": "Troll",
+    "prompt": "Fantasy card art, Troll, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47757
+  },
+  {
+    "id": "031",
+    "name": "Blazer Beetle",
+    "prompt": "Fantasy card art, Blazer Beetle, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47758
+  },
+  {
+    "id": "032",
+    "name": "Abomination",
+    "prompt": "Fantasy card art, Abomination, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47759
+  },
+  {
+    "id": "033",
+    "name": "Zemzelett",
+    "prompt": "Fantasy card art, Zemzelett, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47760
+  },
+  {
+    "id": "034",
+    "name": "Stroper",
+    "prompt": "Fantasy card art, Stroper, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47761
+  },
+  {
+    "id": "035",
+    "name": "Tantarian",
+    "prompt": "Fantasy card art, Tantarian, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47762
+  },
+  {
+    "id": "036",
+    "name": "Grand Dragon",
+    "prompt": "Fantasy card art, Grand Dragon, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47763
+  },
+  {
+    "id": "037",
+    "name": "Feather Circle",
+    "prompt": "Fantasy card art, Feather Circle, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47764
+  },
+  {
+    "id": "038",
+    "name": "Hecteyes",
+    "prompt": "Fantasy card art, Hecteyes, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47765
+  },
+  {
+    "id": "039",
+    "name": "Ogre",
+    "prompt": "Fantasy card art, Ogre, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47766
+  },
+  {
+    "id": "040",
+    "name": "Armstrong",
+    "prompt": "Fantasy card art, Armstrong, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47788
+  },
+  {
+    "id": "041",
+    "name": "Ash",
+    "prompt": "Fantasy card art, Ash, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47789
+  },
+  {
+    "id": "042",
+    "name": "Wraith",
+    "prompt": "Fantasy card art, Wraith, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47790
+  },
+  {
+    "id": "043",
+    "name": "Gargoyle",
+    "prompt": "Fantasy card art, Gargoyle, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47791
+  },
+  {
+    "id": "044",
+    "name": "Vepal",
+    "prompt": "Fantasy card art, Vepal, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47792
+  },
+  {
+    "id": "045",
+    "name": "Grimlock",
+    "prompt": "Fantasy card art, Grimlock, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47793
+  },
+  {
+    "id": "046",
+    "name": "Tonberry",
+    "prompt": "Fantasy card art, Tonberry, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47794
+  },
+  {
+    "id": "047",
+    "name": "Veteran",
+    "prompt": "Fantasy card art, Veteran, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47795
+  },
+  {
+    "id": "048",
+    "name": "Garuda",
+    "prompt": "Fantasy card art, Garuda, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47796
+  },
+  {
+    "id": "049",
+    "name": "Malboro",
+    "prompt": "Fantasy card art, Malboro, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47797
+  },
+  {
+    "id": "050",
+    "name": "Mover",
+    "prompt": "Fantasy card art, Mover, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47819
+  },
+  {
+    "id": "051",
+    "name": "Abadon",
+    "prompt": "Fantasy card art, Abadon, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47820
+  },
+  {
+    "id": "052",
+    "name": "Behemoth",
+    "prompt": "Fantasy card art, Behemoth, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47821
+  },
+  {
+    "id": "053",
+    "name": "Iron Man",
+    "prompt": "Fantasy card art, Iron Man, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47822
+  },
+  {
+    "id": "054",
+    "name": "Nova Dragon",
+    "prompt": "Fantasy card art, Nova Dragon, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47823
+  },
+  {
+    "id": "055",
+    "name": "Ozma",
+    "prompt": "Fantasy card art, Ozma, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47824
+  },
+  {
+    "id": "056",
+    "name": "Hades",
+    "prompt": "Fantasy card art, Hades, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47825
+  },
+  {
+    "id": "057",
+    "name": "Holy",
+    "prompt": "Fantasy card art, Holy, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47826
+  },
+  {
+    "id": "058",
+    "name": "Meteor",
+    "prompt": "Fantasy card art, Meteor, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47827
+  },
+  {
+    "id": "059",
+    "name": "Flare",
+    "prompt": "Fantasy card art, Flare, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47828
+  },
+  {
+    "id": "060",
+    "name": "Shiva",
+    "prompt": "Fantasy card art, Shiva, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47850
+  },
+  {
+    "id": "061",
+    "name": "Ifrit",
+    "prompt": "Fantasy card art, Ifrit, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47851
+  },
+  {
+    "id": "062",
+    "name": "Ramuh",
+    "prompt": "Fantasy card art, Ramuh, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47852
+  },
+  {
+    "id": "063",
+    "name": "Atomos",
+    "prompt": "Fantasy card art, Atomos, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47853
+  },
+  {
+    "id": "064",
+    "name": "Odin",
+    "prompt": "Fantasy card art, Odin, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47854
+  },
+  {
+    "id": "065",
+    "name": "Leviathan",
+    "prompt": "Fantasy card art, Leviathan, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47855
+  },
+  {
+    "id": "066",
+    "name": "Bahamut",
+    "prompt": "Fantasy card art, Bahamut, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47856
+  },
+  {
+    "id": "067",
+    "name": "Ark",
+    "prompt": "Fantasy card art, Ark, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47857
+  },
+  {
+    "id": "068",
+    "name": "Fenrir",
+    "prompt": "Fantasy card art, Fenrir, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47858
+  },
+  {
+    "id": "069",
+    "name": "Madeen",
+    "prompt": "Fantasy card art, Madeen, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47859
+  },
+  {
+    "id": "070",
+    "name": "Alexander",
+    "prompt": "Fantasy card art, Alexander, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47881
+  },
+  {
+    "id": "071",
+    "name": "Excalibur II",
+    "prompt": "Fantasy card art, Excalibur II, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47882
+  },
+  {
+    "id": "072",
+    "name": "Ultima Weapon",
+    "prompt": "Fantasy card art, Ultima Weapon, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47883
+  },
+  {
+    "id": "073",
+    "name": "Masamune",
+    "prompt": "Fantasy card art, Masamune, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47884
+  },
+  {
+    "id": "074",
+    "name": "Elixir",
+    "prompt": "Fantasy card art, Elixir, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47885
+  },
+  {
+    "id": "075",
+    "name": "Dark Matter",
+    "prompt": "Fantasy card art, Dark Matter, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47886
+  },
+  {
+    "id": "076",
+    "name": "Ribbon",
+    "prompt": "Fantasy card art, Ribbon, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47887
+  },
+  {
+    "id": "077",
+    "name": "Tiger Racket",
+    "prompt": "Fantasy card art, Tiger Racket, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47888
+  },
+  {
+    "id": "078",
+    "name": "Save the Queen",
+    "prompt": "Fantasy card art, Save the Queen, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47889
+  },
+  {
+    "id": "079",
+    "name": "Genji",
+    "prompt": "Fantasy card art, Genji, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47890
+  },
+  {
+    "id": "080",
+    "name": "Mythril Sword",
+    "prompt": "Fantasy card art, Mythril Sword, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47912
+  },
+  {
+    "id": "081",
+    "name": "Blue Narciss",
+    "prompt": "Fantasy card art, Blue Narciss, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47913
+  },
+  {
+    "id": "082",
+    "name": "Hilda Garde 3",
+    "prompt": "Fantasy card art, Hilda Garde 3, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47914
+  },
+  {
+    "id": "083",
+    "name": "Invincible",
+    "prompt": "Fantasy card art, Invincible, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47915
+  },
+  {
+    "id": "084",
+    "name": "Cargo Ship",
+    "prompt": "Fantasy card art, Cargo Ship, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47916
+  },
+  {
+    "id": "085",
+    "name": "Hilda Garde 1",
+    "prompt": "Fantasy card art, Hilda Garde 1, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47917
+  },
+  {
+    "id": "086",
+    "name": "Red Rose",
+    "prompt": "Fantasy card art, Red Rose, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47918
+  },
+  {
+    "id": "087",
+    "name": "Theater Ship",
+    "prompt": "Fantasy card art, Theater Ship, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47919
+  },
+  {
+    "id": "088",
+    "name": "Viltgance",
+    "prompt": "Fantasy card art, Viltgance, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47920
+  },
+  {
+    "id": "089",
+    "name": "Chocobo",
+    "prompt": "Fantasy card art, Chocobo, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47921
+  },
+  {
+    "id": "090",
+    "name": "Fat Chocobo",
+    "prompt": "Fantasy card art, Fat Chocobo, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47943
+  },
+  {
+    "id": "091",
+    "name": "Mog",
+    "prompt": "Fantasy card art, Mog, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47944
+  },
+  {
+    "id": "092",
+    "name": "Frog",
+    "prompt": "Fantasy card art, Frog, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47945
+  },
+  {
+    "id": "093",
+    "name": "Oglop",
+    "prompt": "Fantasy card art, Oglop, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47946
+  },
+  {
+    "id": "094",
+    "name": "Alexandria",
+    "prompt": "Fantasy card art, Alexandria, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47947
+  },
+  {
+    "id": "095",
+    "name": "Lindblum",
+    "prompt": "Fantasy card art, Lindblum, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47948
+  },
+  {
+    "id": "096",
+    "name": "Two Moons",
+    "prompt": "Fantasy card art, Two Moons, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47949
+  },
+  {
+    "id": "097",
+    "name": "Gargant",
+    "prompt": "Fantasy card art, Gargant, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47950
+  },
+  {
+    "id": "098",
+    "name": "Namingway",
+    "prompt": "Fantasy card art, Namingway, magical being, mystical, spellcaster or spirit, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47951
+  },
+  {
+    "id": "099",
+    "name": "Boco",
+    "prompt": "Fantasy card art, Boco, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 47952
+  },
+  {
+    "id": "100",
+    "name": "Airship",
+    "prompt": "Fantasy card art, Airship, physical creature, sturdy, fantasy monster or warrior, dramatic lighting, clean composition, fantasy card illustration, detailed, professional, no text, no borders, no watermark",
+    "negativePrompt": "bad anatomy, bad proportions, deformed, disconnected limbs, extra limbs, extra fingers, mutated, poorly drawn hands, poorly drawn face, worst quality, low quality, lowres, blurry, text, watermark, logo, signature, username, jpeg artifacts, cropped, out of frame, duplicate, ugly, nsfw",
+    "seed": 48625
+  }
+]
