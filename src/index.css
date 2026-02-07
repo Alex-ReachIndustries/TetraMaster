@@ -1,32 +1,69 @@
+/* ============================================================
+   Tetra Master – Design System & Styles
+   Visual parity with the in-game FFIX TetraMaster UI.
+   Uses only original CSS, safe Google Fonts, and SVG shapes.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   1. ROOT & TYPOGRAPHY
+   ---------------------------------------------------------- */
 :root {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Cinzel', 'Georgia', serif;
   line-height: 1.5;
   font-weight: 400;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Shared tokens */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --font-stats: 'Fira Code', 'Consolas', 'Courier New', monospace;
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: var(--bg);
-  color: var(--text);
-}
+/* ----------------------------------------------------------
+   2. THEME PALETTES
+   The "classic" theme emulates the deep navy / gold FFIX
+   menu colour-scheme. The "modern" theme is a slate/cyan
+   alternative. Both use beveled frame variables.
+   ---------------------------------------------------------- */
 
 body[data-theme='classic'] {
-  --bg: #1c1410;
-  --surface: #2b1f1a;
-  --surface-alt: #3a2a22;
-  --text: #f5e7cf;
-  --muted: #c8b498;
-  --accent: #d2a76f;
-  --accent-strong: #f5cf85;
-  --border: #4b362a;
-  --success: #7dd3a7;
-  --player-0: #7dd3fc;
-  --player-1: #fca5a5;
-  --battle-backdrop: rgba(12, 9, 8, 0.86);
+  /* Core palette – deep indigo navy inspired by FFIX menus */
+  --bg: #06091e;
+  --surface: #0e1538;
+  --surface-alt: #151d4a;
+  --text: #e8e0d0;
+  --muted: #7888b8;
+  --accent: #c8a048;
+  --accent-strong: #f0cc60;
+  --border: #283060;
+  --success: #50c878;
+  --player-0: #4898e8;
+  --player-1: #e85050;
+
+  /* Frame / bevel effect (FFIX menu frame) */
+  --frame-highlight: #5868a0;
+  --frame-shadow: #060a1e;
+  --frame-inner-hl: rgba(88, 104, 160, 0.25);
+  --frame-inner-sh: rgba(0, 0, 0, 0.35);
+
+  /* Board */
+  --board-bg: #0a1030;
+  --board-cell: #10184a;
+  --board-cell-border: #283060;
+  --board-cell-hover: #1c2668;
+  --board-cell-blocked: #0c1030;
+
+  /* Card */
+  --card-bg: #101840;
+  --card-border: #384880;
+  --card-art-bg: #080e28;
+
+  /* Battle */
+  --battle-backdrop: rgba(4, 6, 16, 0.92);
 }
 
 body[data-theme='modern'] {
@@ -34,14 +71,40 @@ body[data-theme='modern'] {
   --surface: #1e293b;
   --surface-alt: #243147;
   --text: #f8fafc;
-  --muted: #cbd5f5;
+  --muted: #94a3b8;
   --accent: #38bdf8;
   --accent-strong: #7dd3fc;
   --border: #334155;
   --success: #22c55e;
   --player-0: #38bdf8;
   --player-1: #f87171;
+
+  --frame-highlight: #475569;
+  --frame-shadow: #0f172a;
+  --frame-inner-hl: rgba(71, 85, 105, 0.2);
+  --frame-inner-sh: rgba(0, 0, 0, 0.3);
+
+  --board-bg: #131c2e;
+  --board-cell: #1e293b;
+  --board-cell-border: #334155;
+  --board-cell-hover: #293548;
+  --board-cell-blocked: #171f30;
+
+  --card-bg: #1e293b;
+  --card-border: #475569;
+  --card-art-bg: #0f172a;
+
   --battle-backdrop: rgba(8, 12, 20, 0.88);
+}
+
+/* ----------------------------------------------------------
+   3. RESETS
+   ---------------------------------------------------------- */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
 }
 
 body[data-motion='reduced'] * {
@@ -72,6 +135,29 @@ button:disabled {
   opacity: 0.7;
 }
 
+*:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+
+/* ----------------------------------------------------------
+   4. FFIX-STYLE FRAME MIXIN (used by .panel, .hand, etc.)
+   Emulates the classic beveled-border RPG menu frame.
+   ---------------------------------------------------------- */
+.ff-frame {
+  background: var(--surface);
+  border: 2px solid;
+  border-color: var(--frame-highlight) var(--frame-shadow) var(--frame-shadow) var(--frame-highlight);
+  box-shadow:
+    inset 2px 2px 0 var(--frame-inner-hl),
+    inset -2px -2px 0 var(--frame-inner-sh),
+    0 4px 16px rgba(0, 0, 0, 0.4);
+  border-radius: var(--radius-lg);
+}
+
+/* ----------------------------------------------------------
+   5. APP SHELL / LAYOUT
+   ---------------------------------------------------------- */
 .app {
   display: flex;
   flex-direction: column;
@@ -81,62 +167,109 @@ button:disabled {
 .app__header {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1.5rem 2rem;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
   background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 2px solid;
+  border-image: linear-gradient(
+    90deg,
+    var(--frame-shadow),
+    var(--frame-highlight) 20%,
+    var(--frame-highlight) 80%,
+    var(--frame-shadow)
+  ) 1;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 
 .brand__title {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--accent-strong);
+  text-shadow:
+    0 0 10px rgba(240, 204, 96, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
 .brand__subtitle {
   color: var(--muted);
-  font-size: 0.95rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
 }
 
 .nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .nav__link {
-  padding: 0.3rem 0.6rem;
-  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-md);
   color: var(--muted);
+  font-size: 0.9rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  letter-spacing: 0.02em;
+  transition: background 0.15s ease, color 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.nav__link:hover {
+  background: var(--surface-alt);
+  color: var(--text);
 }
 
 .nav__link.is-active {
   background: var(--surface-alt);
   color: var(--accent-strong);
+  border-color: var(--border);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .app__main {
   flex: 1;
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
+/* ----------------------------------------------------------
+   6. PAGE STRUCTURE
+   ---------------------------------------------------------- */
 .page {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+.page > h1 {
+  color: var(--accent-strong);
+  text-shadow: 0 0 8px rgba(240, 204, 96, 0.2);
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+}
+
+/* ----------------------------------------------------------
+   7. HERO (Home Page)
+   ---------------------------------------------------------- */
 .hero {
   display: grid;
   gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   align-items: center;
 }
 
 .hero__panel {
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 2px solid;
+  border-color: var(--frame-highlight) var(--frame-shadow) var(--frame-shadow) var(--frame-highlight);
+  box-shadow:
+    inset 2px 2px 0 var(--frame-inner-hl),
+    inset -2px -2px 0 var(--frame-inner-sh),
+    0 4px 16px rgba(0, 0, 0, 0.4);
   padding: 1.5rem;
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
 }
 
 .hero__card-grid {
@@ -147,14 +280,21 @@ button:disabled {
 
 .hero__tile {
   padding: 0.75rem;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   background: var(--surface-alt);
   text-align: center;
+  border: 1px solid var(--border);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.9rem;
+  color: var(--text);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .hero__note {
   color: var(--muted);
   margin-top: 1rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.85rem;
 }
 
 .hero__actions {
@@ -165,48 +305,87 @@ button:disabled {
 
 .eyebrow {
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.75rem;
-  color: var(--muted);
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .lede {
   color: var(--muted);
   max-width: 620px;
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
 }
 
+/* ----------------------------------------------------------
+   8. BUTTONS
+   ---------------------------------------------------------- */
 .button {
-  padding: 0.6rem 1.2rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
+  padding: 0.55rem 1.2rem;
+  border-radius: var(--radius-md);
+  border: 2px solid;
+  border-color: var(--frame-highlight) var(--frame-shadow) var(--frame-shadow) var(--frame-highlight);
   background: var(--surface-alt);
   color: var(--text);
   cursor: pointer;
-  transition: transform 0.2s ease;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .button--primary {
-  background: var(--accent);
-  color: #1a120c;
-  border-color: transparent;
+  background: linear-gradient(180deg, var(--accent-strong), var(--accent));
+  color: #0e0a04;
+  border-color: var(--accent-strong) var(--accent) var(--accent) var(--accent-strong);
+  font-weight: 600;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .button--ghost {
   background: transparent;
+  border-color: var(--border);
+  box-shadow: none;
 }
 
 .button:hover {
   transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
+.button--primary:hover {
+  background: linear-gradient(180deg, #f8d868, var(--accent-strong));
+}
+
+.button--ghost:hover {
+  background: var(--surface-alt);
+}
+
+/* ----------------------------------------------------------
+   9. PANELS (FFIX-style beveled frame)
+   ---------------------------------------------------------- */
 .panel {
   background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 1.5rem;
-  border-radius: 16px;
+  border: 2px solid;
+  border-color: var(--frame-highlight) var(--frame-shadow) var(--frame-shadow) var(--frame-highlight);
+  box-shadow:
+    inset 2px 2px 0 var(--frame-inner-hl),
+    inset -2px -2px 0 var(--frame-inner-sh),
+    0 4px 16px rgba(0, 0, 0, 0.4);
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.panel h2 {
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  color: var(--accent-strong);
+  text-shadow: 0 0 6px rgba(240, 204, 96, 0.15);
 }
 
 .panel__header {
@@ -216,16 +395,21 @@ button:disabled {
   gap: 1rem;
 }
 
+/* ----------------------------------------------------------
+   10. FORM FIELDS
+   ---------------------------------------------------------- */
 .field {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.35rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.9rem;
 }
 
 .field-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
   align-items: center;
 }
 
@@ -237,40 +421,93 @@ button:disabled {
 
 .field__hint {
   color: var(--muted);
+  font-size: 0.8rem;
+}
+
+textarea {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  color: var(--text);
+  font-family: var(--font-stats);
   font-size: 0.85rem;
 }
 
+input,
+select {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.45rem 0.6rem;
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.9rem;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent);
+}
+
+/* ----------------------------------------------------------
+   11. UTILITIES
+   ---------------------------------------------------------- */
 .list {
   display: grid;
   gap: 0.5rem;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 .small {
   color: var(--muted);
   font-size: 0.85rem;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 .validation {
   color: #fca5a5;
   font-size: 0.9rem;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 .validation--success {
   color: var(--success);
 }
 
+/* ----------------------------------------------------------
+   12. DECK BUILDER
+   ---------------------------------------------------------- */
 .deck-builder {
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .card-list {
   display: grid;
-  gap: 0.75rem;
+  gap: 0.5rem;
   max-height: 420px;
   overflow: auto;
   padding-right: 0.5rem;
+}
+
+/* Scrollbar styling */
+.card-list::-webkit-scrollbar {
+  width: 6px;
+}
+.card-list::-webkit-scrollbar-track {
+  background: var(--surface-alt);
+  border-radius: 3px;
+}
+.card-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+.card-list::-webkit-scrollbar-thumb:hover {
+  background: var(--frame-highlight);
 }
 
 .card-row {
@@ -278,23 +515,32 @@ button:disabled {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  padding: 0.6rem 0.8rem;
+  padding: 0.5rem 0.75rem;
   background: var(--surface-alt);
-  border-radius: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: background 0.15s ease;
+}
+
+.card-row:hover {
+  background: var(--board-cell-hover);
 }
 
 .card-row__title {
   font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .card-row__stats {
-  color: var(--muted);
-  font-size: 0.85rem;
+  color: var(--accent);
+  font-family: var(--font-stats);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
 }
 
 .deck-cards {
   display: grid;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .deck-card {
@@ -310,113 +556,205 @@ button:disabled {
   flex-wrap: wrap;
 }
 
+/* ----------------------------------------------------------
+   13. GAME AREA LAYOUT
+   Structured to place hands on the sides and board in the
+   center, matching the in-game TetraMaster layout.
+   ---------------------------------------------------------- */
 .game {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
 }
 
+/* Status bar – turn, score, winner */
 .game__status {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.game__status > div:first-child {
+  color: var(--accent);
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .score {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  font-family: var(--font-stats);
+  font-size: 0.95rem;
+}
+
+.score span:first-child {
+  color: var(--player-0);
+}
+
+.score span:last-child {
+  color: var(--player-1);
 }
 
 .winner {
-  font-weight: 600;
-  color: var(--success);
+  font-weight: 700;
+  color: var(--accent-strong);
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  text-shadow: 0 0 12px rgba(240, 204, 96, 0.3);
 }
 
-.board {
+/* Game arena – responsive side-by-side layout */
+.game__arena {
   display: grid;
-  grid-template-columns: repeat(4, minmax(90px, 1fr));
-  gap: 0.6rem;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: start;
 }
 
-.board-cell {
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 0.35rem;
-  min-height: 120px;
-  cursor: pointer;
+@media (min-width: 900px) {
+  .game__arena {
+    grid-template-columns: minmax(140px, 200px) auto minmax(140px, 200px);
+    gap: 1.5rem;
+    align-items: start;
+  }
 }
 
-.board-cell:disabled {
-  cursor: default;
-  opacity: 0.8;
-}
-
-.board-cell--blocked {
-  background: repeating-linear-gradient(
-    45deg,
-    var(--surface-alt),
-    var(--surface-alt) 8px,
-    var(--border) 8px,
-    var(--border) 14px
-  );
-}
-
-.board-cell__blocked {
-  font-size: 1.5rem;
-  color: var(--muted);
-}
-
+/* Deprecated class kept for backward-compatibility */
 .game__hands {
   display: grid;
   gap: 1rem;
 }
 
-.hand {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 1rem;
-  border-radius: 12px;
+/* ----------------------------------------------------------
+   14. BOARD
+   The 4x4 grid with a framed panel wrapper.
+   ---------------------------------------------------------- */
+.board-frame {
+  background: var(--board-bg);
+  border: 2px solid;
+  border-color: var(--frame-highlight) var(--frame-shadow) var(--frame-shadow) var(--frame-highlight);
+  box-shadow:
+    inset 3px 3px 0 var(--frame-inner-hl),
+    inset -3px -3px 0 var(--frame-inner-sh),
+    0 6px 24px rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius-lg);
+  padding: 0.75rem;
+  position: relative;
 }
 
-.hand__cards {
-  display: flex;
-  gap: 0.6rem;
-  flex-wrap: wrap;
+/* Subtle inner glow for depth */
+.board-frame::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: calc(var(--radius-lg) - 2px);
+  border: 1px solid rgba(88, 104, 160, 0.12);
+  pointer-events: none;
 }
 
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+
+.board-cell {
+  background: var(--board-cell);
+  border: 1px solid var(--board-cell-border);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+  min-height: 110px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.12s ease, box-shadow 0.12s ease;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.board-cell:hover:not(:disabled) {
+  background: var(--board-cell-hover);
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.3),
+    0 0 8px rgba(88, 104, 160, 0.2);
+}
+
+.board-cell:disabled {
+  cursor: default;
+  opacity: 0.85;
+}
+
+.board-cell--blocked {
+  background: var(--board-cell-blocked);
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 6px,
+    rgba(88, 104, 160, 0.08) 6px,
+    rgba(88, 104, 160, 0.08) 10px
+  );
+  border-style: dashed;
+}
+
+.board-cell__blocked {
+  font-size: 1.5rem;
+  color: var(--muted);
+  opacity: 0.4;
+}
+
+/* ----------------------------------------------------------
+   15. CARDS
+   Compact card design with gold frame, stat line, and
+   directional arrow indicators.
+   ---------------------------------------------------------- */
 .card {
-  border: 1px solid var(--border);
-  background: var(--surface-alt);
-  border-radius: 12px;
-  padding: 0.4rem;
+  border: 2px solid var(--card-border);
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 3px;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 2px;
   position: relative;
   cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Player ownership tinting */
 .card--owner-0 {
-  border-color: color-mix(in srgb, var(--player-0) 55%, var(--border));
-  background: color-mix(in srgb, var(--player-0) 12%, var(--surface-alt));
+  border-color: color-mix(in srgb, var(--player-0) 60%, var(--card-border));
+  background: color-mix(in srgb, var(--player-0) 10%, var(--card-bg));
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    0 0 6px color-mix(in srgb, var(--player-0) 20%, transparent);
 }
 
 .card--owner-0 .card__power {
   color: var(--player-0);
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.9), 0 1px 2px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .card--owner-1 {
-  border-color: color-mix(in srgb, var(--player-1) 55%, var(--border));
-  background: color-mix(in srgb, var(--player-1) 12%, var(--surface-alt));
+  border-color: color-mix(in srgb, var(--player-1) 60%, var(--card-border));
+  background: color-mix(in srgb, var(--player-1) 10%, var(--card-bg));
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    0 0 6px color-mix(in srgb, var(--player-1) 20%, transparent);
 }
 
 .card--owner-1 .card__power {
   color: var(--player-1);
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.9), 0 1px 2px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
+/* Card flash animations */
 .card--flash-place {
   --flash-color: color-mix(in srgb, var(--accent-strong) 70%, transparent);
   animation: card-place-flash var(--flash-place-ms, 220ms) ease-out;
@@ -430,15 +768,12 @@ button:disabled {
 .card--flash-capture[data-owner='0'] {
   --flash-color: color-mix(in srgb, var(--player-0) 70%, transparent);
 }
-
 .card--flash-capture[data-owner='1'] {
   --flash-color: color-mix(in srgb, var(--player-1) 70%, transparent);
 }
-
 .card--flash-place[data-owner='0'] {
   --flash-color: color-mix(in srgb, var(--player-0) 70%, transparent);
 }
-
 .card--flash-place[data-owner='1'] {
   --flash-color: color-mix(in srgb, var(--player-1) 70%, transparent);
 }
@@ -446,62 +781,76 @@ button:disabled {
 @keyframes card-place-flash {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 var(--flash-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 0 0 var(--flash-color);
   }
   50% {
-    transform: scale(1.04);
-    box-shadow: 0 0 16px 4px var(--flash-color);
+    transform: scale(1.05);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 20px 6px var(--flash-color);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 var(--flash-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 0 0 var(--flash-color);
   }
 }
 
 @keyframes card-capture-flash {
   0% {
-    transform: scale(1) translateX(0);
-    box-shadow: 0 0 0 0 var(--flash-color);
+    transform: scale(1) rotateY(0deg);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 0 0 var(--flash-color);
   }
-  35% {
-    transform: scale(1.03) translateX(-2px);
-    box-shadow: 0 0 18px 5px var(--flash-color);
+  30% {
+    transform: scale(1.03) rotateY(90deg);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 20px 6px var(--flash-color);
   }
   60% {
-    transform: scale(1.02) translateX(2px);
+    transform: scale(1.03) rotateY(0deg);
   }
   80% {
-    transform: scale(1.01) translateX(-1px);
+    transform: scale(1.01);
   }
   100% {
-    transform: scale(1) translateX(0);
-    box-shadow: 0 0 0 0 var(--flash-color);
+    transform: scale(1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 0 0 var(--flash-color);
   }
 }
 
+/* Selection */
 .card--selected {
   outline: 2px solid var(--accent-strong);
+  outline-offset: 1px;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    0 0 12px color-mix(in srgb, var(--accent-strong) 40%, transparent);
+  animation: card-selected-pulse 1.5s ease-in-out infinite;
 }
 
+@keyframes card-selected-pulse {
+  0%, 100% { box-shadow: 0 2px 6px rgba(0,0,0,0.4), 0 0 8px color-mix(in srgb, var(--accent-strong) 30%, transparent); }
+  50% { box-shadow: 0 2px 6px rgba(0,0,0,0.4), 0 0 18px color-mix(in srgb, var(--accent-strong) 50%, transparent); }
+}
+
+/* Card sizes */
 .card--small {
-  width: 110px;
+  width: 100px;
 }
 
 .card--medium {
-  width: 140px;
+  width: 130px;
 }
 
 .card--large {
-  width: 180px;
+  width: 170px;
 }
 
+/* Card art area */
 .card__art {
   width: 100%;
   aspect-ratio: 5 / 7;
   overflow: hidden;
-  border-radius: 8px;
-  background: #111827;
+  border-radius: var(--radius-sm);
+  background: var(--card-art-bg);
   position: relative;
+  border: 1px solid rgba(88, 104, 160, 0.15);
 }
 
 .card__art img,
@@ -511,44 +860,80 @@ button:disabled {
   display: block;
 }
 
+/* Power overlay during battle */
 .card__power {
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
   pointer-events: none;
-  font-size: clamp(2rem, 8vw, 3.5rem);
-  font-weight: 800;
+  font-family: var(--font-stats);
+  font-size: clamp(1.8rem, 7vw, 3rem);
+  font-weight: 700;
   line-height: 1;
   color: var(--text);
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.95), 0 2px 4px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.95), 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
+/* Card stats row – matches the in-game "0P00" hex format */
 .card__stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  font-weight: 700;
-  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  gap: 1px;
+  font-family: var(--font-stats);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
 }
 
 .stat {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.1rem 0.3rem;
-  border-radius: 6px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  padding: 1px 3px;
+  min-width: 1.1em;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(88, 104, 160, 0.15);
+  color: var(--accent-strong);
 }
 
-.card__name {
-  font-size: 0.8rem;
+.stat--class {
   color: var(--muted);
 }
 
+.stat--power {
+  color: var(--accent-strong);
+}
+
+.stat--physical {
+  color: var(--player-0);
+}
+
+.stat--magical {
+  color: var(--player-1);
+}
+
+/* Card name */
+.card__name {
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-align: center;
+  font-family: system-ui, -apple-system, sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 2px;
+}
+
+/* ----------------------------------------------------------
+   16. CARD ARROWS
+   Directional indicators shown on card edges/corners.
+   Uses CSS border triangles with a glow for visibility.
+   ---------------------------------------------------------- */
 .card__arrows {
   position: absolute;
-  inset: 6px;
+  inset: 4px;
   pointer-events: none;
 }
 
@@ -558,70 +943,75 @@ button:disabled {
   height: 0;
   border-style: solid;
   border-color: transparent;
+  filter: drop-shadow(0 0 2px rgba(240, 204, 96, 0.5));
 }
 
 .arrow--n {
-  top: -2px;
+  top: -1px;
   left: 50%;
   transform: translateX(-50%);
-  border-width: 0 6px 10px 6px;
+  border-width: 0 5px 8px 5px;
   border-bottom-color: var(--accent-strong);
 }
 
 .arrow--ne {
-  top: 0;
-  right: 0;
-  border-width: 0 8px 8px 0;
+  top: 1px;
+  right: 1px;
+  border-width: 0 7px 7px 0;
   border-right-color: var(--accent-strong);
 }
 
 .arrow--e {
-  right: -2px;
+  right: -1px;
   top: 50%;
   transform: translateY(-50%);
-  border-width: 6px 0 6px 10px;
+  border-width: 5px 0 5px 8px;
   border-left-color: var(--accent-strong);
 }
 
 .arrow--se {
-  bottom: 0;
-  right: 0;
-  border-width: 8px 8px 0 0;
+  bottom: 1px;
+  right: 1px;
+  border-width: 7px 7px 0 0;
   border-top-color: var(--accent-strong);
 }
 
 .arrow--s {
-  bottom: -2px;
+  bottom: -1px;
   left: 50%;
   transform: translateX(-50%);
-  border-width: 10px 6px 0 6px;
+  border-width: 8px 5px 0 5px;
   border-top-color: var(--accent-strong);
 }
 
 .arrow--sw {
-  bottom: 0;
-  left: 0;
-  border-width: 8px 0 0 8px;
+  bottom: 1px;
+  left: 1px;
+  border-width: 7px 0 0 7px;
   border-top-color: var(--accent-strong);
 }
 
 .arrow--w {
-  left: -2px;
+  left: -1px;
   top: 50%;
   transform: translateY(-50%);
-  border-width: 6px 10px 6px 0;
+  border-width: 5px 8px 5px 0;
   border-right-color: var(--accent-strong);
 }
 
 .arrow--nw {
-  top: 0;
-  left: 0;
-  border-width: 0 0 8px 8px;
+  top: 1px;
+  left: 1px;
+  border-width: 0 0 7px 7px;
   border-left-color: var(--accent-strong);
 }
 
+/* ----------------------------------------------------------
+   17. FACEDOWN CARD
+   ---------------------------------------------------------- */
 .card--facedown {
   background: var(--surface);
+  border-color: var(--border);
 }
 
 .card__back {
@@ -629,28 +1019,71 @@ button:disabled {
   display: grid;
   place-items: center;
   font-weight: 700;
-  color: var(--muted);
-  border-radius: 8px;
-  border: 1px dashed var(--border);
-  padding: 2rem;
+  font-family: 'Cinzel', serif;
+  color: var(--accent);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 4px,
+      rgba(88, 104, 160, 0.06) 4px,
+      rgba(88, 104, 160, 0.06) 8px
+    ),
+    var(--surface-alt);
+  text-shadow: 0 0 6px rgba(200, 160, 72, 0.3);
 }
 
-.dev-panel {
-  background: var(--surface-alt);
-  border: 1px dashed var(--border);
-  padding: 1rem;
-  border-radius: 12px;
+/* ----------------------------------------------------------
+   18. HAND PANELS
+   ---------------------------------------------------------- */
+.hand {
+  background: var(--surface);
+  border: 2px solid;
+  border-color: var(--frame-highlight) var(--frame-shadow) var(--frame-shadow) var(--frame-highlight);
+  box-shadow:
+    inset 2px 2px 0 var(--frame-inner-hl),
+    inset -2px -2px 0 var(--frame-inner-sh),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+  padding: 0.75rem;
+  border-radius: var(--radius-lg);
+}
+
+.hand h3 {
   font-size: 0.85rem;
-  display: grid;
-  gap: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  margin: 0 0 0.5rem 0;
 }
 
-.dev-panel__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 0.75rem;
+.hand__cards {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
+/* Side-hand layout (in arena mode, cards stack vertically) */
+@media (min-width: 900px) {
+  .hand--side .hand__cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Player-specific hand header accent */
+.hand--player-0 h3 {
+  color: var(--player-0);
+}
+
+.hand--player-1 h3 {
+  color: var(--player-1);
+}
+
+/* ----------------------------------------------------------
+   19. BATTLE MODAL
+   ---------------------------------------------------------- */
 .battle-modal {
   position: fixed;
   inset: 0;
@@ -669,11 +1102,16 @@ button:disabled {
   position: relative;
   z-index: 1;
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 18px;
+  border: 2px solid;
+  border-color: var(--frame-highlight) var(--frame-shadow) var(--frame-shadow) var(--frame-highlight);
+  border-radius: var(--radius-xl);
   padding: 1.5rem 2rem;
   min-width: min(520px, 90vw);
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    inset 2px 2px 0 var(--frame-inner-hl),
+    inset -2px -2px 0 var(--frame-inner-sh),
+    0 18px 60px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(0, 0, 0, 0.3);
   display: grid;
   gap: 1.25rem;
   text-align: center;
@@ -682,37 +1120,43 @@ button:disabled {
 
 .battle-modal__title {
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: var(--accent-strong);
+  font-size: 1.2rem;
+  text-shadow: 0 0 10px rgba(240, 204, 96, 0.3);
 }
 
 .battle-modal__arena {
   display: grid;
-  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  grid-template-columns: repeat(2, minmax(160px, 1fr));
   gap: 1.5rem;
   align-items: center;
 }
 
 .battle-card {
   display: grid;
-  gap: 0.6rem;
+  gap: 0.5rem;
   justify-items: center;
   position: relative;
 }
 
 .battle-card__label {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--muted);
+  font-family: system-ui, -apple-system, sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .battle-card--winner {
   animation: battle-winner var(--battle-winner-ms, 200ms) ease-out;
-  filter: drop-shadow(0 0 12px color-mix(in srgb, var(--success) 70%, transparent));
+  filter: drop-shadow(0 0 16px color-mix(in srgb, var(--accent-strong) 60%, transparent));
 }
 
 .battle-card--loser {
-  opacity: 0.6;
-  filter: grayscale(0.3);
+  opacity: 0.5;
+  filter: grayscale(0.4);
 }
 
 .battle-card--left.battle-card--bump {
@@ -725,6 +1169,8 @@ button:disabled {
 
 .battle-modal__result {
   font-weight: 600;
+  font-family: 'Cinzel', serif;
+  color: var(--accent-strong);
 }
 
 .battle-modal__result--muted {
@@ -734,7 +1180,7 @@ button:disabled {
 @keyframes battle-popin {
   0% {
     opacity: 0;
-    transform: scale(0.92);
+    transform: scale(0.9);
   }
   100% {
     opacity: 1;
@@ -743,59 +1189,97 @@ button:disabled {
 }
 
 @keyframes battle-bump-left {
-  0% {
-    transform: translateX(0);
-  }
-  45% {
-    transform: translateX(18px);
-  }
-  100% {
-    transform: translateX(0);
-  }
+  0% { transform: translateX(0); }
+  45% { transform: translateX(20px); }
+  100% { transform: translateX(0); }
 }
 
 @keyframes battle-bump-right {
-  0% {
-    transform: translateX(0);
-  }
-  45% {
-    transform: translateX(-18px);
-  }
-  100% {
-    transform: translateX(0);
-  }
+  0% { transform: translateX(0); }
+  45% { transform: translateX(-20px); }
+  100% { transform: translateX(0); }
 }
 
 @keyframes battle-winner {
-  0% {
-    transform: translateY(0);
-  }
-  60% {
-    transform: translateY(-6px);
-  }
-  100% {
-    transform: translateY(-3px);
-  }
+  0% { transform: translateY(0); }
+  60% { transform: translateY(-8px); }
+  100% { transform: translateY(-4px); }
 }
 
-textarea {
+/* ----------------------------------------------------------
+   20. DEV PANEL
+   ---------------------------------------------------------- */
+.dev-panel {
   background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.75rem;
-  color: var(--text);
+  border: 1px dashed var(--border);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-family: var(--font-stats);
+  display: grid;
+  gap: 0.75rem;
+  color: var(--muted);
 }
 
-input,
-select {
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.5rem 0.6rem;
-  color: var(--text);
+.dev-panel__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
 }
 
-*:focus-visible {
-  outline: 2px solid var(--accent-strong);
-  outline-offset: 2px;
+/* ----------------------------------------------------------
+   21. ABOUT PAGE
+   ---------------------------------------------------------- */
+.page a[href] {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  transition: color 0.15s ease;
+}
+
+.page a[href]:hover {
+  color: var(--accent-strong);
+}
+
+.page p,
+.page li {
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.7;
+}
+
+/* ----------------------------------------------------------
+   22. RESPONSIVE ADJUSTMENTS
+   ---------------------------------------------------------- */
+@media (max-width: 600px) {
+  .app__header {
+    padding: 0.75rem 1rem;
+  }
+
+  .app__main {
+    padding: 1rem;
+  }
+
+  .brand__title {
+    font-size: 1.2rem;
+  }
+
+  .board-cell {
+    min-height: 80px;
+  }
+
+  .card--small {
+    width: 80px;
+  }
+
+  .card--medium {
+    width: 100px;
+  }
+
+  .card__stats {
+    font-size: 0.65rem;
+  }
+
+  .card__name {
+    font-size: 0.55rem;
+  }
 }

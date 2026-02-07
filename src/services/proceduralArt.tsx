@@ -10,7 +10,7 @@ const makeRng = (seed: number) => {
 }
 
 const palette = {
-  classic: ['#2d1f1a', '#6c4e3d', '#b08b5e', '#f5e6c8', '#6a9e8f'],
+  classic: ['#0a1030', '#1a2260', '#384890', '#c8a050', '#5868a0'],
   modern: ['#0f172a', '#1e293b', '#38bdf8', '#f8fafc', '#94a3b8'],
 }
 
@@ -27,20 +27,30 @@ export const ProceduralArt = ({
   const rand = makeRng(seed)
   const colors = theme === 'classic' ? palette.classic : palette.modern
 
-  const shapes = Array.from({ length: 6 }).map((_, index) => ({
+  const shapes = Array.from({ length: 8 }).map((_, index) => ({
     x: rand() * 100,
     y: rand() * 120,
-    w: 10 + rand() * 40,
-    h: 10 + rand() * 40,
-    r: rand() * 18,
+    w: 8 + rand() * 35,
+    h: 8 + rand() * 35,
+    r: rand() * 14,
     color: colors[index % colors.length],
-    opacity: 0.3 + rand() * 0.5,
+    opacity: 0.25 + rand() * 0.45,
   }))
 
   return (
     <svg viewBox="0 0 100 140" aria-hidden="true" role="img">
-      <rect width="100" height="140" fill={colors[0]} />
-      <rect width="100" height="140" fill={colors[1]} opacity="0.45" />
+      <defs>
+        <linearGradient id={`bg-${cardId}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={colors[0]} />
+          <stop offset="100%" stopColor={colors[1]} />
+        </linearGradient>
+        <radialGradient id={`glow-${cardId}`} cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stopColor={colors[3]} stopOpacity="0.2" />
+          <stop offset="100%" stopColor={colors[0]} stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <rect width="100" height="140" fill={`url(#bg-${cardId})`} />
+      <rect width="100" height="140" fill={`url(#glow-${cardId})`} />
       {shapes.map((shape, index) => (
         <rect
           key={`rect-${index}`}
@@ -57,14 +67,30 @@ export const ProceduralArt = ({
       <circle
         cx={20 + rand() * 60}
         cy={20 + rand() * 80}
-        r={10 + rand() * 20}
+        r={8 + rand() * 18}
         fill={colors[3]}
-        opacity="0.4"
+        opacity="0.2"
+      />
+      <circle
+        cx={30 + rand() * 40}
+        cy={50 + rand() * 50}
+        r={5 + rand() * 12}
+        fill={colors[4]}
+        opacity="0.15"
       />
       <path
-        d={`M 0 ${100 + rand() * 40} Q 40 ${80 + rand() * 40} 100 ${100 + rand() * 40} V 140 H 0 Z`}
+        d={`M 0 ${100 + rand() * 30} Q 50 ${80 + rand() * 30} 100 ${100 + rand() * 30} V 140 H 0 Z`}
         fill={colors[2]}
-        opacity="0.3"
+        opacity="0.2"
+      />
+      {/* Subtle vignette border */}
+      <rect
+        width="100"
+        height="140"
+        fill="none"
+        stroke={colors[4]}
+        strokeWidth="1"
+        opacity="0.15"
       />
     </svg>
   )
