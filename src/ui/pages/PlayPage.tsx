@@ -316,6 +316,7 @@ export const PlayPage = () => {
 
   const renderHand = (playerId: number, side?: 'left' | 'right') => {
     const player = game!.players[playerId]
+    const isActive = game!.status === 'in_progress' && game!.activePlayer === playerId
     const faceDown =
       playerTypes[playerId] === 'ai' ||
       (settings.hideOpponentHand &&
@@ -324,7 +325,7 @@ export const PlayPage = () => {
         game!.activePlayer !== playerId)
     return (
       <div
-        className={`hand ${side ? 'hand--side' : ''} hand--player-${playerId}`}
+        className={`hand ${side ? 'hand--side' : ''} hand--player-${playerId}${isActive ? ' hand--active' : ''}`}
       >
         <h3>Player {playerId + 1}</h3>
         <div className="hand__cards">

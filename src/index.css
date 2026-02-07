@@ -690,7 +690,12 @@ textarea:focus {
    The 4x4 grid with a framed panel wrapper.
    ---------------------------------------------------------- */
 .board-frame {
-  background: var(--board-bg);
+  background: linear-gradient(
+    135deg,
+    var(--board-bg),
+    color-mix(in srgb, var(--board-bg) 85%, var(--frame-highlight)) 50%,
+    var(--board-bg)
+  );
   border: 2px solid;
   border-color: var(--frame-highlight) var(--frame-shadow) var(--frame-shadow) var(--frame-highlight);
   box-shadow:
@@ -932,6 +937,16 @@ textarea:focus {
   border: 1px solid rgba(88, 104, 160, 0.15);
 }
 
+/* Vignette overlay for depth */
+.card__art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
 .card__art img,
 .card__art svg {
   width: 100%;
@@ -1154,10 +1169,21 @@ textarea:focus {
 /* Player-specific hand header accent */
 .hand--player-0 h3 {
   color: var(--player-0);
+  text-shadow: 0 0 6px color-mix(in srgb, var(--player-0) 30%, transparent);
 }
 
 .hand--player-1 h3 {
   color: var(--player-1);
+  text-shadow: 0 0 6px color-mix(in srgb, var(--player-1) 30%, transparent);
+}
+
+/* Active hand highlight – subtle border glow */
+.hand--active {
+  border-color: var(--accent) var(--frame-shadow) var(--frame-shadow) var(--accent);
+  box-shadow:
+    inset 2px 2px 0 var(--frame-inner-hl),
+    inset -2px -2px 0 var(--frame-inner-sh),
+    0 0 10px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
 /* ----------------------------------------------------------
