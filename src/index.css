@@ -1175,6 +1175,12 @@ textarea:focus {
   position: absolute;
   inset: 0;
   background: var(--battle-backdrop);
+  animation: backdrop-fade-in 0.15s ease-out;
+}
+
+@keyframes backdrop-fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .battle-modal__content {
@@ -1208,9 +1214,18 @@ textarea:focus {
 
 .battle-modal__arena {
   display: grid;
-  grid-template-columns: repeat(2, minmax(160px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
   align-items: center;
+}
+
+.battle-modal__vs {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--accent-strong);
+  text-shadow: 0 0 12px rgba(240, 204, 96, 0.4);
+  letter-spacing: 0.1em;
 }
 
 .battle-card {

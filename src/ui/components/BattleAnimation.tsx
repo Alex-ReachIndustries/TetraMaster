@@ -171,6 +171,9 @@ export const BattleAnimation = ({
             />
             <div className="battle-card__label">Attacker</div>
           </div>
+          <div className="battle-modal__vs" aria-hidden="true">
+            VS
+          </div>
           <div className={rightClassName} data-owner={battle.defenderPlayer}>
             <CardView
               card={battle.defender}
