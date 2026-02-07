@@ -872,6 +872,30 @@ input[type='number'] {
   cursor: default;
 }
 
+/* Empty cells that are valid targets show a subtle shimmer */
+.board-cell--empty:not(:disabled) {
+  cursor: pointer;
+}
+
+.board-cell--empty:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 2px;
+  border: 1px solid var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.board-cell--empty:not(:disabled):hover::after {
+  opacity: 0.35;
+}
+
+/* Card-filled cells */
+.board-cell--card {
+  padding: 2px;
+}
+
 .board-cell--blocked {
   background: repeating-linear-gradient(
     45deg,
@@ -1293,6 +1317,15 @@ input[type='number'] {
   position: relative;
   z-index: 1;
   text-shadow: 0 0 8px var(--accent-glow);
+}
+
+.card__back-emblem {
+  position: relative;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  color: var(--accent);
+  filter: drop-shadow(0 0 4px var(--accent-glow));
 }
 
 /* ================================================================

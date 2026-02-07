@@ -47,7 +47,20 @@ export const CardView = ({
 
   const content = faceDown ? (
     <div className="card__back">
-      <span>TM</span>
+      <svg
+        className="card__back-emblem"
+        viewBox="0 0 40 40"
+        aria-hidden="true"
+      >
+        <path
+          d="M20 4 L32 20 L20 36 L8 20 Z"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          opacity="0.6"
+        />
+        <circle cx="20" cy="20" r="4" fill="currentColor" opacity="0.5" />
+      </svg>
     </div>
   ) : (
     <>
