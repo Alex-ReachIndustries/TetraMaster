@@ -388,9 +388,7 @@ export const PlayPage = () => {
                 value={aiDifficulty[player]}
                 onChange={(event) => {
                   const value = event.target.value as AiLevel
-                  setAiDifficulty((prev) =>
-                    player === 0 ? [value, prev[1]] : [prev[0], value],
-                  )
+                  setAiDifficulty((prev) => (player === 0 ? [value, prev[1]] : [prev[0], value]))
                 }}
                 disabled={playerTypes[player] !== 'ai'}
               >
