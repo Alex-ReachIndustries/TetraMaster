@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { selectMoveEasy, selectMoveHard, selectMoveMedium } from '../../ai'
 import { countScores, createGame, applyMove } from '../../engine/rules'
@@ -451,7 +452,7 @@ export const PlayPage = () => {
                   playerTypes[1] === 'human' &&
                   game.activePlayer !== playerId)
               return (
-                <div className="hand hand--left">
+                <div className={clsx('hand', 'hand--left', game.status === 'in_progress' && game.activePlayer === playerId && 'hand--active-turn')}>
                   <div className="hand__header">
                     <span className="hand__name" data-player="0">Player 1</span>
                     <span className="hand__score" data-player="0">{scores[0]}</span>
@@ -501,7 +502,7 @@ export const PlayPage = () => {
                   playerTypes[1] === 'human' &&
                   game.activePlayer !== playerId)
               return (
-                <div className="hand hand--right">
+                <div className={clsx('hand', 'hand--right', game.status === 'in_progress' && game.activePlayer === playerId && 'hand--active-turn')}>
                   <div className="hand__header">
                     <span className="hand__name" data-player="1">Player 2</span>
                     <span className="hand__score" data-player="1">{scores[1]}</span>

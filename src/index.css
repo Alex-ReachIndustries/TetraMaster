@@ -1377,6 +1377,62 @@ body[data-theme='classic'] .battle-modal__content::before {
 }
 
 /* ================================================================
+   CARD HOVER & INTERACTIVE STATES
+   ================================================================ */
+button.card:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 0 8px rgba(201, 168, 76, 0.1);
+  border-color: var(--accent-dim);
+}
+
+button.card:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Active player hand glow */
+.hand--active .hand__header {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.12);
+}
+
+/* ================================================================
+   SETUP PANEL (match setup) – in-game dialog style
+   ================================================================ */
+body[data-theme='classic'] .page > .panel {
+  border-color: var(--accent-dim);
+}
+
+body[data-theme='classic'] .page > .panel h2 {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+/* ================================================================
+   SETTINGS / ABOUT – themed list items
+   ================================================================ */
+.list li {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.list li:last-child {
+  border-bottom: none;
+}
+
+.list a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-dim);
+  text-underline-offset: 2px;
+}
+
+.list a:hover {
+  color: var(--accent-strong);
+}
+
+/* ================================================================
    SCROLLBAR STYLING (subtle)
    ================================================================ */
 ::-webkit-scrollbar {
@@ -1394,4 +1450,16 @@ body[data-theme='classic'] .battle-modal__content::before {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--border-strong);
+}
+
+/* ================================================================
+   TURN INDICATOR – glow on active player hand
+   ================================================================ */
+.hand--active-turn .hand__header {
+  box-shadow: 0 0 14px rgba(240, 208, 96, 0.15);
+  border-color: var(--accent);
+}
+
+.hand--active-turn .hand__name {
+  text-shadow: 0 0 8px currentColor;
 }

@@ -10,7 +10,7 @@ const makeRng = (seed: number) => {
 }
 
 const palette = {
-  classic: ['#2d1f1a', '#6c4e3d', '#b08b5e', '#f5e6c8', '#6a9e8f'],
+  classic: ['#0a0e24', '#141a42', '#2a3a78', '#c9a84c', '#4e6e8e'],
   modern: ['#0f172a', '#1e293b', '#38bdf8', '#f8fafc', '#94a3b8'],
 }
 
