@@ -122,7 +122,7 @@ export const DeckBuilderPage = () => {
 
   return (
     <section className="page">
-      <h1>Deck builder</h1>
+      <h1>Deck Builder</h1>
       <div className="deck-builder">
         <div className="panel">
           <h2>Available cards</h2>
