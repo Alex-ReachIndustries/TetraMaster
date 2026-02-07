@@ -259,7 +259,27 @@ select {
   border-radius: 10px;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    0 4px 16px rgba(0, 0, 0, 0.25);
+    0 4px 16px rgba(0, 0, 0, 0.25),
+    0 0 1px var(--board-frame-accent, transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative gold accent line at top of hero panel */
+.hero__panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent),
+    transparent
+  );
+  opacity: 0.6;
 }
 
 .hero__card-grid {
@@ -519,6 +539,23 @@ select {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Turn indicator styling */
+.game__status > div:first-child {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Active player color accent on status bar */
+.game__status[data-active-player='0'] {
+  border-left: 3px solid var(--player-0);
+}
+
+.game__status[data-active-player='1'] {
+  border-left: 3px solid var(--player-1);
+}
+
 .score {
   display: flex;
   gap: 1.25rem;
@@ -557,6 +594,14 @@ select {
   }
 }
 
+/* ─── GAME BOARD WRAPPER ──────────────────────────── */
+
+.game__board {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
 /* ═════════════════════════════════════════════════════
    BOARD – In-game visual parity
    ═════════════════════════════════════════════════════ */
@@ -590,6 +635,17 @@ select {
   border: 1px solid var(--board-frame-accent, transparent);
   border-radius: 9px;
   pointer-events: none;
+  animation: board-frame-glow 4s ease-in-out infinite;
+}
+
+@keyframes board-frame-glow {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 /* Inner depth shadow */
@@ -669,6 +725,32 @@ select {
   padding: 2px;
 }
 
+/* Board cards: overlay stats on card face (in-game parity) */
+.board-cell .card {
+  gap: 0;
+}
+
+.board-cell .card__stats {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  padding: 0.1rem 0.35rem;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 3px;
+  backdrop-filter: blur(2px);
+  font-size: 0.7rem;
+}
+
+.board-cell .card__name {
+  display: none;
+}
+
+.board-cell .card__art {
+  border-radius: 3px;
+}
+
 /* ─── PLAYER HANDS ────────────────────────────────── */
 
 .game__hands {
@@ -723,6 +805,7 @@ select {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 /* ═════════════════════════════════════════════════════

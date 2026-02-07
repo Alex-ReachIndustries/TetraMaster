@@ -416,9 +416,9 @@ export const PlayPage = () => {
 
       {game ? (
         <div className="game">
-          <div className="game__status">
+          <div className="game__status" data-active-player={game.activePlayer}>
             <div>
-              Turn {game.turn} - Active player: {game.activePlayer + 1}
+              Turn {game.turn} &middot; Player {game.activePlayer + 1}&apos;s turn
             </div>
             <div className="score">
               <span>Player 1: {scores[0]}</span>
