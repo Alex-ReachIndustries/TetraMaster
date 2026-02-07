@@ -272,12 +272,55 @@ button:disabled {
   width: 100%;
 }
 
-.page > h1 {
+.page > h1,
+.page h1 {
   font-family: 'Cinzel', serif;
   font-weight: 700;
   letter-spacing: 0.03em;
   color: var(--accent-strong);
   margin: 0;
+}
+
+.page h2 {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--accent-strong);
+  margin: 0;
+}
+
+.page h3 {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0;
+}
+
+/* General link styling in content */
+.page a[href] {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s ease;
+}
+
+.page a[href]:hover {
+  color: var(--accent-strong);
+}
+
+/* List styling */
+.page ul,
+.page ol {
+  padding-left: 1.25rem;
+}
+
+.page li {
+  margin-bottom: 0.35rem;
+  color: var(--text);
+}
+
+.page li::marker {
+  color: var(--accent);
 }
 
 /* ---------- hero / home page ---------- */
@@ -506,11 +549,34 @@ select {
   color: var(--text);
 }
 
+select {
+  cursor: pointer;
+}
+
 input:focus,
 select:focus,
 textarea:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+/* Checkbox styling */
+input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* Range slider */
+input[type='range'] {
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* Number input */
+input[type='number'] {
+  width: 80px;
 }
 
 *:focus-visible {
@@ -617,6 +683,11 @@ textarea:focus {
   flex-wrap: wrap;
 }
 
+/* Deck name badge in card-row stats for thematic look */
+.card-row__stats {
+  white-space: nowrap;
+}
+
 /* ================================================================
    GAME PLAY AREA
    ================================================================ */
@@ -643,8 +714,42 @@ textarea:focus {
 }
 
 .game__turn-label {
+  font-family: 'Cinzel', serif;
   font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
   color: var(--text);
+}
+
+/* Active player indicator dot */
+.game__active-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+  animation: active-dot-pulse 1.5s ease-in-out infinite;
+}
+
+.game__active-dot--p0 {
+  background: var(--player-0);
+  box-shadow: 0 0 8px var(--player-0-glow);
+}
+
+.game__active-dot--p1 {
+  background: var(--player-1);
+  box-shadow: 0 0 8px var(--player-1-glow);
+}
+
+@keyframes active-dot-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .score {
@@ -1370,16 +1475,70 @@ textarea:focus {
 }
 
 /* ================================================================
-   MATCH END OVERLAY
+   MATCH SETUP PANEL (collapsed state during game)
+   ================================================================ */
+
+.panel--setup-collapsed {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1.5rem;
+  border-color: transparent;
+  opacity: 0;
+  margin: 0;
+  transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.2s ease, margin 0.3s ease;
+}
+
+/* ================================================================
+   MATCH END / RESULT
    ================================================================ */
 
 .game__result-banner {
   text-align: center;
-  padding: 1rem;
+  padding: 1.25rem;
   background: var(--surface);
-  border: 1px solid var(--accent);
-  border-radius: 6px;
-  box-shadow: 0 0 24px var(--accent-glow);
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  box-shadow: 0 0 30px var(--accent-glow), inset 0 0 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.game__result-banner::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 9px;
+  border: 1px solid var(--accent-strong);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ================================================================
+   ABOUT PAGE
+   ================================================================ */
+
+.about-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  position: relative;
+}
+
+.about-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 8px;
+  right: 8px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent) 30%,
+    var(--accent) 70%,
+    transparent
+  );
+  opacity: 0.15;
 }
 
 /* ================================================================

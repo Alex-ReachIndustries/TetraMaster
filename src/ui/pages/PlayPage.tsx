@@ -453,6 +453,7 @@ export const PlayPage = () => {
         <div className="game">
           <div className="game__status">
             <span className="game__turn-label">
+              <span className={`game__active-dot game__active-dot--p${game.activePlayer}`} />
               Turn {game.turn} &mdash; Player {game.activePlayer + 1}
             </span>
             <div className="score">

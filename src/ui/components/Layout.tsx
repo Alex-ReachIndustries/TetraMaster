@@ -17,7 +17,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
       <header className="app__header">
         <div className="brand">
           <span className="brand__title">Tetra Master</span>
-          <span className="brand__subtitle">Classic-inspired Tetra Master</span>
+          <span className="brand__subtitle">Browser Card Game</span>
         </div>
         <nav className="nav">
           {navItems.map((item) => (
