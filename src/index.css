@@ -552,6 +552,14 @@ body[data-theme='classic'] .panel {
   flex-direction: column;
   gap: 1.25rem;
   align-items: center;
+  padding: 1rem;
+  border-radius: 6px;
+  /* Subtle radial background to focus attention on the board */
+  background: radial-gradient(
+    ellipse at center,
+    rgba(20, 26, 66, 0.3) 0%,
+    transparent 70%
+  );
 }
 
 /* -- HUD bar (turn + active player) -- */
@@ -688,27 +696,47 @@ body[data-theme='classic'] .game__board-frame {
   pointer-events: none;
 }
 
-/* Blocked cell */
+/* Blocked cell – cross-hatch pattern */
 .board-cell--blocked {
-  background: repeating-linear-gradient(
-    45deg,
-    var(--cell-bg),
-    var(--cell-bg) 6px,
-    var(--cell-border-light) 6px,
-    var(--cell-border-light) 10px
-  );
-  opacity: 0.7;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 5px,
+      rgba(30, 40, 96, 0.4) 5px,
+      rgba(30, 40, 96, 0.4) 7px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 5px,
+      rgba(30, 40, 96, 0.4) 5px,
+      rgba(30, 40, 96, 0.4) 7px
+    ),
+    var(--cell-bg);
+  opacity: 0.6;
 }
 
 .board-cell__blocked {
-  font-size: 1.2rem;
-  color: var(--muted);
-  opacity: 0.5;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--border-strong);
+  opacity: 0.6;
 }
 
-/* Card cell has no extra background */
+/* Card cell has no extra background – card fills the cell */
 .board-cell--card {
   padding: 1px;
+}
+
+.board-cell--card .card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.board-cell--card .card--small {
+  width: 100%;
 }
 
 /* ================================================================
@@ -950,6 +978,19 @@ body[data-theme='classic'] .hand__header {
   width: 100%;
   height: 100%;
   display: block;
+}
+
+/* Subtle vignette overlay on card art */
+.card__art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 50%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
 }
 
 /* -- Power overlay (for battle display) -- */
