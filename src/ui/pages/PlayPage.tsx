@@ -453,8 +453,15 @@ export const PlayPage = () => {
       {game ? (
         <div className="game">
           <div className="game__status">
-            <div>
-              Turn {game.turn} &mdash; Player {game.activePlayer + 1}&apos;s turn
+            <div className="game__turn">
+              {game.status === 'in_progress' ? (
+                <>
+                  <span className={`game__turn-indicator game__turn-indicator--${game.activePlayer}`} />
+                  Turn {game.turn} &mdash; Player {game.activePlayer + 1}
+                </>
+              ) : (
+                <>Turn {game.turn} &mdash; Game Over</>
+              )}
             </div>
             <div className="score">
               <span>P1: {scores[0]}</span>
@@ -464,7 +471,7 @@ export const PlayPage = () => {
               <div className="winner">
                 {game.winner == null || game.winner === 'draw'
                   ? 'Draw!'
-                  : `Player ${game.winner + 1} wins the match!`}
+                  : `Player ${game.winner + 1} wins!`}
               </div>
             ) : null}
           </div>
