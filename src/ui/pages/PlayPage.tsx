@@ -416,34 +416,33 @@ export const PlayPage = () => {
 
       {game ? (
         <div className="game">
-          <div className="game__status">
-            <div>
-              Turn {game.turn} - Active player: {game.activePlayer + 1}
-            </div>
-            <div className="score">
-              <span>Player 1: {scores[0]}</span>
-              <span>Player 2: {scores[1]}</span>
-            </div>
+          <div className="game__hud">
+            <span className="hud__turn">Turn {game.turn}</span>
             {game.status === 'finished' ? (
-              <div className="winner">
+              <span className="hud__active hud__active--finished">
                 {game.winner == null || game.winner === 'draw'
                   ? 'Draw!'
-                  : `Player ${game.winner + 1} wins the match.`}
-              </div>
-            ) : null}
+                  : `Player ${game.winner + 1} wins!`}
+              </span>
+            ) : (
+              <span className="hud__active">
+                Player {game.activePlayer + 1}&apos;s turn
+              </span>
+            )}
           </div>
 
-          <div className="game__board">
-            <BoardView
-              game={game}
-              onCellClick={handleCellClick}
-              flashByPosition={flashByPosition}
-              interactionDisabled={isBattleAnimating}
-            />
-          </div>
+          {game.status === 'finished' ? (
+            <div className="winner">
+              {game.winner == null || game.winner === 'draw'
+                ? 'The match is a draw.'
+                : `Player ${game.winner + 1} wins the match!`}
+            </div>
+          ) : null}
 
-          <div className="game__hands">
-            {[0, 1].map((playerId) => {
+          <div className="game__arena">
+            {/* Player 1 hand – left side */}
+            {(() => {
+              const playerId = 0
               const player = game.players[playerId]
               const faceDown =
                 playerTypes[playerId] === 'ai' ||
@@ -452,8 +451,11 @@ export const PlayPage = () => {
                   playerTypes[1] === 'human' &&
                   game.activePlayer !== playerId)
               return (
-                <div key={playerId} className="hand">
-                  <h3>Player {playerId + 1} hand</h3>
+                <div className="hand hand--left">
+                  <div className="hand__header">
+                    <span className="hand__name" data-player="0">Player 1</span>
+                    <span className="hand__score" data-player="0">{scores[0]}</span>
+                  </div>
                   <div className="hand__cards">
                     {player.hand.map((card) => (
                       <CardView
@@ -462,6 +464,7 @@ export const PlayPage = () => {
                         owner={playerId as PlayerId}
                         faceDown={faceDown}
                         selected={selectedCardId === card.instanceId}
+                        size="small"
                         onClick={() => {
                           if (isBattleAnimating) return
                           if (playerTypes[game.activePlayer] !== 'human') return
@@ -475,7 +478,57 @@ export const PlayPage = () => {
                   </div>
                 </div>
               )
-            })}
+            })()}
+
+            {/* Board – center */}
+            <div className="game__board-frame">
+              <BoardView
+                game={game}
+                onCellClick={handleCellClick}
+                flashByPosition={flashByPosition}
+                interactionDisabled={isBattleAnimating}
+              />
+            </div>
+
+            {/* Player 2 hand – right side */}
+            {(() => {
+              const playerId = 1
+              const player = game.players[playerId]
+              const faceDown =
+                playerTypes[playerId] === 'ai' ||
+                (settings.hideOpponentHand &&
+                  playerTypes[0] === 'human' &&
+                  playerTypes[1] === 'human' &&
+                  game.activePlayer !== playerId)
+              return (
+                <div className="hand hand--right">
+                  <div className="hand__header">
+                    <span className="hand__name" data-player="1">Player 2</span>
+                    <span className="hand__score" data-player="1">{scores[1]}</span>
+                  </div>
+                  <div className="hand__cards">
+                    {player.hand.map((card) => (
+                      <CardView
+                        key={card.instanceId}
+                        card={card}
+                        owner={playerId as PlayerId}
+                        faceDown={faceDown}
+                        selected={selectedCardId === card.instanceId}
+                        size="small"
+                        onClick={() => {
+                          if (isBattleAnimating) return
+                          if (playerTypes[game.activePlayer] !== 'human') return
+                          if (game.activePlayer !== playerId) return
+                          setSelectedCardId((prev) =>
+                            prev === card.instanceId ? null : card.instanceId,
+                          )
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )
+            })()}
           </div>
 
           {settings.showDevPanel ? <DevPanel game={game} /> : null}

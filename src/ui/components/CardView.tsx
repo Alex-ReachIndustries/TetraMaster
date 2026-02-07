@@ -66,10 +66,12 @@ export const CardView = ({
         )}
       </div>
       <div className="card__stats">
-        <span className="stat stat--power">{card.stats.power}</span>
-        <span className="stat stat--class">{card.stats.class}</span>
-        <span className="stat stat--physical">{card.stats.physical}</span>
-        <span className="stat stat--magical">{card.stats.magical}</span>
+        <span className="stat-code">
+          {card.stats.power}
+          {card.stats.class}
+          {card.stats.physical}
+          {card.stats.magical}
+        </span>
       </div>
       <div className="card__name">{card.name}</div>
       <div className="card__arrows">
