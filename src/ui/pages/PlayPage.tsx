@@ -452,7 +452,7 @@ export const PlayPage = () => {
                   playerTypes[1] === 'human' &&
                   game.activePlayer !== playerId)
               return (
-                <div key={playerId} className="hand">
+                <div key={playerId} className="hand" data-player={playerId}>
                   <h3>Player {playerId + 1} hand</h3>
                   <div className="hand__cards">
                     {player.hand.map((card) => (
