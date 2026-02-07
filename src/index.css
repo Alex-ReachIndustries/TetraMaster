@@ -1395,4 +1395,79 @@ input[type='range'] {
   .card__name {
     font-size: 0.55rem;
   }
+
+  .battle-modal__arena {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .battle-modal__vs {
+    font-size: 1rem;
+  }
+
+  .game__status {
+    padding: 0.5rem 0.75rem;
+    gap: 0.5rem;
+  }
+}
+
+/* ----------------------------------------------------------
+   23. GAME END RESULT OVERLAY
+   ---------------------------------------------------------- */
+.game__result-overlay {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 2px solid;
+  border-color: var(--frame-highlight) var(--frame-shadow) var(--frame-shadow) var(--frame-highlight);
+  box-shadow:
+    inset 2px 2px 0 var(--frame-inner-hl),
+    inset -2px -2px 0 var(--frame-inner-sh),
+    0 0 30px rgba(240, 204, 96, 0.1);
+  border-radius: var(--radius-lg);
+  animation: result-appear 0.4s ease-out;
+}
+
+@keyframes result-appear {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ----------------------------------------------------------
+   24. ADDITIONAL ANIMATION UTILITIES
+   ---------------------------------------------------------- */
+
+/* Fade in for newly added elements */
+@keyframes fade-in {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.hand__cards > * {
+  animation: fade-in 0.2s ease-out;
+}
+
+/* Subtle board cell idle shimmer for classic theme */
+body[data-theme='classic'] .board-cell--empty:not(:disabled) {
+  position: relative;
+}
+
+body[data-theme='classic'] .board-cell--empty:not(:disabled)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    135deg,
+    transparent 40%,
+    rgba(88, 104, 160, 0.04) 50%,
+    transparent 60%
+  );
+  pointer-events: none;
 }
