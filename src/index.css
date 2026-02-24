@@ -336,21 +336,20 @@ textarea {
 /* ── Game Board & Match (shared by Play + Campaign) ── */
 
 .game {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr;
-  gap: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   flex: 1;
   min-height: 0;
   overflow: hidden;
 }
 
 .game__status {
-  grid-column: 1 / -1;
   display: flex;
   gap: 1rem;
   align-items: center;
   font-size: 0.85rem;
+  flex-shrink: 0;
 }
 
 .score {
@@ -363,17 +362,27 @@ textarea {
   color: var(--success);
 }
 
+.game__field {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 0;
+}
+
 .game__board {
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 4px;
-  width: min(480px, 50vw);
+  width: min(420px, 44vw, 52vh);
   aspect-ratio: 1;
 }
 
@@ -403,25 +412,42 @@ textarea {
 
 .board-cell__blocked { font-size: 1rem; color: var(--muted); }
 
-.game__hands {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  overflow-y: auto;
-  min-height: 0;
-}
+/* ── Hands (vertical stacks flanking the board) ── */
 
 .hand {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 0.5rem;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: center;
+  min-width: 86px;
+}
+
+.hand--left { order: -1; }
+.hand--right { order: 1; }
+
+.hand__label {
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.hand__cards--vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: center;
 }
 
 .hand__cards {
   display: flex;
   gap: 0.35rem;
   flex-wrap: wrap;
+}
+
+/* Legacy horizontal hands (unused in classic layout) */
+.game__hands {
+  display: none;
 }
 
 /* ── Card Component ── */

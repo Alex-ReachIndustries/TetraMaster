@@ -464,7 +464,7 @@ const CampaignMatch = ({
         </div>
       )}
 
-      <div className="game">
+      <div className="game game--classic">
         <div className="game__status">
           <div>
             Turn {game.turn} — {game.status === 'finished' ? 'Match over' : game.activePlayer === 0 ? 'Your turn' : `${node.opponent.name}'s turn`}
@@ -475,24 +475,40 @@ const CampaignMatch = ({
           </div>
         </div>
 
-        <div className="game__board">
-          <BoardView
-            game={game}
-            onCellClick={handleCellClick}
-            flashByPosition={flashByPosition}
-            interactionDisabled={isBattleAnimating || matchPhase !== 'playing'}
-          />
-        </div>
+        <div className="game__field">
+          <div className="hand hand--left">
+            <div className="hand__label">{node.opponent.name}</div>
+            <div className="hand__cards hand__cards--vertical">
+              {game.players[1].hand.map((card) => (
+                <CardView
+                  key={card.instanceId}
+                  card={card}
+                  owner={1}
+                  size="small"
+                  faceDown
+                />
+              ))}
+            </div>
+          </div>
 
-        <div className="game__hands">
-          <div className="hand">
-            <h3>Your hand</h3>
-            <div className="hand__cards">
+          <div className="game__board">
+            <BoardView
+              game={game}
+              onCellClick={handleCellClick}
+              flashByPosition={flashByPosition}
+              interactionDisabled={isBattleAnimating || matchPhase !== 'playing'}
+            />
+          </div>
+
+          <div className="hand hand--right">
+            <div className="hand__label">You</div>
+            <div className="hand__cards hand__cards--vertical">
               {game.players[0].hand.map((card) => (
                 <CardView
                   key={card.instanceId}
                   card={card}
                   owner={0}
+                  size="small"
                   selected={selectedCardId === card.instanceId}
                   onClick={() => {
                     if (isBattleAnimating || game.activePlayer !== 0 || matchPhase !== 'playing')
@@ -501,19 +517,6 @@ const CampaignMatch = ({
                       prev === card.instanceId ? null : card.instanceId,
                     )
                   }}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="hand">
-            <h3>{node.opponent.name}&apos;s hand</h3>
-            <div className="hand__cards">
-              {game.players[1].hand.map((card) => (
-                <CardView
-                  key={card.instanceId}
-                  card={card}
-                  owner={1}
-                  faceDown
                 />
               ))}
             </div>
