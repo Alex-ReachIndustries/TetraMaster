@@ -24,6 +24,7 @@ import { BattleAnimation, type BattlePresentation } from '../components/BattleAn
 import { BoardView } from '../components/BoardView'
 import { CardView } from '../components/CardView'
 import { CAPTURE_FLASH_MS, PLACE_FLASH_MS, getAiDelayMs } from '../animationConfig'
+import { AchievementToast } from '../components/AchievementToast'
 
 const positionKey = (position: Position) => `${position.x},${position.y}`
 
@@ -306,6 +307,8 @@ const CampaignMatch = ({
     if (matchEndHandled.current) return
     matchEndHandled.current = true
     const playerWon = game.winner === 0
+    const finalScores = countScores(game)
+    const matchScore = { player: finalScores[0], opponent: finalScores[1] }
     if (playerWon) {
       const seed = `reward-${node.id}-${matchCounter.current}`
       matchCounter.current += 1
@@ -317,9 +320,11 @@ const CampaignMatch = ({
         campaign.completeNode(node.id)
       }
       campaign.rollChallenges()
+      campaign.evaluateAchievements(matchScore, Boolean(challenge))
     } else {
       setMatchPhase('defeat')
       campaign.addLoss()
+      campaign.evaluateAchievements(matchScore, false)
     }
   }, [game, matchPhase, isBattleAnimating, node, challenge, campaign])
 
@@ -523,6 +528,8 @@ const CampaignMatch = ({
           onComplete={handleBattleComplete}
         />
       )}
+
+      <AchievementToast />
     </section>
   )
 }

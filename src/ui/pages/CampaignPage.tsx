@@ -12,12 +12,15 @@ import type { CardInstance } from '../../engine/types'
 import { useCampaignStore, type ActiveChallenge } from '../../state/campaignStore'
 import { CardView } from '../components/CardView'
 import { WorldMap } from '../components/WorldMap'
+import { AchievementToast } from '../components/AchievementToast'
+import { AchievementList } from '../components/AchievementList'
 
 export const CampaignPage = () => {
   const campaign = useCampaignStore()
   const navigate = useNavigate()
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null)
   const [deckEditing, setDeckEditing] = useState(false)
+  const [showAchievements, setShowAchievements] = useState(false)
 
   const selectedNode = useMemo(
     () => (selectedNodeId ? allCampaignNodes.find((n) => n.id === selectedNodeId) ?? null : null),
@@ -65,6 +68,9 @@ export const CampaignPage = () => {
           <span className="campaign-stat">Losses {campaign.losses}</span>
           <span className="campaign-stat">Cards {campaign.collection.length}/100</span>
           <span className="campaign-stat">Progress {campaign.completedNodes.length}/15</span>
+          <button className="campaign-stat campaign-stat--trophy" onClick={() => setShowAchievements(true)}>
+            🏆 {campaign.unlockedAchievements.length}
+          </button>
         </div>
       </div>
 
@@ -136,6 +142,15 @@ export const CampaignPage = () => {
           </div>
         </div>
       </div>
+
+      {showAchievements && (
+        <AchievementList
+          unlocked={campaign.unlockedAchievements}
+          onClose={() => setShowAchievements(false)}
+        />
+      )}
+
+      <AchievementToast />
     </section>
   )
 }

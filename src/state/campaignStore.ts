@@ -11,6 +11,7 @@ import {
   challengeModifiers,
   type ChallengeModifier,
 } from '../data/campaign'
+import { checkAchievements, type AchievementContext } from '../data/achievements'
 
 export interface ActiveChallenge {
   nodeId: string
@@ -26,6 +27,9 @@ export interface CampaignStoreState {
   losses: number
   activeChallenges: ActiveChallenge[]
   completedChallenges: string[]
+  unlockedAchievements: string[]
+  currentWinStreak: number
+  pendingAchievements: string[]
 }
 
 export interface CampaignStoreActions {
@@ -38,6 +42,8 @@ export interface CampaignStoreActions {
   rollChallenges: () => void
   completeChallenge: (nodeId: string) => void
   swapDeckCard: (outInstanceId: string, inCard: CardInstance) => void
+  evaluateAchievements: (matchScore?: { player: number; opponent: number }, wasChallenge?: boolean) => void
+  dismissAchievement: (id: string) => void
 }
 
 const buildStarterCollection = (): CardInstance[] => {
@@ -64,6 +70,9 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
       losses: 0,
       activeChallenges: [],
       completedChallenges: [],
+      unlockedAchievements: [],
+      currentWinStreak: 0,
+      pendingAchievements: [],
 
       startCampaign: () => {
         const collection = buildStarterCollection()
@@ -76,6 +85,9 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
           losses: 0,
           activeChallenges: [],
           completedChallenges: [],
+          unlockedAchievements: [],
+          currentWinStreak: 0,
+          pendingAchievements: [],
         })
       },
 
@@ -89,6 +101,9 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
           losses: 0,
           activeChallenges: [],
           completedChallenges: [],
+          unlockedAchievements: [],
+          currentWinStreak: 0,
+          pendingAchievements: [],
         }),
 
       completeNode: (nodeId: string) => {
@@ -97,6 +112,7 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
         set({
           completedNodes: [...state.completedNodes, nodeId],
           wins: state.wins + 1,
+          currentWinStreak: state.currentWinStreak + 1,
         })
       },
 
@@ -107,7 +123,11 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
 
       setCampaignDeck: (cards: CardInstance[]) => set({ campaignDeck: cards }),
 
-      addLoss: () => set((state) => ({ losses: state.losses + 1 })),
+      addLoss: () =>
+        set((state) => ({
+          losses: state.losses + 1,
+          currentWinStreak: 0,
+        })),
 
       swapDeckCard: (outInstanceId: string, inCard: CardInstance) => {
         const state = get()
@@ -144,7 +164,34 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
           activeChallenges: state.activeChallenges.filter((c) => c.nodeId !== nodeId),
           completedChallenges: [...state.completedChallenges, nodeId],
           wins: state.wins + 1,
+          currentWinStreak: state.currentWinStreak + 1,
         })
+      },
+
+      evaluateAchievements: (matchScore, wasChallenge) => {
+        const state = get()
+        const ctx: AchievementContext = {
+          completedNodes: state.completedNodes,
+          wins: state.wins,
+          losses: state.losses,
+          collection: state.collection,
+          currentWinStreak: state.currentWinStreak,
+          lastMatchScore: matchScore,
+          wasChallenge,
+        }
+        const newlyEarned = checkAchievements(ctx, state.unlockedAchievements)
+        if (newlyEarned.length > 0) {
+          set({
+            unlockedAchievements: [...state.unlockedAchievements, ...newlyEarned],
+            pendingAchievements: [...state.pendingAchievements, ...newlyEarned],
+          })
+        }
+      },
+
+      dismissAchievement: (id: string) => {
+        set((state) => ({
+          pendingAchievements: state.pendingAchievements.filter((a) => a !== id),
+        }))
       },
     }),
     {
