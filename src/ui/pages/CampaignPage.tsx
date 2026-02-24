@@ -1,19 +1,17 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  campaignRegions,
-  isRegionAvailable,
-  isRegionComplete,
+  allCampaignNodes,
   isNodeAvailable,
   getCardDef,
   type CampaignNode,
-  type CampaignRegion,
 } from '../../data/campaign'
 import { createCardInstance } from '../../engine/cards'
 import { createRng } from '../../engine/rng'
 import type { CardInstance } from '../../engine/types'
 import { useCampaignStore, type ActiveChallenge } from '../../state/campaignStore'
 import { CardView } from '../components/CardView'
+import { WorldMap } from '../components/WorldMap'
 
 export const CampaignPage = () => {
   const campaign = useCampaignStore()
@@ -22,10 +20,7 @@ export const CampaignPage = () => {
   const [deckEditing, setDeckEditing] = useState(false)
 
   const selectedNode = useMemo(
-    () =>
-      campaignRegions
-        .flatMap((r) => r.nodes)
-        .find((n) => n.id === selectedNodeId) ?? null,
+    () => (selectedNodeId ? allCampaignNodes.find((n) => n.id === selectedNodeId) ?? null : null),
     [selectedNodeId],
   )
 
@@ -37,17 +32,15 @@ export const CampaignPage = () => {
     [selectedNodeId, campaign.activeChallenges],
   )
 
-  const collectionCount = campaign.collection.length
-  const totalCards = 100
-
   if (!campaign.started) {
     return (
       <section className="page">
         <div className="campaign-intro">
+          <p className="eyebrow">Single-player campaign</p>
           <h1>Journey Mode</h1>
           <p className="lede">
-            Begin your quest as a card player. Travel across the world, defeat opponents,
-            and build your collection from a humble starter deck to a legendary arsenal.
+            Travel across the world, defeat opponents, and build your card
+            collection from a humble starter deck to a legendary arsenal.
           </p>
           <div className="campaign-intro__features">
             <div className="hero__tile">15 opponents</div>
@@ -68,33 +61,21 @@ export const CampaignPage = () => {
       <div className="campaign-header">
         <h1>Journey Mode</h1>
         <div className="campaign-stats">
-          <span className="campaign-stat">
-            Wins: {campaign.wins}
-          </span>
-          <span className="campaign-stat">
-            Losses: {campaign.losses}
-          </span>
-          <span className="campaign-stat">
-            Cards: {collectionCount}/{totalCards}
-          </span>
-          <span className="campaign-stat">
-            Progress: {campaign.completedNodes.length}/15
-          </span>
+          <span className="campaign-stat">Wins {campaign.wins}</span>
+          <span className="campaign-stat">Losses {campaign.losses}</span>
+          <span className="campaign-stat">Cards {campaign.collection.length}/100</span>
+          <span className="campaign-stat">Progress {campaign.completedNodes.length}/15</span>
         </div>
       </div>
 
       <div className="campaign-layout">
         <div className="campaign-map">
-          {campaignRegions.map((region) => (
-            <RegionRow
-              key={region.id}
-              region={region}
-              completedNodes={campaign.completedNodes}
-              selectedNodeId={selectedNodeId}
-              activeChallenges={campaign.activeChallenges}
-              onSelectNode={setSelectedNodeId}
-            />
-          ))}
+          <WorldMap
+            completedNodes={campaign.completedNodes}
+            activeChallenges={campaign.activeChallenges}
+            selectedNodeId={selectedNodeId}
+            onSelectNode={setSelectedNodeId}
+          />
         </div>
 
         <div className="campaign-sidebar">
@@ -127,23 +108,14 @@ export const CampaignPage = () => {
           ) : (
             <div className="panel">
               <h2>Select a location</h2>
-              <p className="small">Click a node on the map to see details and battle opponents.</p>
+              <p className="small">Click a node on the map to view details.</p>
               <h3>Your Deck</h3>
               <div className="campaign-deck-row">
                 {campaign.campaignDeck.map((card) => (
-                  <CardView
-                    key={card.instanceId}
-                    card={card}
-                    owner={0}
-                    size="small"
-                    interactive={false}
-                  />
+                  <CardView key={card.instanceId} card={card} owner={0} size="small" interactive={false} />
                 ))}
               </div>
-              <button
-                className="button button--ghost"
-                onClick={() => setDeckEditing(true)}
-              >
+              <button className="button button--ghost" onClick={() => setDeckEditing(true)}>
                 Edit Deck
               </button>
             </div>
@@ -168,138 +140,38 @@ export const CampaignPage = () => {
   )
 }
 
-const RegionRow = ({
-  region,
-  completedNodes,
-  selectedNodeId,
-  activeChallenges,
-  onSelectNode,
-}: {
-  region: CampaignRegion
-  completedNodes: string[]
-  selectedNodeId: string | null
-  activeChallenges: ActiveChallenge[]
-  onSelectNode: (id: string) => void
-}) => {
-  const available = isRegionAvailable(region, completedNodes)
-  const complete = isRegionComplete(region.id, completedNodes)
-
-  return (
-    <div
-      className={`campaign-region ${!available ? 'campaign-region--locked' : ''} ${complete ? 'campaign-region--complete' : ''}`}
-    >
-      <div className="campaign-region__header">
-        <span className="campaign-region__icon">{region.icon}</span>
-        <div>
-          <h3 className="campaign-region__name">{region.name}</h3>
-          <p className="campaign-region__desc small">{region.description}</p>
-        </div>
-      </div>
-      <div className="campaign-region__nodes">
-        {region.nodes.map((node, idx) => {
-          const nodeAvailable = available && isNodeAvailable(node, completedNodes)
-          const nodeComplete = completedNodes.includes(node.id)
-          const hasChallenge = activeChallenges.some((c) => c.nodeId === node.id)
-          const isSelected = selectedNodeId === node.id
-          return (
-            <div key={node.id} className="campaign-node-wrapper">
-              {idx > 0 && (
-                <div
-                  className={`campaign-path ${nodeComplete || nodeAvailable ? 'campaign-path--active' : ''}`}
-                />
-              )}
-              <button
-                className={`campaign-node ${node.isBoss ? 'campaign-node--boss' : ''} ${nodeComplete ? 'campaign-node--complete' : ''} ${nodeAvailable && !nodeComplete ? 'campaign-node--available' : ''} ${!nodeAvailable && !nodeComplete ? 'campaign-node--locked' : ''} ${isSelected ? 'campaign-node--selected' : ''} ${hasChallenge ? 'campaign-node--challenge' : ''}`}
-                onClick={() => (nodeAvailable || nodeComplete) && onSelectNode(node.id)}
-                disabled={!nodeAvailable && !nodeComplete}
-                title={node.name}
-              >
-                <span className="campaign-node__icon">
-                  {nodeComplete
-                    ? hasChallenge
-                      ? '⚔'
-                      : '✓'
-                    : node.isBoss
-                      ? '★'
-                      : '●'}
-                </span>
-              </button>
-              <span className="campaign-node__label">{node.name}</span>
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
-
 const NodeDetail = ({
-  node,
-  available,
-  completed,
-  challenge,
-  deck,
-  onBattle,
-  onEditDeck,
+  node, available, completed, challenge, deck, onBattle, onEditDeck,
 }: {
-  node: CampaignNode
-  available: boolean
-  completed: boolean
-  challenge: ActiveChallenge | null
-  deck: CardInstance[]
-  onBattle: () => void
-  onEditDeck: () => void
+  node: CampaignNode; available: boolean; completed: boolean
+  challenge: ActiveChallenge | null; deck: CardInstance[]
+  onBattle: () => void; onEditDeck: () => void
 }) => {
-  const opponentDeck = useMemo(
-    () => buildNodeOpponentDeck(node),
-    [node],
-  )
-
+  const opponentDeck = useMemo(() => buildNodeOpponentDeck(node), [node])
   const canBattle = (available && !completed) || challenge !== null
-  const hasDeck = deck.length === 5
 
   return (
     <div className="panel campaign-detail">
       <div className="campaign-detail__header">
         <h2>{node.name}</h2>
         {node.isBoss && <span className="campaign-badge campaign-badge--boss">Boss</span>}
-        {completed && !challenge && (
-          <span className="campaign-badge campaign-badge--done">Cleared</span>
-        )}
-        {challenge && (
-          <span className="campaign-badge campaign-badge--challenge">
-            Challenge: {challenge.modifier.name}
-          </span>
-        )}
+        {completed && !challenge && <span className="campaign-badge campaign-badge--done">Cleared</span>}
+        {challenge && <span className="campaign-badge campaign-badge--challenge">Challenge</span>}
       </div>
       <p className="small">{node.description}</p>
 
       {challenge && (
-        <div className="campaign-challenge-info">
-          <p>{challenge.modifier.description}</p>
-        </div>
+        <div className="campaign-challenge-info"><p>{challenge.modifier.description}</p></div>
       )}
 
       <div className="campaign-opponent">
-        <h3>
-          {node.opponent.name}{' '}
-          <span className="small">— {node.opponent.title}</span>
-        </h3>
-        <p className="campaign-dialogue">"{node.opponent.dialogue.intro}"</p>
-        <div className="campaign-meta">
-          <span>Difficulty: {node.opponent.aiLevel}</span>
-        </div>
+        <h3>{node.opponent.name} <span className="small">— {node.opponent.title}</span></h3>
+        <p className="campaign-dialogue">&ldquo;{node.opponent.dialogue.intro}&rdquo;</p>
+        <p className="campaign-meta">Difficulty: {node.opponent.aiLevel}</p>
         <h4>Opponent&apos;s Deck</h4>
         <div className="campaign-deck-row">
           {opponentDeck.map((card) => (
-            <CardView
-              key={card.instanceId}
-              card={card}
-              owner={1}
-              size="small"
-              interactive={false}
-              faceDown={!completed}
-            />
+            <CardView key={card.instanceId} card={card} owner={1} size="small" interactive={false} faceDown={!completed} />
           ))}
         </div>
       </div>
@@ -308,26 +180,14 @@ const NodeDetail = ({
         <h4>Your Deck</h4>
         <div className="campaign-deck-row">
           {deck.map((card) => (
-            <CardView
-              key={card.instanceId}
-              card={card}
-              owner={0}
-              size="small"
-              interactive={false}
-            />
+            <CardView key={card.instanceId} card={card} owner={0} size="small" interactive={false} />
           ))}
         </div>
-        <button className="button button--ghost" onClick={onEditDeck}>
-          Edit Deck
-        </button>
+        <button className="button button--ghost" onClick={onEditDeck}>Edit Deck</button>
       </div>
 
       <div className="field-group">
-        <button
-          className="button button--primary"
-          onClick={onBattle}
-          disabled={!canBattle || !hasDeck}
-        >
+        <button className="button button--primary" onClick={onBattle} disabled={!canBattle || deck.length !== 5}>
           {challenge ? 'Accept Challenge' : completed ? 'Cleared' : 'Battle'}
         </button>
       </div>
@@ -336,104 +196,62 @@ const NodeDetail = ({
 }
 
 const DeckEditor = ({
-  collection,
-  deck,
-  onSave,
-  onCancel,
+  collection, deck, onSave, onCancel,
 }: {
-  collection: CardInstance[]
-  deck: CardInstance[]
-  onSave: (deck: CardInstance[]) => void
-  onCancel: () => void
+  collection: CardInstance[]; deck: CardInstance[]
+  onSave: (deck: CardInstance[]) => void; onCancel: () => void
 }) => {
   const [editDeck, setEditDeck] = useState<CardInstance[]>([...deck])
   const [search, setSearch] = useState('')
+  const deckIds = useMemo(() => new Set(editDeck.map((c) => c.instanceId)), [editDeck])
 
-  const deckInstanceIds = useMemo(
-    () => new Set(editDeck.map((c) => c.instanceId)),
-    [editDeck],
-  )
-
-  const filteredCollection = useMemo(() => {
+  const filtered = useMemo(() => {
     if (!search) return collection
-    const lower = search.toLowerCase()
-    return collection.filter((c) => c.name.toLowerCase().includes(lower))
+    const s = search.toLowerCase()
+    return collection.filter((c) => c.name.toLowerCase().includes(s))
   }, [collection, search])
 
-  const addCard = useCallback(
-    (card: CardInstance) => {
-      if (editDeck.length >= 5) return
-      if (deckInstanceIds.has(card.instanceId)) return
-      setEditDeck((prev) => [...prev, card])
-    },
-    [editDeck.length, deckInstanceIds],
-  )
+  const addCard = useCallback((card: CardInstance) => {
+    if (editDeck.length >= 5 || deckIds.has(card.instanceId)) return
+    setEditDeck((prev) => [...prev, card])
+  }, [editDeck.length, deckIds])
 
-  const removeCard = useCallback((instanceId: string) => {
-    setEditDeck((prev) => prev.filter((c) => c.instanceId !== instanceId))
+  const removeCard = useCallback((id: string) => {
+    setEditDeck((prev) => prev.filter((c) => c.instanceId !== id))
   }, [])
 
   return (
     <div className="panel campaign-deck-editor">
-      <h2>Edit Deck</h2>
-      <p className="small">Select 5 cards from your collection ({editDeck.length}/5)</p>
-
-      <h3>Current Deck</h3>
+      <h2>Edit Deck ({editDeck.length}/5)</h2>
       <div className="campaign-deck-row">
         {editDeck.map((card) => (
           <div key={card.instanceId} className="campaign-deck-slot">
             <CardView card={card} owner={0} size="small" interactive={false} />
-            <button
-              className="button button--ghost campaign-deck-remove"
-              onClick={() => removeCard(card.instanceId)}
-            >
-              ✕
-            </button>
+            <button className="campaign-deck-remove" onClick={() => removeCard(card.instanceId)}>✕</button>
           </div>
         ))}
         {Array.from({ length: 5 - editDeck.length }).map((_, i) => (
-          <div key={`empty-${i}`} className="campaign-deck-empty">
-            <span>Empty</span>
-          </div>
+          <div key={`e-${i}`} className="campaign-deck-empty"><span>Empty</span></div>
         ))}
       </div>
-
-      <h3>Collection ({collection.length} cards)</h3>
-      <input
-        type="text"
-        placeholder="Search cards..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="campaign-search"
-      />
+      <input type="text" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} className="campaign-search" />
       <div className="campaign-collection">
-        {filteredCollection.map((card) => {
-          const inDeck = deckInstanceIds.has(card.instanceId)
+        {filtered.map((card) => {
+          const inDeck = deckIds.has(card.instanceId)
           return (
-            <button
-              key={card.instanceId}
+            <button key={card.instanceId}
               className={`campaign-collection-card ${inDeck ? 'campaign-collection-card--in-deck' : ''}`}
               onClick={() => (inDeck ? removeCard(card.instanceId) : addCard(card))}
-              disabled={!inDeck && editDeck.length >= 5}
-            >
+              disabled={!inDeck && editDeck.length >= 5}>
               <CardView card={card} owner={0} size="small" interactive={false} />
               {inDeck && <span className="campaign-collection-card__badge">In Deck</span>}
             </button>
           )
         })}
       </div>
-
       <div className="field-group">
-        <button
-          className="button button--primary"
-          onClick={() => onSave(editDeck)}
-          disabled={editDeck.length !== 5}
-        >
-          Save Deck
-        </button>
-        <button className="button button--ghost" onClick={onCancel}>
-          Cancel
-        </button>
+        <button className="button button--primary" onClick={() => onSave(editDeck)} disabled={editDeck.length !== 5}>Save</button>
+        <button className="button button--ghost" onClick={onCancel}>Cancel</button>
       </div>
     </div>
   )

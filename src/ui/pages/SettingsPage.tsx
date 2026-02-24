@@ -30,7 +30,7 @@ export const SettingsPage = () => {
   } = useSettingsStore()
 
   return (
-    <section className="page">
+    <section className="page page--scroll">
       <h1>Settings</h1>
 
       <div className="panel">

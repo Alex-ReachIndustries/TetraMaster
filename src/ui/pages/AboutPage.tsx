@@ -1,5 +1,5 @@
 export const AboutPage = () => (
-  <section className="page">
+    <section className="page page--scroll">
     <h1>About this project</h1>
     <p>
       This fan-made project recreates Final Fantasy IX&apos;s Tetra Master minigame using original
