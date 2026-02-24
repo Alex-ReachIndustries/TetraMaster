@@ -22,6 +22,9 @@ See `README.md` and `package.json` scripts for full details. Key commands:
 
 ### Gotchas
 
-- You must create a deck in the Deck Builder before starting a match; the Play page will not let you start without one.
+- **Free Play** requires creating a deck in the Deck Builder first; the Play page won't start without one.
+- **Journey Mode** has its own deck/collection system — no manual deck creation needed.
+- Campaign state is persisted in localStorage (`tetra-master-campaign`). Click "Reset Campaign" to regenerate cards after code changes to card generation.
+- Arrow generation uses `'original'` mode (FF9 distribution) in campaign with `minArrows` guarantees so no card is ever useless.
 - The local-art-server (`local-art-server/`) is entirely optional and only needed with `VITE_ART_PROVIDER=local`. Default procedural SVG art works without it.
 - Node.js 20+ is required (project Dockerfile uses `node:20-slim`; Node 22 also works).
