@@ -4,8 +4,9 @@ import { useSettingsStore } from '../../state'
 
 const navItems = [
   { to: '/', label: 'Home' },
+  { to: '/campaign', label: 'Journey' },
   { to: '/deck-builder', label: 'Deck Builder' },
-  { to: '/play', label: 'Play' },
+  { to: '/play', label: 'Free Play' },
   { to: '/settings', label: 'Settings' },
   { to: '/about', label: 'About' },
 ]

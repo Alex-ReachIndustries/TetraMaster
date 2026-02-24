@@ -799,3 +799,436 @@ select {
   outline: 2px solid var(--accent-strong);
   outline-offset: 2px;
 }
+
+/* ── Campaign / Journey Mode ── */
+
+.campaign-intro {
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.campaign-intro__features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.campaign-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.campaign-stats {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.campaign-stat {
+  padding: 0.35rem 0.8rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.campaign-layout {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr 380px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .campaign-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── World Map ── */
+
+.campaign-map {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.campaign-region {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: opacity 0.2s;
+}
+
+.campaign-region--locked {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.campaign-region--complete {
+  border-color: var(--success);
+}
+
+.campaign-region__header {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.campaign-region__icon {
+  font-size: 1.8rem;
+}
+
+.campaign-region__name {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.campaign-region__desc {
+  margin: 0;
+}
+
+.campaign-region__nodes {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.campaign-node-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex: 1;
+  gap: 0;
+}
+
+.campaign-path {
+  flex: 1;
+  height: 3px;
+  background: var(--border);
+  min-width: 20px;
+}
+
+.campaign-path--active {
+  background: var(--accent);
+}
+
+.campaign-node {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--border);
+  background: var(--surface-alt);
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+  flex-shrink: 0;
+}
+
+.campaign-node:hover:not(:disabled) {
+  transform: scale(1.1);
+}
+
+.campaign-node--complete {
+  border-color: var(--success);
+  background: color-mix(in srgb, var(--success) 18%, var(--surface-alt));
+}
+
+.campaign-node--available {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 40%, transparent);
+  animation: node-pulse 2s ease-in-out infinite;
+}
+
+.campaign-node--locked {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.campaign-node--boss {
+  width: 60px;
+  height: 60px;
+  font-size: 1.4rem;
+}
+
+.campaign-node--selected {
+  outline: 3px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+
+.campaign-node--challenge {
+  border-color: #f59e0b;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+  animation: node-pulse-challenge 2s ease-in-out infinite;
+}
+
+.campaign-node__icon {
+  pointer-events: none;
+}
+
+.campaign-node__label {
+  display: block;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+  white-space: nowrap;
+}
+
+@keyframes node-pulse {
+  0%, 100% { box-shadow: 0 0 8px color-mix(in srgb, var(--accent) 30%, transparent); }
+  50% { box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 60%, transparent); }
+}
+
+@keyframes node-pulse-challenge {
+  0%, 100% { box-shadow: 0 0 8px rgba(245, 158, 11, 0.3); }
+  50% { box-shadow: 0 0 18px rgba(245, 158, 11, 0.6); }
+}
+
+/* ── Sidebar / Detail ── */
+
+.campaign-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.campaign-detail {
+  gap: 1rem;
+}
+
+.campaign-detail__header {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.campaign-badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.campaign-badge--boss {
+  background: #7c3aed;
+  color: #fff;
+}
+
+.campaign-badge--done {
+  background: var(--success);
+  color: #000;
+}
+
+.campaign-badge--challenge {
+  background: #f59e0b;
+  color: #000;
+}
+
+.campaign-opponent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.campaign-dialogue {
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.campaign-meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.campaign-deck-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.campaign-your-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.campaign-challenge-info {
+  background: color-mix(in srgb, #f59e0b 10%, var(--surface-alt));
+  border: 1px solid #f59e0b;
+  border-radius: 10px;
+  padding: 0.75rem;
+  font-size: 0.9rem;
+}
+
+/* ── Deck Editor ── */
+
+.campaign-deck-editor {
+  gap: 1rem;
+}
+
+.campaign-deck-slot {
+  position: relative;
+}
+
+.campaign-deck-remove {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--player-1);
+  color: #000;
+  font-size: 0.7rem;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: none;
+  cursor: pointer;
+}
+
+.campaign-deck-empty {
+  width: 110px;
+  min-height: 140px;
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.campaign-search {
+  width: 100%;
+}
+
+.campaign-collection {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 0.5rem;
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.campaign-collection-card {
+  position: relative;
+  cursor: pointer;
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  padding: 2px;
+  transition: border-color 0.15s;
+}
+
+.campaign-collection-card:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.campaign-collection-card--in-deck {
+  border-color: var(--player-0);
+}
+
+.campaign-collection-card:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.campaign-collection-card__badge {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  background: var(--player-0);
+  color: #000;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* ── Battle Page ── */
+
+.campaign-battle-header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.campaign-result {
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  text-align: center;
+}
+
+.campaign-result--victory {
+  background: color-mix(in srgb, var(--success) 12%, var(--surface));
+  border: 1px solid var(--success);
+}
+
+.campaign-result--defeat {
+  background: color-mix(in srgb, var(--player-1) 12%, var(--surface));
+  border: 1px solid var(--player-1);
+}
+
+.campaign-reward {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.campaign-reward__cards {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.campaign-reward__pick {
+  cursor: pointer;
+  background: none;
+  border: 3px solid transparent;
+  border-radius: 14px;
+  padding: 4px;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.campaign-reward__pick:hover {
+  border-color: var(--accent-strong);
+  transform: translateY(-4px);
+}
+
+.campaign-reward-confirmation {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.campaign-actions {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -11,8 +11,11 @@ export const HomePage = () => (
           original Tetra Master rules and all 100 cards.
         </p>
         <div className="hero__actions">
-          <Link className="button button--primary" to="/play">
-            Start a match
+          <Link className="button button--primary" to="/campaign">
+            Journey Mode
+          </Link>
+          <Link className="button button--ghost" to="/play">
+            Free Play
           </Link>
           <Link className="button button--ghost" to="/deck-builder">
             Build a deck
@@ -21,13 +24,14 @@ export const HomePage = () => (
       </div>
       <div className="hero__panel">
         <div className="hero__card-grid">
-          <div className="hero__tile">4x4 board</div>
-          <div className="hero__tile">100 cards</div>
-          <div className="hero__tile">AI opponents</div>
-          <div className="hero__tile">Deck builder</div>
+          <div className="hero__tile">Single-player campaign</div>
+          <div className="hero__tile">100 cards to collect</div>
+          <div className="hero__tile">15 opponents across 5 regions</div>
+          <div className="hero__tile">Challenges &amp; bosses</div>
         </div>
         <p className="hero__note">
-          Designed with deterministic rules, accessibility options, and a dev panel for debugging.
+          Journey Mode: start with a basic deck, defeat opponents, and build your collection
+          as you travel across the world.
         </p>
       </div>
     </div>

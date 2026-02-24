@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Layout } from './ui/components/Layout'
 import { AboutPage } from './ui/pages/AboutPage'
+import { CampaignPage } from './ui/pages/CampaignPage'
+import { CampaignBattlePage } from './ui/pages/CampaignBattlePage'
 import { DeckBuilderPage } from './ui/pages/DeckBuilderPage'
 import { HomePage } from './ui/pages/HomePage'
 import { PlayPage } from './ui/pages/PlayPage'
@@ -21,6 +23,8 @@ const App = () => {
     <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/campaign" element={<CampaignPage />} />
+        <Route path="/campaign/battle/:nodeId" element={<CampaignBattlePage />} />
         <Route path="/deck-builder" element={<DeckBuilderPage />} />
         <Route path="/play" element={<PlayPage />} />
         <Route path="/settings" element={<SettingsPage />} />
