@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   allCampaignNodes,
@@ -51,9 +51,12 @@ export const CampaignPage = () => {
             <div className="hero__tile">100 cards to collect</div>
             <div className="hero__tile">Challenges &amp; bosses</div>
           </div>
-          <button className="button button--primary" onClick={campaign.startCampaign}>
-            Begin Journey
-          </button>
+          <div className="field-group">
+            <button className="button button--primary" onClick={campaign.startCampaign}>
+              Begin Journey
+            </button>
+            <LoadButton onImport={campaign.importSave} />
+          </div>
         </div>
       </section>
     )
@@ -127,19 +130,16 @@ export const CampaignPage = () => {
             </div>
           )}
 
-          <div className="campaign-actions">
-            <button
-              className="button button--ghost"
-              onClick={() => {
-                if (window.confirm('Reset your campaign? All progress will be lost.')) {
-                  campaign.resetCampaign()
-                  setSelectedNodeId(null)
-                }
-              }}
-            >
-              Reset Campaign
-            </button>
-          </div>
+          <SaveLoadBar
+            onExport={campaign.exportSave}
+            onImport={campaign.importSave}
+            onReset={() => {
+              if (window.confirm('Reset your campaign? All progress will be lost.')) {
+                campaign.resetCampaign()
+                setSelectedNodeId(null)
+              }
+            }}
+          />
         </div>
       </div>
 
@@ -271,6 +271,47 @@ const DeckEditor = ({
     </div>
   )
 }
+
+const LoadButton = ({ onImport }: { onImport: (json: string) => boolean }) => {
+  const fileRef = useRef<HTMLInputElement>(null)
+
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      const ok = onImport(reader.result as string)
+      if (!ok) alert('Invalid save file.')
+    }
+    reader.readAsText(file)
+    e.target.value = ''
+  }
+
+  return (
+    <>
+      <input ref={fileRef} type="file" accept=".json" onChange={handleFile} style={{ display: 'none' }} />
+      <button className="button button--ghost" onClick={() => fileRef.current?.click()}>
+        Load Save
+      </button>
+    </>
+  )
+}
+
+const SaveLoadBar = ({
+  onExport,
+  onImport,
+  onReset,
+}: {
+  onExport: () => void
+  onImport: (json: string) => boolean
+  onReset: () => void
+}) => (
+  <div className="campaign-actions">
+    <button className="button button--ghost" onClick={onExport}>Save</button>
+    <LoadButton onImport={onImport} />
+    <button className="button button--ghost" onClick={onReset}>Reset</button>
+  </div>
+)
 
 function buildNodeOpponentDeck(node: CampaignNode): CardInstance[] {
   const cards: CardInstance[] = []

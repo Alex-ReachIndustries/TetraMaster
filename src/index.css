@@ -901,7 +901,7 @@ textarea {
 
 .campaign-reward-confirmation { color: var(--success); font-weight: 600; font-size: 0.85rem; }
 
-.campaign-actions { display: flex; justify-content: flex-end; }
+.campaign-actions { display: flex; gap: 0.35rem; justify-content: flex-end; flex-wrap: wrap; }
 
 .campaign-stat--trophy {
   cursor: pointer;

@@ -44,6 +44,8 @@ export interface CampaignStoreActions {
   swapDeckCard: (outInstanceId: string, inCard: CardInstance) => void
   evaluateAchievements: (matchScore?: { player: number; opponent: number }, wasChallenge?: boolean) => void
   dismissAchievement: (id: string) => void
+  exportSave: () => void
+  importSave: (json: string) => boolean
 }
 
 const buildStarterCollection = (): CardInstance[] => {
@@ -192,6 +194,55 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
         set((state) => ({
           pendingAchievements: state.pendingAchievements.filter((a) => a !== id),
         }))
+      },
+
+      exportSave: () => {
+        const state = get()
+        const saveData: CampaignStoreState = {
+          started: state.started,
+          collection: state.collection,
+          campaignDeck: state.campaignDeck,
+          completedNodes: state.completedNodes,
+          wins: state.wins,
+          losses: state.losses,
+          activeChallenges: state.activeChallenges,
+          completedChallenges: state.completedChallenges,
+          unlockedAchievements: state.unlockedAchievements,
+          currentWinStreak: state.currentWinStreak,
+          pendingAchievements: [],
+        }
+        const blob = new Blob([JSON.stringify(saveData, null, 2)], { type: 'application/json' })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `tetra-master-save-${new Date().toISOString().slice(0, 10)}.json`
+        a.click()
+        URL.revokeObjectURL(url)
+      },
+
+      importSave: (json: string): boolean => {
+        try {
+          const data = JSON.parse(json)
+          if (typeof data.started !== 'boolean' || !Array.isArray(data.collection)) {
+            return false
+          }
+          set({
+            started: data.started ?? false,
+            collection: data.collection ?? [],
+            campaignDeck: data.campaignDeck ?? [],
+            completedNodes: data.completedNodes ?? [],
+            wins: data.wins ?? 0,
+            losses: data.losses ?? 0,
+            activeChallenges: data.activeChallenges ?? [],
+            completedChallenges: data.completedChallenges ?? [],
+            unlockedAchievements: data.unlockedAchievements ?? [],
+            currentWinStreak: data.currentWinStreak ?? 0,
+            pendingAchievements: [],
+          })
+          return true
+        } catch {
+          return false
+        }
       },
     }),
     {
