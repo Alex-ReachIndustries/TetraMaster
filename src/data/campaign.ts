@@ -60,7 +60,7 @@ export const challengeModifiers: ChallengeModifier[] = [
   },
 ]
 
-export const starterCardIds = ['001', '002', '003', '004', '005']
+export const starterCardIds = ['009', '010', '012', '014', '015']
 
 export const getCardDef = (id: string): CardDefinition | undefined =>
   cards.find((c) => c.id === id)
