@@ -8,6 +8,7 @@ export type ArrowGenerationMode = 'density' | 'original'
 export interface ArrowGenerationOptions {
   mode: ArrowGenerationMode
   density: number
+  minArrows?: number
 }
 
 const originalArrowProbability = [1, 8, 25, 31, 18, 9, 5, 2, 1]
@@ -27,8 +28,11 @@ const pickArrowCountOriginal = (rng: RngState): { count: number; rng: RngState }
 const pickRandomDirections = (
   count: number,
   rng: RngState,
+  exclude: Direction[] = [],
 ): { arrows: Direction[]; rng: RngState } => {
-  const order = [...directionOrder]
+  const excluded = new Set(exclude)
+  const available = directionOrder.filter((d) => !excluded.has(d))
+  const order = [...available]
   let nextRng = rng
   for (let i = order.length - 1; i > 0; i -= 1) {
     const [index, updated] = nextInt(nextRng, 0, i)
@@ -37,7 +41,7 @@ const pickRandomDirections = (
     order[i] = order[index]
     order[index] = temp
   }
-  return { arrows: order.slice(0, count), rng: nextRng }
+  return { arrows: order.slice(0, Math.min(count, order.length)), rng: nextRng }
 }
 
 export const createCardInstance = (
@@ -60,6 +64,13 @@ export const createCardInstance = (
         arrows.push(dir)
       }
     })
+  }
+
+  if (options.minArrows !== undefined && arrows.length < options.minArrows) {
+    const needed = options.minArrows - arrows.length
+    const { arrows: extra, rng: afterExtra } = pickRandomDirections(needed, nextRng, arrows)
+    arrows = [...arrows, ...extra]
+    nextRng = afterExtra
   }
 
   const [idValue, idRng] = nextInt(nextRng, 0, 999999)

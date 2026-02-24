@@ -46,7 +46,7 @@ const buildStarterCollection = (): CardInstance[] => {
   for (const id of starterCardIds) {
     const def = getCardDef(id)
     if (!def) continue
-    const result = createCardInstance(def, rng, { mode: 'density', density: 0.35 })
+    const result = createCardInstance(def, rng, { mode: 'original', density: 0.5, minArrows: 3 })
     collection.push(result.card)
     rng = result.rng
   }

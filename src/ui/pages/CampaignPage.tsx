@@ -445,7 +445,7 @@ function buildNodeOpponentDeck(node: CampaignNode): CardInstance[] {
   for (const id of node.opponent.deckCardIds) {
     const def = getCardDef(id)
     if (!def) continue
-    const result = createCardInstance(def, rng, { mode: 'density', density: 0.4 })
+    const result = createCardInstance(def, rng, { mode: 'original', density: 0.5, minArrows: 2 })
     cards.push(result.card)
     rng = result.rng
   }
