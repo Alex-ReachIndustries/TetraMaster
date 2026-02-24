@@ -121,7 +121,7 @@ export const DeckBuilderPage = () => {
     : { valid: false, errors: ['Create a deck to begin.'] }
 
   return (
-    <section className="page">
+    <section className="page page--scroll">
       <h1>Deck builder</h1>
       <div className="deck-builder">
         <div className="panel">

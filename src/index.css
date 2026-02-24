@@ -254,6 +254,7 @@ textarea {
   gap: 1.5rem;
   grid-template-columns: 1fr 1fr;
   align-items: center;
+  align-content: center;
   flex: 1;
   min-height: 0;
 }
