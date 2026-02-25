@@ -1,18 +1,17 @@
 import { useEffect, useMemo, useState } from 'react'
 import { getEnvArtMode, getGeneratedArtPath, getLocalArtEndpoint } from '../../services'
 import { requestLocalArt } from '../../services/localArt'
-import { ProceduralArt } from '../../services/proceduralArt'
+import { LoreArt } from '../../services/loreArt'
 
 export const CardArt = ({
   cardId,
   name,
-  theme,
   artModeOverride,
   seed,
 }: {
   cardId: string
   name: string
-  theme: 'classic' | 'modern'
+  theme?: string
   artModeOverride: 'env' | 'procedural' | 'generated' | 'local'
   seed: string
 }) => {
@@ -41,5 +40,5 @@ export const CardArt = ({
     return <img src={imageSrc} alt={`${name} art`} />
   }
 
-  return <ProceduralArt cardId={cardId} name={name} theme={theme} />
+  return <LoreArt cardId={cardId} />
 }
