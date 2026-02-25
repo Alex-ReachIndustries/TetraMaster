@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getAchievement, type AchievementRarity } from '../../data/achievements'
 import { useCampaignStore } from '../../state/campaignStore'
 
@@ -14,20 +14,34 @@ export const AchievementToast = () => {
   const dismiss = useCampaignStore((s) => s.dismissAchievement)
   const [visible, setVisible] = useState<string | null>(null)
   const [animating, setAnimating] = useState(false)
+  const showTimer = useRef<number | null>(null)
+  const hideTimer = useRef<number | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (showTimer.current) window.clearTimeout(showTimer.current)
+      if (hideTimer.current) window.clearTimeout(hideTimer.current)
+    }
+  }, [])
 
   useEffect(() => {
     if (visible || pending.length === 0) return
     const next = pending[0]
     setVisible(next)
     setAnimating(true)
-    const timer = window.setTimeout(() => {
+
+    showTimer.current = window.setTimeout(() => {
       setAnimating(false)
-      window.setTimeout(() => {
+      hideTimer.current = window.setTimeout(() => {
         dismiss(next)
         setVisible(null)
       }, 400)
-    }, 3500)
-    return () => window.clearTimeout(timer)
+    }, 3000)
+
+    return () => {
+      if (showTimer.current) { window.clearTimeout(showTimer.current); showTimer.current = null }
+      if (hideTimer.current) { window.clearTimeout(hideTimer.current); hideTimer.current = null }
+    }
   }, [pending, visible, dismiss])
 
   if (!visible) return null
@@ -35,7 +49,15 @@ export const AchievementToast = () => {
   if (!def) return null
 
   return (
-    <div className={`achievement-toast ${animating ? 'achievement-toast--in' : 'achievement-toast--out'} achievement-toast--${def.rarity}`}>
+    <div
+      className={`achievement-toast ${animating ? 'achievement-toast--in' : 'achievement-toast--out'} achievement-toast--${def.rarity}`}
+      onClick={() => {
+        if (showTimer.current) { window.clearTimeout(showTimer.current); showTimer.current = null }
+        if (hideTimer.current) { window.clearTimeout(hideTimer.current); hideTimer.current = null }
+        dismiss(visible)
+        setVisible(null)
+      }}
+    >
       <div className="achievement-toast__icon">{def.icon}</div>
       <div className="achievement-toast__body">
         <div className="achievement-toast__label">Achievement Unlocked!</div>
