@@ -378,6 +378,8 @@ textarea {
   justify-content: center;
   flex: 1;
   min-height: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .game__board {
@@ -845,6 +847,7 @@ textarea {
 .campaign-badge--challenge { background: #f59e0b; color: #000; }
 
 .campaign-opponent { display: flex; flex-direction: column; gap: 0.35rem; }
+.campaign-opponent__row { display: flex; gap: 0.6rem; align-items: flex-start; }
 .campaign-dialogue { font-style: italic; color: var(--muted); font-size: 0.8rem; }
 .campaign-meta { font-size: 0.75rem; color: var(--muted); }
 

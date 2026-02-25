@@ -25,6 +25,8 @@ import { BoardView } from '../components/BoardView'
 import { CardView } from '../components/CardView'
 import { CAPTURE_FLASH_MS, PLACE_FLASH_MS, getAiDelayMs } from '../animationConfig'
 import { AchievementToast } from '../components/AchievementToast'
+import { BattlefieldBackground } from '../../services/characterArt'
+import { getRegionForNode } from '../../data/campaign'
 
 const positionKey = (position: Position) => `${position.x},${position.y}`
 
@@ -471,10 +473,11 @@ const CampaignMatch = ({
         </div>
       )}
 
-      <div className="game game--classic">
-        <div className="game__status">
+      <div className="game game--classic" style={{ position: 'relative' }}>
+        <BattlefieldBackground regionId={getRegionForNode(node.id)?.id ?? 'alexandria'} />
+        <div className="game__status" style={{ position: 'relative', zIndex: 1 }}>
           <div>
-            Turn {game.turn} — {game.status === 'finished' ? 'Match over' : game.activePlayer === 0 ? 'Your turn' : `${node.opponent.name}'s turn`}
+            Turn {game.turn} — {game.status === 'finished' ? 'Match over' : game.activePlayer === 0 ? 'Your turn' : `${node.opponent.name}'s turn`}{isHard ? ' (HARD)' : ''}
           </div>
           <div className="score">
             <span>You: {scores[0]}</span>

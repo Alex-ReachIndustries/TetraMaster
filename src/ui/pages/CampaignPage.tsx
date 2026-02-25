@@ -9,6 +9,7 @@ import type { CardInstance } from '../../engine/types'
 import { useCampaignStore, type ActiveChallenge } from '../../state/campaignStore'
 import { CardView } from '../components/CardView'
 import { WorldMap } from '../components/WorldMap'
+import { CharacterPortrait } from '../../services/characterArt'
 import { AchievementToast } from '../components/AchievementToast'
 import { AchievementList } from '../components/AchievementList'
 
@@ -176,9 +177,14 @@ const NodeDetail = ({
       <p className="small">{node.description}</p>
 
       <div className="campaign-opponent">
-        <h3>{node.opponent.name} <span className="small">— {node.opponent.title}</span></h3>
-        <p className="campaign-dialogue">&ldquo;{node.opponent.dialogue.intro}&rdquo;</p>
-        <p className="campaign-meta">Difficulty: {node.opponent.aiLevel}</p>
+        <div className="campaign-opponent__row">
+          <CharacterPortrait nodeId={node.id} />
+          <div>
+            <h3>{node.opponent.name} <span className="small">— {node.opponent.title}</span></h3>
+            <p className="campaign-dialogue">&ldquo;{node.opponent.dialogue.intro}&rdquo;</p>
+            <p className="campaign-meta">Difficulty: {node.opponent.aiLevel}</p>
+          </div>
+        </div>
       </div>
 
       <div className="campaign-your-deck">
