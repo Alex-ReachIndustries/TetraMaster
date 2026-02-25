@@ -1127,11 +1127,13 @@ textarea {
 .inventory__collection-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  grid-auto-rows: min-content;
   gap: 0.4rem;
   overflow-y: auto;
   flex: 1;
   min-height: 0;
   padding-right: 0.25rem;
+  align-content: start;
 }
 
 .inventory__collection-card {
@@ -1146,6 +1148,7 @@ textarea {
   padding: 2px;
   transition: border-color 0.15s;
   position: relative;
+  height: min-content;
 }
 
 .inventory__collection-card:hover:not(:disabled) {
@@ -1190,6 +1193,8 @@ textarea {
 
   .inventory__collection-grid {
     grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    grid-auto-rows: min-content;
+    align-content: start;
   }
 }
 
