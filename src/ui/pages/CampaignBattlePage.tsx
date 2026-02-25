@@ -289,16 +289,17 @@ const CampaignMatch = ({
     [aiLevel, settings.aiThinkTimeMs, settings.aiRandomness],
   )
 
+  const matchEndHandled = useRef(false)
+
   const startMatch = useCallback(() => {
     resetTransientState()
     setSelectedCardId(null)
     setMatchPhase('playing')
     setRewardCards([])
     setRewardPicked(false)
+    matchEndHandled.current = false
     setGameState(buildInitialGame())
   }, [buildInitialGame, resetTransientState])
-
-  const matchEndHandled = useRef(false)
   const matchCounter = useRef(0)
 
   useEffect(() => {
