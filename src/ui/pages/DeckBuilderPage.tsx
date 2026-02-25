@@ -122,10 +122,10 @@ export const DeckBuilderPage = () => {
 
   return (
     <section className="page page--scroll">
-      <h1>Deck builder</h1>
+      <h1>🃏 Deck Builder</h1>
       <div className="deck-builder">
         <div className="panel">
-          <h2>Available cards</h2>
+          <h2>Available Cards (100)</h2>
           <div className="field-group">
             <input
               placeholder="Search cards..."

@@ -316,10 +316,10 @@ export const PlayPage = () => {
 
   return (
     <section className="page">
-      <h1>Play</h1>
+      <h1>Free Play</h1>
 
       <div className="panel">
-        <h2>Match setup</h2>
+        <h2>⚔️ Match Setup</h2>
         <div className="field-group">
           <div className="field">
             <span>Player 1</span>

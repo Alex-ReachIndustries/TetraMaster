@@ -3,189 +3,106 @@ import { useSettingsStore } from '../../state'
 
 export const SettingsPage = () => {
   const {
-    theme,
-    reducedMotion,
-    aiRandomness,
-    aiThinkTimeMs,
-    arrowMode,
-    arrowDensity,
-    blockMode,
-    blockCount,
-    rngSeed,
-    showDevPanel,
-    artModeOverride,
-    hideOpponentHand,
-    setTheme,
-    setReducedMotion,
-    setAiRandomness,
-    setAiThinkTime,
-    setArrowMode,
-    setArrowDensity,
-    setBlockMode,
-    setBlockCount,
-    setRngSeed,
-    setShowDevPanel,
-    setArtModeOverride,
-    setHideOpponentHand,
+    theme, reducedMotion, aiRandomness, aiThinkTimeMs, arrowMode, arrowDensity,
+    blockMode, blockCount, rngSeed, showDevPanel, artModeOverride, hideOpponentHand,
+    setTheme, setReducedMotion, setAiRandomness, setAiThinkTime, setArrowMode,
+    setArrowDensity, setBlockMode, setBlockCount, setRngSeed, setShowDevPanel,
+    setArtModeOverride, setHideOpponentHand,
   } = useSettingsStore()
 
   return (
     <section className="page page--scroll">
       <h1>Settings</h1>
 
-      <div className="panel">
-        <h2>Appearance</h2>
-        <label className="field">
-          <span>Theme</span>
-          <select value={theme} onChange={(event) => setTheme(event.target.value as never)}>
-            <option value="classic">Classic-inspired</option>
-            <option value="modern">Modern minimal</option>
-          </select>
-        </label>
-        <label className="field field--toggle">
-          <input
-            type="checkbox"
-            checked={reducedMotion}
-            onChange={(event) => setReducedMotion(event.target.checked)}
-          />
-          <span>Reduced motion</span>
-        </label>
-      </div>
-
-      <div className="panel">
-        <h2>Gameplay defaults</h2>
-        <label className="field">
-          <span>RNG seed</span>
-          <input value={rngSeed} onChange={(event) => setRngSeed(event.target.value)} />
-        </label>
-        <label className="field">
-          <span>Arrow generation</span>
-          <select
-            value={arrowMode}
-            onChange={(event) => setArrowMode(event.target.value as never)}
-          >
-            <option value="original">Original distribution</option>
-            <option value="density">Density slider</option>
-          </select>
-        </label>
-        <label className="field">
-          <span>Arrow density</span>
-          <input
-            type="range"
-            min={0}
-            max={1}
-            step={0.05}
-            value={arrowDensity}
-            onChange={(event) => setArrowDensity(Number(event.target.value))}
-            disabled={arrowMode !== 'density'}
-          />
-          <span className="field__hint">{Math.round(arrowDensity * 100)}%</span>
-        </label>
-        <label className="field">
-          <span>Blocked squares</span>
-          <select
-            value={blockMode}
-            onChange={(event) => setBlockMode(event.target.value as never)}
-          >
-            <option value="random">Random (0-6)</option>
-            <option value="fixed">Fixed count</option>
-          </select>
-        </label>
-        {blockMode === 'fixed' ? (
+      <div className="settings-grid">
+        <div className="panel">
+          <h2>🎨 Appearance</h2>
           <label className="field">
-            <span>Blocked count</span>
-            <input
-              type="number"
-              min={0}
-              max={6}
-              value={blockCount}
-              onChange={(event) => setBlockCount(Number(event.target.value))}
-            />
+            <span>Theme</span>
+            <select value={theme} onChange={(e) => setTheme(e.target.value as never)}>
+              <option value="classic">Classic (FF9 inspired)</option>
+              <option value="modern">Modern minimal</option>
+            </select>
           </label>
-        ) : null}
-      </div>
-
-      <div className="panel">
-        <h2>AI</h2>
-        <label className="field field--toggle">
-          <input
-            type="checkbox"
-            checked={aiRandomness}
-            onChange={(event) => setAiRandomness(event.target.checked)}
-          />
-          <span>Allow AI randomness (otherwise deterministic)</span>
-        </label>
-        <div className="field-group">
-          <label className="field">
-            <span>Easy (ms)</span>
-            <input
-              type="number"
-              min={50}
-              max={2000}
-              value={aiThinkTimeMs.easy}
-              onChange={(event) => setAiThinkTime('easy', Number(event.target.value))}
-            />
+          <label className="field field--toggle">
+            <input type="checkbox" checked={reducedMotion} onChange={(e) => setReducedMotion(e.target.checked)} />
+            <span>Reduced motion</span>
           </label>
           <label className="field">
-            <span>Medium (ms)</span>
-            <input
-              type="number"
-              min={50}
-              max={2000}
-              value={aiThinkTimeMs.medium}
-              onChange={(event) => setAiThinkTime('medium', Number(event.target.value))}
-            />
-          </label>
-          <label className="field">
-            <span>Hard (ms)</span>
-            <input
-              type="number"
-              min={50}
-              max={3000}
-              value={aiThinkTimeMs.hard}
-              onChange={(event) => setAiThinkTime('hard', Number(event.target.value))}
-            />
+            <span>Card art</span>
+            <select value={artModeOverride} onChange={(e) => setArtModeOverride(e.target.value as never)}>
+              <option value="env">Default ({getEnvArtMode()})</option>
+              <option value="procedural">Lore art</option>
+              <option value="generated">Generated images</option>
+              <option value="local">Local service</option>
+            </select>
           </label>
         </div>
-        <label className="field field--toggle">
-          <input
-            type="checkbox"
-            checked={hideOpponentHand}
-            onChange={(event) => setHideOpponentHand(event.target.checked)}
-          />
-          <span>Hide opponent hand in hotseat matches</span>
-        </label>
-      </div>
 
-      <div className="panel">
-        <h2>Card art</h2>
-        <p className="small">
-          Current env default: <strong>{getEnvArtMode()}</strong>
-        </p>
-        <label className="field">
-          <span>Art provider override</span>
-          <select
-            value={artModeOverride}
-            onChange={(event) => setArtModeOverride(event.target.value as never)}
-          >
-            <option value="env">Use env default</option>
-            <option value="procedural">Procedural</option>
-            <option value="generated">Generated (public/generated)</option>
-            <option value="local">Local service</option>
-          </select>
-        </label>
-      </div>
+        <div className="panel">
+          <h2>🎯 Gameplay</h2>
+          <label className="field">
+            <span>RNG seed</span>
+            <input value={rngSeed} onChange={(e) => setRngSeed(e.target.value)} />
+          </label>
+          <label className="field">
+            <span>Arrow generation</span>
+            <select value={arrowMode} onChange={(e) => setArrowMode(e.target.value as never)}>
+              <option value="original">Original distribution</option>
+              <option value="density">Density slider</option>
+            </select>
+          </label>
+          {arrowMode === 'density' && (
+            <label className="field">
+              <span>Arrow density: {Math.round(arrowDensity * 100)}%</span>
+              <input type="range" min={0} max={1} step={0.05} value={arrowDensity}
+                onChange={(e) => setArrowDensity(Number(e.target.value))} />
+            </label>
+          )}
+          <label className="field">
+            <span>Blocked squares</span>
+            <select value={blockMode} onChange={(e) => setBlockMode(e.target.value as never)}>
+              <option value="random">Random (0-6)</option>
+              <option value="fixed">Fixed count</option>
+            </select>
+          </label>
+          {blockMode === 'fixed' && (
+            <label className="field">
+              <span>Block count</span>
+              <input type="number" min={0} max={6} value={blockCount}
+                onChange={(e) => setBlockCount(Number(e.target.value))} />
+            </label>
+          )}
+        </div>
 
-      <div className="panel">
-        <h2>Debug</h2>
-        <label className="field field--toggle">
-          <input
-            type="checkbox"
-            checked={showDevPanel}
-            onChange={(event) => setShowDevPanel(event.target.checked)}
-          />
-          <span>Show dev panel during matches</span>
-        </label>
+        <div className="panel">
+          <h2>🤖 AI</h2>
+          <label className="field field--toggle">
+            <input type="checkbox" checked={aiRandomness} onChange={(e) => setAiRandomness(e.target.checked)} />
+            <span>Allow AI randomness</span>
+          </label>
+          <div className="field-group">
+            {(['easy', 'medium', 'hard'] as const).map((level) => (
+              <label className="field" key={level}>
+                <span>{level} (ms)</span>
+                <input type="number" min={50} max={3000} value={aiThinkTimeMs[level]}
+                  onChange={(e) => setAiThinkTime(level, Number(e.target.value))} />
+              </label>
+            ))}
+          </div>
+          <label className="field field--toggle">
+            <input type="checkbox" checked={hideOpponentHand} onChange={(e) => setHideOpponentHand(e.target.checked)} />
+            <span>Hide opponent hand in hotseat</span>
+          </label>
+        </div>
+
+        <div className="panel">
+          <h2>🔧 Debug</h2>
+          <label className="field field--toggle">
+            <input type="checkbox" checked={showDevPanel} onChange={(e) => setShowDevPanel(e.target.checked)} />
+            <span>Show dev panel in matches</span>
+          </label>
+        </div>
       </div>
     </section>
   )
