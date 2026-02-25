@@ -12,6 +12,8 @@ import { WorldMap } from '../components/WorldMap'
 import { CharacterPortrait } from '../../services/characterArt'
 import { AchievementToast } from '../components/AchievementToast'
 import { AchievementList } from '../components/AchievementList'
+import { CutscenePlayer } from '../components/CutscenePlayer'
+import { cutscenes } from '../../data/cutscenes'
 
 export const CampaignPage = () => {
   const campaign = useCampaignStore()
@@ -151,6 +153,13 @@ export const CampaignPage = () => {
       )}
 
       <AchievementToast />
+
+      {campaign.pendingCutscene && cutscenes[campaign.pendingCutscene] && (
+        <CutscenePlayer
+          cutscene={cutscenes[campaign.pendingCutscene]!}
+          onComplete={() => campaign.dismissCutscene()}
+        />
+      )}
     </section>
   )
 }

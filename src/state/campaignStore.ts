@@ -31,6 +31,8 @@ export interface CampaignStoreState {
   unlockedAchievements: string[]
   currentWinStreak: number
   pendingAchievements: string[]
+  seenCutscenes: string[]
+  pendingCutscene: string | null
 }
 
 export interface CampaignStoreActions {
@@ -46,6 +48,8 @@ export interface CampaignStoreActions {
   swapDeckCard: (outInstanceId: string, inCard: CardInstance) => void
   evaluateAchievements: (matchScore?: { player: number; opponent: number }, wasChallenge?: boolean) => void
   dismissAchievement: (id: string) => void
+  triggerCutscene: (id: string) => void
+  dismissCutscene: () => void
   exportSave: () => void
   importSave: (json: string) => boolean
 }
@@ -78,6 +82,8 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
       unlockedAchievements: [],
       currentWinStreak: 0,
       pendingAchievements: [],
+      seenCutscenes: [],
+      pendingCutscene: null,
 
       startCampaign: () => {
         const collection = buildStarterCollection()
@@ -94,6 +100,8 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
           unlockedAchievements: [],
           currentWinStreak: 0,
           pendingAchievements: [],
+          seenCutscenes: ['journey-start'],
+          pendingCutscene: 'journey-start',
         })
       },
 
@@ -111,6 +119,8 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
           unlockedAchievements: [],
           currentWinStreak: 0,
           pendingAchievements: [],
+          seenCutscenes: [],
+          pendingCutscene: null,
         }),
 
       completeNode: (nodeId: string) => {
@@ -211,6 +221,17 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
         }))
       },
 
+      triggerCutscene: (id: string) => {
+        const state = get()
+        if (state.seenCutscenes.includes(id)) return
+        set({
+          seenCutscenes: [...state.seenCutscenes, id],
+          pendingCutscene: id,
+        })
+      },
+
+      dismissCutscene: () => set({ pendingCutscene: null }),
+
       exportSave: () => {
         const state = get()
         const saveData: CampaignStoreState = {
@@ -226,6 +247,8 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
           unlockedAchievements: state.unlockedAchievements,
           currentWinStreak: state.currentWinStreak,
           pendingAchievements: [],
+          seenCutscenes: state.seenCutscenes,
+          pendingCutscene: null,
         }
         const blob = new Blob([JSON.stringify(saveData, null, 2)], { type: 'application/json' })
         const url = URL.createObjectURL(blob)
@@ -255,6 +278,8 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
             unlockedAchievements: data.unlockedAchievements ?? [],
             currentWinStreak: data.currentWinStreak ?? 0,
             pendingAchievements: [],
+            seenCutscenes: data.seenCutscenes ?? [],
+            pendingCutscene: null,
           })
           return true
         } catch {
@@ -265,7 +290,7 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
     {
       name: 'tetra-master-campaign',
       partialize: (state) => {
-        const { pendingAchievements: _, ...rest } = state
+        const { pendingAchievements: _, pendingCutscene: _2, ...rest } = state
         return rest
       },
     },

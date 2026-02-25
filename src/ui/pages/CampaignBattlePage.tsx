@@ -27,6 +27,8 @@ import { CAPTURE_FLASH_MS, PLACE_FLASH_MS, getAiDelayMs } from '../animationConf
 import { AchievementToast } from '../components/AchievementToast'
 import { BattlefieldBackground } from '../../services/characterArt'
 import { getRegionForNode } from '../../data/campaign'
+import { CutscenePlayer } from '../components/CutscenePlayer'
+import { cutscenes } from '../../data/cutscenes'
 
 const positionKey = (position: Position) => `${position.x},${position.y}`
 
@@ -330,6 +332,26 @@ const CampaignMatch = ({
       }
       campaign.rollChallenges()
       campaign.evaluateAchievements(matchScore, Boolean(challenge))
+
+      // Trigger cutscenes for milestones
+      if (node.isBoss && !isHard && !challenge) {
+        const region = getRegionForNode(node.id)
+        if (region) {
+          campaign.triggerCutscene(`region-${region.id}-complete`)
+        }
+        if (campaign.completedNodes.filter((id) => {
+          const n = getCampaignNode(id)
+          return n?.isBoss
+        }).length === 0) {
+          campaign.triggerCutscene('first-boss-defeat')
+        }
+      }
+      if (isHard && campaign.completedHardNodes.length === 0) {
+        campaign.triggerCutscene('first-hard-clear')
+      }
+      if (campaign.completedNodes.length >= 39) {
+        campaign.triggerCutscene('journey-complete')
+      }
     } else {
       setMatchPhase('defeat')
       campaign.addLoss()
@@ -544,6 +566,13 @@ const CampaignMatch = ({
       )}
 
       <AchievementToast />
+
+      {campaign.pendingCutscene && cutscenes[campaign.pendingCutscene] && (
+        <CutscenePlayer
+          cutscene={cutscenes[campaign.pendingCutscene]!}
+          onComplete={() => campaign.dismissCutscene()}
+        />
+      )}
     </section>
   )
 }
