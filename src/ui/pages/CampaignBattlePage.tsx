@@ -479,15 +479,14 @@ const CampaignMatch = ({
           <div className="hand hand--left">
             <div className="hand__label">{node.opponent.name}</div>
             <div className="hand__cards hand__cards--vertical">
-              {game.players[1].hand.map((card) => (
-                <CardView
-                  key={card.instanceId}
-                  card={card}
-                  owner={1}
-                  size="small"
-                  faceDown
-                />
-              ))}
+              {Array.from({ length: 5 }).map((_, i) => {
+                const card = game.players[1].hand[i]
+                return card ? (
+                  <CardView key={card.instanceId} card={card} owner={1} size="small" faceDown />
+                ) : (
+                  <div key={`empty-l-${i}`} className="hand-slot--empty" />
+                )
+              })}
             </div>
           </div>
 
@@ -503,22 +502,24 @@ const CampaignMatch = ({
           <div className="hand hand--right">
             <div className="hand__label">You</div>
             <div className="hand__cards hand__cards--vertical">
-              {game.players[0].hand.map((card) => (
-                <CardView
-                  key={card.instanceId}
-                  card={card}
-                  owner={0}
-                  size="small"
-                  selected={selectedCardId === card.instanceId}
-                  onClick={() => {
-                    if (isBattleAnimating || game.activePlayer !== 0 || matchPhase !== 'playing')
-                      return
-                    setSelectedCardId((prev) =>
-                      prev === card.instanceId ? null : card.instanceId,
-                    )
-                  }}
-                />
-              ))}
+              {Array.from({ length: 5 }).map((_, i) => {
+                const card = game.players[0].hand[i]
+                return card ? (
+                  <CardView
+                    key={card.instanceId}
+                    card={card}
+                    owner={0}
+                    size="small"
+                    selected={selectedCardId === card.instanceId}
+                    onClick={() => {
+                      if (isBattleAnimating || game.activePlayer !== 0 || matchPhase !== 'playing') return
+                      setSelectedCardId((prev) => prev === card.instanceId ? null : card.instanceId)
+                    }}
+                  />
+                ) : (
+                  <div key={`empty-r-${i}`} className="hand-slot--empty" />
+                )
+              })}
             </div>
           </div>
         </div>

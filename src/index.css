@@ -400,12 +400,13 @@ textarea {
   background: var(--surface-alt);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 2px;
+  padding: 0;
   cursor: pointer;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch;
+  justify-content: stretch;
   aspect-ratio: 1;
+  overflow: hidden;
 }
 
 .board-cell:disabled { cursor: default; opacity: 0.8; }
@@ -448,7 +449,7 @@ textarea {
 .hand__cards--vertical {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 2px;
   align-items: center;
   flex: 1;
   min-height: 0;
@@ -459,6 +460,16 @@ textarea {
 .hand__cards--vertical .card--small {
   width: 100%;
   max-width: 68px;
+}
+
+/* Fixed empty slot in hand */
+.hand-slot--empty {
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--surface-alt) 50%, transparent);
+  width: 100%;
+  max-width: 68px;
+  aspect-ratio: 2 / 3;
 }
 
 .hand__cards {
@@ -472,10 +483,25 @@ textarea {
   display: none;
 }
 
-/* Cards inside board cells must fill the cell */
+/* Cards inside board cells fill the cell completely */
 .board-cell .card {
   width: 100% !important;
-  max-width: none;
+  height: 100% !important;
+  max-width: none !important;
+  border-radius: 0;
+  border: none;
+  padding: 1px;
+  overflow: hidden;
+}
+
+.board-cell .card__art {
+  flex: 1;
+  aspect-ratio: unset;
+  min-height: 0;
+}
+
+.board-cell .card__name {
+  display: none;
 }
 
 /* ── Card Component ── */
@@ -1259,6 +1285,12 @@ textarea {
     max-width: 48px;
   }
 
+  .hand-slot--empty {
+    width: 48px;
+    max-width: 48px;
+    aspect-ratio: 2 / 3;
+  }
+
   .hand__label {
     align-self: center;
     min-width: 1.8rem;
@@ -1299,6 +1331,11 @@ textarea {
 
   .hand__cards--vertical .card,
   .hand__cards--vertical .card--small {
+    width: 100%;
+    max-width: 52px;
+  }
+
+  .hand-slot--empty {
     width: 100%;
     max-width: 52px;
   }

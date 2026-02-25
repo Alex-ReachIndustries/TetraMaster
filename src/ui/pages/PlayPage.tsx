@@ -437,28 +437,18 @@ export const PlayPage = () => {
             <div className="hand hand--left">
               <div className="hand__label">Player 1</div>
               <div className="hand__cards hand__cards--vertical">
-                {game.players[0].hand.map((card) => {
+                {Array.from({ length: 5 }).map((_, i) => {
+                  const card = game.players[0].hand[i]
+                  if (!card) return <div key={`e0-${i}`} className="hand-slot--empty" />
                   const faceDown =
                     playerTypes[0] === 'ai' ||
-                    (settings.hideOpponentHand &&
-                      playerTypes[0] === 'human' &&
-                      playerTypes[1] === 'human' &&
-                      game.activePlayer !== 0)
+                    (settings.hideOpponentHand && playerTypes[0] === 'human' && playerTypes[1] === 'human' && game.activePlayer !== 0)
                   return (
-                    <CardView
-                      key={card.instanceId}
-                      card={card}
-                      owner={0}
-                      size="small"
-                      faceDown={faceDown}
+                    <CardView key={card.instanceId} card={card} owner={0} size="small" faceDown={faceDown}
                       selected={selectedCardId === card.instanceId}
                       onClick={() => {
-                        if (isBattleAnimating) return
-                        if (playerTypes[game.activePlayer] !== 'human') return
-                        if (game.activePlayer !== 0) return
-                        setSelectedCardId((prev) =>
-                          prev === card.instanceId ? null : card.instanceId,
-                        )
+                        if (isBattleAnimating || playerTypes[game.activePlayer] !== 'human' || game.activePlayer !== 0) return
+                        setSelectedCardId((prev) => prev === card.instanceId ? null : card.instanceId)
                       }}
                     />
                   )
@@ -467,39 +457,24 @@ export const PlayPage = () => {
             </div>
 
             <div className="game__board">
-              <BoardView
-                game={game}
-                onCellClick={handleCellClick}
-                flashByPosition={flashByPosition}
-                interactionDisabled={isBattleAnimating}
-              />
+              <BoardView game={game} onCellClick={handleCellClick} flashByPosition={flashByPosition} interactionDisabled={isBattleAnimating} />
             </div>
 
             <div className="hand hand--right">
               <div className="hand__label">Player 2</div>
               <div className="hand__cards hand__cards--vertical">
-                {game.players[1].hand.map((card) => {
+                {Array.from({ length: 5 }).map((_, i) => {
+                  const card = game.players[1].hand[i]
+                  if (!card) return <div key={`e1-${i}`} className="hand-slot--empty" />
                   const faceDown =
                     playerTypes[1] === 'ai' ||
-                    (settings.hideOpponentHand &&
-                      playerTypes[0] === 'human' &&
-                      playerTypes[1] === 'human' &&
-                      game.activePlayer !== 1)
+                    (settings.hideOpponentHand && playerTypes[0] === 'human' && playerTypes[1] === 'human' && game.activePlayer !== 1)
                   return (
-                    <CardView
-                      key={card.instanceId}
-                      card={card}
-                      owner={1}
-                      size="small"
-                      faceDown={faceDown}
+                    <CardView key={card.instanceId} card={card} owner={1} size="small" faceDown={faceDown}
                       selected={selectedCardId === card.instanceId}
                       onClick={() => {
-                        if (isBattleAnimating) return
-                        if (playerTypes[game.activePlayer] !== 'human') return
-                        if (game.activePlayer !== 1) return
-                        setSelectedCardId((prev) =>
-                          prev === card.instanceId ? null : card.instanceId,
-                        )
+                        if (isBattleAnimating || playerTypes[game.activePlayer] !== 'human' || game.activePlayer !== 1) return
+                        setSelectedCardId((prev) => prev === card.instanceId ? null : card.instanceId)
                       }}
                     />
                   )
