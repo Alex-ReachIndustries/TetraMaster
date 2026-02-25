@@ -23,6 +23,7 @@ export interface CampaignStoreState {
   collection: CardInstance[]
   campaignDeck: CardInstance[]
   completedNodes: string[]
+  completedHardNodes: string[]
   wins: number
   losses: number
   activeChallenges: ActiveChallenge[]
@@ -36,6 +37,7 @@ export interface CampaignStoreActions {
   startCampaign: () => void
   resetCampaign: () => void
   completeNode: (nodeId: string) => void
+  completeHardNode: (nodeId: string) => void
   addCardToCollection: (card: CardInstance) => void
   setCampaignDeck: (cards: CardInstance[]) => void
   addLoss: () => void
@@ -68,6 +70,7 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
       collection: [],
       campaignDeck: [],
       completedNodes: [],
+      completedHardNodes: [],
       wins: 0,
       losses: 0,
       activeChallenges: [],
@@ -83,6 +86,7 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
           collection,
           campaignDeck: collection.slice(0, 5),
           completedNodes: [],
+          completedHardNodes: [],
           wins: 0,
           losses: 0,
           activeChallenges: [],
@@ -99,6 +103,7 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
           collection: [],
           campaignDeck: [],
           completedNodes: [],
+          completedHardNodes: [],
           wins: 0,
           losses: 0,
           activeChallenges: [],
@@ -113,6 +118,16 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
         if (state.completedNodes.includes(nodeId)) return
         set({
           completedNodes: [...state.completedNodes, nodeId],
+          wins: state.wins + 1,
+          currentWinStreak: state.currentWinStreak + 1,
+        })
+      },
+
+      completeHardNode: (nodeId: string) => {
+        const state = get()
+        if (state.completedHardNodes.includes(nodeId)) return
+        set({
+          completedHardNodes: [...state.completedHardNodes, nodeId],
           wins: state.wins + 1,
           currentWinStreak: state.currentWinStreak + 1,
         })
@@ -203,6 +218,7 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
           collection: state.collection,
           campaignDeck: state.campaignDeck,
           completedNodes: state.completedNodes,
+          completedHardNodes: state.completedHardNodes,
           wins: state.wins,
           losses: state.losses,
           activeChallenges: state.activeChallenges,
@@ -231,6 +247,7 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
             collection: data.collection ?? [],
             campaignDeck: data.campaignDeck ?? [],
             completedNodes: data.completedNodes ?? [],
+            completedHardNodes: data.completedHardNodes ?? [],
             wins: data.wins ?? 0,
             losses: data.losses ?? 0,
             activeChallenges: data.activeChallenges ?? [],

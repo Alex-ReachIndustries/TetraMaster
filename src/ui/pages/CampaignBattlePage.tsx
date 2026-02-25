@@ -34,6 +34,7 @@ export const CampaignBattlePage = () => {
   const { nodeId } = useParams<{ nodeId: string }>()
   const [searchParams] = useSearchParams()
   const isChallenge = searchParams.get('challenge') === '1'
+  const isHard = searchParams.get('hard') === '1'
   const navigate = useNavigate()
   const settings = useSettingsStore()
   const campaign = useCampaignStore()
@@ -66,6 +67,7 @@ export const CampaignBattlePage = () => {
     <CampaignMatch
       node={node}
       challenge={challenge}
+      isHard={isHard}
       playerDeck={campaign.campaignDeck}
       settings={settings}
       campaign={campaign}
@@ -77,6 +79,7 @@ export const CampaignBattlePage = () => {
 const CampaignMatch = ({
   node,
   challenge,
+  isHard,
   playerDeck,
   settings,
   campaign,
@@ -84,16 +87,17 @@ const CampaignMatch = ({
 }: {
   node: CampaignNode
   challenge: ReturnType<typeof useCampaignStore.getState>['activeChallenges'][0] | null
+  isHard: boolean
   playerDeck: CardInstance[]
   settings: ReturnType<typeof useSettingsStore.getState>
   campaign: ReturnType<typeof useCampaignStore.getState>
   navigate: ReturnType<typeof useNavigate>
 }) => {
-  const aiLevel: AiLevel = challenge?.modifier.aiLevelOverride ?? node.opponent.aiLevel
+  const aiLevel: AiLevel = isHard ? 'hard' : (challenge?.modifier.aiLevelOverride ?? node.opponent.aiLevel)
 
   const opponentDeck = useMemo(
-    () => buildOpponentDeck(node),
-    [node],
+    () => buildOpponentDeck(node, isHard),
+    [node, isHard],
   )
 
   const buildInitialGame = useCallback(() => {
@@ -314,9 +318,11 @@ const CampaignMatch = ({
       const seed = `reward-${node.id}-${matchCounter.current}`
       matchCounter.current += 1
       setMatchPhase('victory')
-      setRewardCards(generateRewards(node, seed))
+      setRewardCards(generateRewards(node, seed, isHard))
       if (challenge) {
         campaign.completeChallenge(node.id)
+      } else if (isHard) {
+        campaign.completeHardNode(node.id)
       } else {
         campaign.completeNode(node.id)
       }
@@ -539,21 +545,22 @@ const CampaignMatch = ({
   )
 }
 
-function buildOpponentDeck(node: CampaignNode): CardInstance[] {
+function buildOpponentDeck(node: CampaignNode, hard: boolean): CardInstance[] {
+  const cardIds = hard ? node.opponent.hardDeckCardIds : node.opponent.deckCardIds
   const cards: CardInstance[] = []
-  let rng = createRng(`opponent-${node.id}`)
-  for (const id of node.opponent.deckCardIds) {
+  let rng = createRng(`opponent-${node.id}-${hard ? 'hard' : 'normal'}`)
+  for (const id of cardIds) {
     const def = getCardDef(id)
     if (!def) continue
-    const result = createCardInstance(def, rng, { mode: 'original', density: 0.5, minArrows: 2 })
+    const result = createCardInstance(def, rng, { mode: 'original', density: 0.5, minArrows: hard ? 3 : 2 })
     cards.push(result.card)
     rng = result.rng
   }
   return cards
 }
 
-function generateRewards(node: CampaignNode, seed: string): CardInstance[] {
-  const pool = node.rewardPool
+function generateRewards(node: CampaignNode, seed: string, hard: boolean): CardInstance[] {
+  const pool = hard ? node.hardRewardPool : node.rewardPool
   let rng = createRng(seed)
   const shuffled = [...pool]
   for (let i = shuffled.length - 1; i > 0; i--) {

@@ -15,11 +15,14 @@ export const achievements: AchievementDef[] = [
   // ── Progress ──
   { id: 'first-win', name: 'First Victory', description: 'Win your first campaign match.', icon: '⚔', rarity: 'bronze' },
   { id: 'region-alexandria', name: 'Alexandrian Hero', description: 'Complete all nodes in Alexandria.', icon: '🏰', rarity: 'bronze' },
-  { id: 'region-lindblum', name: 'Lindblum Champion', description: 'Complete all nodes in Lindblum.', icon: '🏙️', rarity: 'silver' },
+  { id: 'region-lindblum', name: 'Lindblum Champion', description: 'Complete all nodes in Lindblum.', icon: '🏙️', rarity: 'bronze' },
+  { id: 'region-burmecia', name: 'Burmecian Valor', description: 'Complete all nodes in Burmecia.', icon: '🌧️', rarity: 'silver' },
   { id: 'region-treno', name: 'King of Treno', description: 'Complete all nodes in Treno.', icon: '🌙', rarity: 'silver' },
   { id: 'region-cleyra', name: 'Crown of Cleyra', description: 'Complete all nodes in Cleyra.', icon: '🌳', rarity: 'gold' },
+  { id: 'region-desert-palace', name: 'Desert Conqueror', description: 'Complete all nodes in Desert Palace.', icon: '🏜️', rarity: 'gold' },
+  { id: 'region-ipsens-castle', name: 'Ipsen Explorer', description: "Complete all nodes in Ipsen's Castle.", icon: '🏚️', rarity: 'gold' },
   { id: 'region-memoria', name: 'Memory Eternal', description: 'Complete all nodes in Memoria.', icon: '💎', rarity: 'platinum' },
-  { id: 'journey-complete', name: 'Card Master', description: 'Complete all 15 campaign nodes.', icon: '👑', rarity: 'platinum' },
+  { id: 'journey-complete', name: 'Card Master', description: 'Complete all 40 campaign nodes.', icon: '👑', rarity: 'platinum' },
 
   // ── Combat ──
   { id: 'flawless', name: 'Flawless Victory', description: 'Win a match controlling all 10 cards on the board.', icon: '💯', rarity: 'gold' },
@@ -79,11 +82,14 @@ export function checkAchievements(
 
   if (isRegionComplete('alexandria', ctx.completedNodes)) earn('region-alexandria')
   if (isRegionComplete('lindblum', ctx.completedNodes)) earn('region-lindblum')
+  if (isRegionComplete('burmecia', ctx.completedNodes)) earn('region-burmecia')
   if (isRegionComplete('treno', ctx.completedNodes)) earn('region-treno')
   if (isRegionComplete('cleyra', ctx.completedNodes)) earn('region-cleyra')
+  if (isRegionComplete('desert-palace', ctx.completedNodes)) earn('region-desert-palace')
+  if (isRegionComplete('ipsens-castle', ctx.completedNodes)) earn('region-ipsens-castle')
   if (isRegionComplete('memoria', ctx.completedNodes)) earn('region-memoria')
 
-  if (ctx.completedNodes.length >= 15) earn('journey-complete')
+  if (ctx.completedNodes.length >= 40) earn('journey-complete')
 
   if (bossNodeIds.every((id) => ctx.completedNodes.includes(id))) earn('boss-slayer')
 

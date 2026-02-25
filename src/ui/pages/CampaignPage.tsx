@@ -3,11 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import {
   allCampaignNodes,
   isNodeAvailable,
-  getCardDef,
   type CampaignNode,
 } from '../../data/campaign'
-import { createCardInstance } from '../../engine/cards'
-import { createRng } from '../../engine/rng'
 import type { CardInstance } from '../../engine/types'
 import { useCampaignStore, type ActiveChallenge } from '../../state/campaignStore'
 import { CardView } from '../components/CardView'
@@ -70,7 +67,7 @@ export const CampaignPage = () => {
           <span className="campaign-stat">Wins {campaign.wins}</span>
           <span className="campaign-stat">Losses {campaign.losses}</span>
           <span className="campaign-stat">Cards {campaign.collection.length}/100</span>
-          <span className="campaign-stat">Progress {campaign.completedNodes.length}/15</span>
+          <span className="campaign-stat">Progress {campaign.completedNodes.length}/40</span>
           <button className="campaign-stat campaign-stat--trophy" onClick={() => setShowAchievements(true)}>
             🏆 {campaign.unlockedAchievements.length}
           </button>
@@ -93,12 +90,14 @@ export const CampaignPage = () => {
                 node={selectedNode}
                 available={isNodeAvailable(selectedNode, campaign.completedNodes)}
                 completed={campaign.completedNodes.includes(selectedNode.id)}
+                hardCompleted={campaign.completedHardNodes.includes(selectedNode.id)}
                 challenge={challenge}
                 deck={campaign.campaignDeck}
                 onBattle={() =>
-                  navigate(
-                    `/campaign/battle/${selectedNode.id}${challenge ? '?challenge=1' : ''}`,
-                  )
+                  navigate(`/campaign/battle/${selectedNode.id}${challenge ? '?challenge=1' : ''}`)
+                }
+                onBattleHard={() =>
+                  navigate(`/campaign/battle/${selectedNode.id}?hard=1`)
                 }
                 onEditDeck={() => setDeckEditing(true)}
               />
@@ -156,39 +155,30 @@ export const CampaignPage = () => {
 }
 
 const NodeDetail = ({
-  node, available, completed, challenge, deck, onBattle, onEditDeck,
+  node, available, completed, hardCompleted, challenge, deck, onBattle, onBattleHard, onEditDeck,
 }: {
-  node: CampaignNode; available: boolean; completed: boolean
+  node: CampaignNode; available: boolean; completed: boolean; hardCompleted: boolean
   challenge: ActiveChallenge | null; deck: CardInstance[]
-  onBattle: () => void; onEditDeck: () => void
+  onBattle: () => void; onBattleHard: () => void; onEditDeck: () => void
 }) => {
-  const opponentDeck = useMemo(() => buildNodeOpponentDeck(node), [node])
   const canBattle = (available && !completed) || challenge !== null
+  const canHardBattle = completed && !hardCompleted
 
   return (
     <div className="panel campaign-detail">
       <div className="campaign-detail__header">
         <h2>{node.name}</h2>
         {node.isBoss && <span className="campaign-badge campaign-badge--boss">Boss</span>}
-        {completed && !challenge && <span className="campaign-badge campaign-badge--done">Cleared</span>}
+        {completed && <span className="campaign-badge campaign-badge--done">Cleared</span>}
+        {hardCompleted && <span className="campaign-badge campaign-badge--hard">Hard Cleared</span>}
         {challenge && <span className="campaign-badge campaign-badge--challenge">Challenge</span>}
       </div>
       <p className="small">{node.description}</p>
-
-      {challenge && (
-        <div className="campaign-challenge-info"><p>{challenge.modifier.description}</p></div>
-      )}
 
       <div className="campaign-opponent">
         <h3>{node.opponent.name} <span className="small">— {node.opponent.title}</span></h3>
         <p className="campaign-dialogue">&ldquo;{node.opponent.dialogue.intro}&rdquo;</p>
         <p className="campaign-meta">Difficulty: {node.opponent.aiLevel}</p>
-        <h4>Opponent&apos;s Deck</h4>
-        <div className="campaign-deck-row">
-          {opponentDeck.map((card) => (
-            <CardView key={card.instanceId} card={card} owner={1} size="small" interactive={false} faceDown={!completed} />
-          ))}
-        </div>
       </div>
 
       <div className="campaign-your-deck">
@@ -202,9 +192,25 @@ const NodeDetail = ({
       </div>
 
       <div className="field-group">
-        <button className="button button--primary" onClick={onBattle} disabled={!canBattle || deck.length !== 5}>
-          {challenge ? 'Accept Challenge' : completed ? 'Cleared' : 'Battle'}
-        </button>
+        {canBattle && (
+          <button className="button button--primary" onClick={onBattle} disabled={deck.length !== 5}>
+            Battle
+          </button>
+        )}
+        {canHardBattle && (
+          <button className="button button--primary" onClick={onBattleHard} disabled={deck.length !== 5}
+            style={{ background: '#dc2626' }}>
+            Hard Battle
+          </button>
+        )}
+        {challenge && (
+          <button className="button button--primary" onClick={onBattle} disabled={deck.length !== 5}>
+            Accept Challenge
+          </button>
+        )}
+        {completed && !canHardBattle && !challenge && (
+          <span className="small">All battles cleared!</span>
+        )}
       </div>
     </div>
   )
@@ -337,15 +343,3 @@ const SaveLoadBar = ({
   </div>
 )
 
-function buildNodeOpponentDeck(node: CampaignNode): CardInstance[] {
-  const cards: CardInstance[] = []
-  let rng = createRng(`opponent-${node.id}`)
-  for (const id of node.opponent.deckCardIds) {
-    const def = getCardDef(id)
-    if (!def) continue
-    const result = createCardInstance(def, rng, { mode: 'original', density: 0.5, minArrows: 2 })
-    cards.push(result.card)
-    rng = result.rng
-  }
-  return cards
-}

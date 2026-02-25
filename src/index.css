@@ -841,6 +841,7 @@ textarea {
 
 .campaign-badge--boss { background: #7c3aed; color: #fff; }
 .campaign-badge--done { background: var(--success); color: #000; }
+.campaign-badge--hard { background: #dc2626; color: #fff; }
 .campaign-badge--challenge { background: #f59e0b; color: #000; }
 
 .campaign-opponent { display: flex; flex-direction: column; gap: 0.35rem; }
