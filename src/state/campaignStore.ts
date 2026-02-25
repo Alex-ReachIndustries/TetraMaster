@@ -247,6 +247,10 @@ export const useCampaignStore = create<CampaignStoreState & CampaignStoreActions
     }),
     {
       name: 'tetra-master-campaign',
+      partialize: (state) => {
+        const { pendingAchievements: _, ...rest } = state
+        return rest
+      },
     },
   ),
 )
