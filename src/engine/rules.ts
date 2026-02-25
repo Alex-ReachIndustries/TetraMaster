@@ -147,6 +147,8 @@ const pickBattleStats = (attacker: CardInstance, defender: CardInstance) => {
   }
 }
 
+const BATTLE_DAMPENING = 0.5
+
 const rollBattle = (
   attacker: CardInstance,
   defender: CardInstance,
@@ -161,9 +163,11 @@ const rollBattle = (
   nextRng = rng1
   const [defenderValue, rng2] = nextInt(nextRng, defenderRange.min, defenderRange.max)
   nextRng = rng2
-  const [attackRoll, rng3] = nextInt(nextRng, 0, attackerValue)
+  const attackRollMax = Math.max(0, Math.floor(attackerValue * BATTLE_DAMPENING))
+  const defenseRollMax = Math.max(0, Math.floor(defenderValue * BATTLE_DAMPENING))
+  const [attackRoll, rng3] = nextInt(nextRng, 0, attackRollMax)
   nextRng = rng3
-  const [defenseRoll, rng4] = nextInt(nextRng, 0, defenderValue)
+  const [defenseRoll, rng4] = nextInt(nextRng, 0, defenseRollMax)
   nextRng = rng4
 
   const attackDiff = attackerValue - attackRoll

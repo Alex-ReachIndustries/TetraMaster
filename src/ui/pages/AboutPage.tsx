@@ -1,10 +1,15 @@
+import { BattleDiagram } from '../components/BattleDiagram'
+
 export const AboutPage = () => (
-    <section className="page page--scroll">
+  <section className="page page--scroll">
     <h1>About this project</h1>
     <p>
       This fan-made project recreates Final Fantasy IX&apos;s Tetra Master minigame using original
       visuals and modern web tooling. It is not affiliated with Square Enix.
     </p>
+
+    <h2>Battle system reference</h2>
+    <BattleDiagram />
 
     <h2>Sources &amp; citations</h2>
     <ul className="list">
