@@ -29,6 +29,11 @@ body,
 body {
   background: var(--bg);
   color: var(--text);
+  padding:
+    env(safe-area-inset-top)
+    env(safe-area-inset-right)
+    env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
 }
 
 /* ── Theme Tokens ── */
@@ -88,6 +93,10 @@ button:disabled { opacity: 0.5; cursor: default; }
   flex-direction: column;
   height: 100%;
   overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .app__header {
@@ -1081,4 +1090,184 @@ textarea {
 @keyframes fade-in {
   0% { opacity: 0; }
   100% { opacity: 1; }
+}
+
+/* ══════════════════════════════════════════
+   Mobile / Touch Device Optimizations
+   ══════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* ── Header: compact single row ── */
+  .app__header {
+    padding: 0.4rem 0.75rem;
+    gap: 0.5rem;
+  }
+  .brand__title { font-size: 0.9rem; }
+  .nav { gap: 0; }
+  .nav__link { padding: 0.3rem 0.45rem; font-size: 0.7rem; }
+
+  /* ── Page padding ── */
+  .page {
+    padding: 0.5rem 0.6rem;
+    gap: 0.5rem;
+  }
+  .page h1 { font-size: 1rem; }
+
+  /* ── Buttons: touch-friendly ── */
+  .button {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Home page: single column ── */
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* ── Deck builder: single column stack ── */
+  .deck-builder {
+    grid-template-columns: 1fr;
+  }
+
+  /* ── Game field: portrait layout ──
+     Opponent hand on top, board in center, player hand on bottom */
+
+  .game__field {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .hand--left { order: 0; }
+  .game__board { order: 1; }
+  .hand--right { order: 2; }
+
+  .hand {
+    flex-direction: row;
+    min-width: unset;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hand__cards--vertical {
+    flex-direction: row;
+    gap: 0.25rem;
+  }
+
+  .hand__label {
+    writing-mode: unset;
+    align-self: center;
+    min-width: 2rem;
+  }
+
+  .board {
+    width: min(92vw, 52vh);
+  }
+
+  .board-cell {
+    min-height: 0;
+    border-radius: 5px;
+    padding: 1px;
+  }
+
+  /* ── Cards: mobile size ── */
+  .card--small { width: 56px; }
+  .card--medium { width: 80px; }
+  .card--large { width: 110px; }
+
+  .card { border-radius: 6px; padding: 2px; }
+  .card__stats { font-size: 0.55rem; }
+  .card__name { font-size: 0.5rem; }
+  .card__arrows { inset: 2px; }
+  .arrow--n { border-width: 0 4px 6px 4px; }
+  .arrow--ne { border-width: 0 5px 5px 0; }
+  .arrow--e { border-width: 4px 0 4px 6px; }
+  .arrow--se { border-width: 5px 5px 0 0; }
+  .arrow--s { border-width: 6px 4px 0 4px; }
+  .arrow--sw { border-width: 5px 0 0 5px; }
+  .arrow--w { border-width: 4px 6px 4px 0; }
+  .arrow--nw { border-width: 0 0 5px 5px; }
+
+  .stat {
+    padding: 0 0.15rem;
+    border-radius: 3px;
+    font-size: 0.55rem;
+  }
+
+  .card__back { padding: 0.5rem; font-size: 0.6rem; }
+
+  /* ── Campaign layout: stacked ── */
+  .campaign-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
+
+  .campaign-map {
+    min-height: 200px;
+  }
+
+  .campaign-sidebar {
+    max-height: 40vh;
+  }
+
+  .campaign-stats { gap: 0.3rem; }
+  .campaign-stat { font-size: 0.6rem; padding: 0.15rem 0.4rem; }
+
+  .campaign-deck-row { gap: 0.2rem; }
+
+  .campaign-deck-empty {
+    width: 56px;
+    min-height: 72px;
+  }
+
+  .campaign-collection {
+    grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+    max-height: 160px;
+  }
+
+  /* ── Campaign battle: tighter ── */
+  .campaign-battle-header { gap: 0.4rem; }
+  .campaign-battle-header h2 { font-size: 0.9rem; }
+
+  .campaign-result {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .campaign-reward__cards { gap: 0.4rem; }
+
+  /* ── Battle modal: mobile ── */
+  .battle-modal__content {
+    padding: 0.75rem 1rem;
+    min-width: min(360px, 92vw);
+  }
+
+  .battle-modal__arena {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  /* ── Achievement toast: mobile ── */
+  .achievement-toast {
+    top: auto;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    left: 0.5rem;
+    max-width: none;
+  }
+
+  .achievement-panel {
+    width: min(95vw, 400px);
+    max-height: 85vh;
+  }
+
+  /* ── Settings: tighter ── */
+  .panel { padding: 0.5rem 0.75rem; border-radius: 8px; }
+
+  /* ── Score display ── */
+  .game__status { font-size: 0.75rem; gap: 0.5rem; }
 }
