@@ -89,17 +89,6 @@ export const CampaignPage = () => {
 
         <div className="campaign-sidebar">
           {selectedNode ? (
-            deckEditing ? (
-              <DeckEditor
-                collection={campaign.collection}
-                deck={campaign.campaignDeck}
-                onSave={(deck) => {
-                  campaign.setCampaignDeck(deck)
-                  setDeckEditing(false)
-                }}
-                onCancel={() => setDeckEditing(false)}
-              />
-            ) : (
               <NodeDetail
                 node={selectedNode}
                 available={isNodeAvailable(selectedNode, campaign.completedNodes)}
@@ -113,7 +102,6 @@ export const CampaignPage = () => {
                 }
                 onEditDeck={() => setDeckEditing(true)}
               />
-            )
           ) : (
             <div className="panel">
               <h2>Select a location</h2>
@@ -142,6 +130,18 @@ export const CampaignPage = () => {
           />
         </div>
       </div>
+
+      {deckEditing && (
+        <DeckEditor
+          collection={campaign.collection}
+          deck={campaign.campaignDeck}
+          onSave={(deck) => {
+            campaign.setCampaignDeck(deck)
+            setDeckEditing(false)
+          }}
+          onCancel={() => setDeckEditing(false)}
+        />
+      )}
 
       {showAchievements && (
         <AchievementList
@@ -236,37 +236,61 @@ const DeckEditor = ({
   }, [])
 
   return (
-    <div className="panel campaign-deck-editor">
-      <h2>Edit Deck ({editDeck.length}/5)</h2>
-      <div className="campaign-deck-row">
-        {editDeck.map((card) => (
-          <div key={card.instanceId} className="campaign-deck-slot">
-            <CardView card={card} owner={0} size="small" interactive={false} />
-            <button className="campaign-deck-remove" onClick={() => removeCard(card.instanceId)}>✕</button>
+    <div className="inventory-overlay">
+      <div className="inventory">
+        <div className="inventory__header">
+          <h2>Deck Management</h2>
+          <span className="small">{editDeck.length}/5 cards selected</span>
+          <div className="inventory__header-actions">
+            <button className="button button--primary" onClick={() => onSave(editDeck)} disabled={editDeck.length !== 5}>Save Deck</button>
+            <button className="button button--ghost" onClick={onCancel}>Cancel</button>
           </div>
-        ))}
-        {Array.from({ length: 5 - editDeck.length }).map((_, i) => (
-          <div key={`e-${i}`} className="campaign-deck-empty"><span>Empty</span></div>
-        ))}
-      </div>
-      <input type="text" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} className="campaign-search" />
-      <div className="campaign-collection">
-        {filtered.map((card) => {
-          const inDeck = deckIds.has(card.instanceId)
-          return (
-            <button key={card.instanceId}
-              className={`campaign-collection-card ${inDeck ? 'campaign-collection-card--in-deck' : ''}`}
-              onClick={() => (inDeck ? removeCard(card.instanceId) : addCard(card))}
-              disabled={!inDeck && editDeck.length >= 5}>
-              <CardView card={card} owner={0} size="small" interactive={false} />
-              {inDeck && <span className="campaign-collection-card__badge">In Deck</span>}
-            </button>
-          )
-        })}
-      </div>
-      <div className="field-group">
-        <button className="button button--primary" onClick={() => onSave(editDeck)} disabled={editDeck.length !== 5}>Save</button>
-        <button className="button button--ghost" onClick={onCancel}>Cancel</button>
+        </div>
+
+        <div className="inventory__body">
+          <div className="inventory__deck-section">
+            <h3>Active Deck</h3>
+            <div className="inventory__deck-slots">
+              {Array.from({ length: 5 }).map((_, i) => {
+                const card = editDeck[i]
+                return card ? (
+                  <div key={card.instanceId} className="inventory__deck-slot inventory__deck-slot--filled">
+                    <CardView card={card} owner={0} size="small" interactive={false} />
+                    <button className="inventory__deck-remove" onClick={() => removeCard(card.instanceId)}>✕</button>
+                    <span className="inventory__card-label">{card.name}</span>
+                  </div>
+                ) : (
+                  <div key={`e-${i}`} className="inventory__deck-slot inventory__deck-slot--empty">
+                    <span>Slot {i + 1}</span>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          <div className="inventory__collection-section">
+            <div className="inventory__collection-header">
+              <h3>Collection ({collection.length} cards)</h3>
+              <input type="text" placeholder="Search cards..." value={search}
+                onChange={(e) => setSearch(e.target.value)} className="inventory__search" />
+            </div>
+            <div className="inventory__collection-grid">
+              {filtered.map((card) => {
+                const inDeck = deckIds.has(card.instanceId)
+                return (
+                  <button key={card.instanceId}
+                    className={`inventory__collection-card ${inDeck ? 'inventory__collection-card--selected' : ''}`}
+                    onClick={() => (inDeck ? removeCard(card.instanceId) : addCard(card))}
+                    disabled={!inDeck && editDeck.length >= 5}>
+                    <CardView card={card} owner={0} size="small" interactive={false} />
+                    <span className="inventory__card-label">{card.name}</span>
+                    {inDeck && <span className="inventory__in-deck-badge">In Deck</span>}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
