@@ -528,6 +528,7 @@ const CampaignMatch = ({
               onCellClick={handleCellClick}
               flashByPosition={flashByPosition}
               interactionDisabled={isBattleAnimating || matchPhase !== 'playing'}
+              animateBlocks
             />
           </div>
 

@@ -414,16 +414,32 @@ textarea {
 .board-cell:disabled { cursor: default; opacity: 0.8; }
 
 .board-cell--blocked {
-  background: repeating-linear-gradient(
-    45deg,
-    var(--surface-alt),
-    var(--surface-alt) 6px,
-    var(--border) 6px,
-    var(--border) 10px
-  );
+  background: #1a1510;
 }
 
-.board-cell__blocked { font-size: 1rem; color: var(--muted); }
+.stone-block-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stone-block {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.stone-block--animate {
+  animation: stone-drop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes stone-drop {
+  0% { transform: scale(0.3) translateY(-20px); opacity: 0; }
+  60% { transform: scale(1.08) translateY(2px); opacity: 1; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
 
 /* ── Hands (vertical stacks flanking the board) ── */
 

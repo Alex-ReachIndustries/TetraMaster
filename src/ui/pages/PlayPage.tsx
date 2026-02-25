@@ -457,7 +457,7 @@ export const PlayPage = () => {
             </div>
 
             <div className="game__board">
-              <BoardView game={game} onCellClick={handleCellClick} flashByPosition={flashByPosition} interactionDisabled={isBattleAnimating} />
+              <BoardView game={game} onCellClick={handleCellClick} flashByPosition={flashByPosition} interactionDisabled={isBattleAnimating} animateBlocks />
             </div>
 
             <div className="hand hand--right">
